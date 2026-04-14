@@ -69,14 +69,17 @@ export default function Home() {
                 <li><i className="ph-bold ph-check-circle"></i> Deine Nummer bleibt deine Nummer</li>
                 <li><i className="ph-bold ph-check-circle"></i> Einrichtung in einem 15-Minuten-Call</li>
               </ul>
-              <div className="product-price">€29 <span>/ Monat</span></div>
-              <div className="product-cta" style={{ marginTop: '1.5rem' }}>
-                <Link href="/autochat" className="btn-primary" style={{ width: '100%', textAlign: 'center' }}>Mehr erfahren</Link>
+              <div style={{ marginTop: '1.5rem', background: '#f0fdfa', borderRadius: '10px', padding: '0.85rem 1rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <i className="ph-fill ph-clock" style={{ color: 'var(--primary)', fontSize: '1.2rem', flexShrink: 0 }}></i>
+                <span style={{ fontSize: '0.9rem', color: 'var(--primary)', fontWeight: 600 }}>Spart dir bis zu 30 Stunden im Monat</span>
+              </div>
+              <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
+                <Link href="/kontakt?produkt=autochat" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block' }}>Jetzt anfragen</Link>
               </div>
             </div>
 
             {/* MailPilot */}
-            <div className="product-card highlight fade-up delay-1">
+            <div className="product-card fade-up delay-1">
               <div className="product-icon"><i className="ph-duotone ph-envelope-simple"></i></div>
               <span className="product-tag">MailPilot</span>
               <h3 style={{ fontSize: '1.8rem', letterSpacing: '-0.5px' }}>E-Mails automatisch sortieren & Termine eintragen</h3>
@@ -87,9 +90,12 @@ export default function Home() {
                 <li><i className="ph-bold ph-check-circle"></i> Funktioniert mit Gmail & Outlook</li>
                 <li><i className="ph-bold ph-check-circle"></i> Kein Download, läuft im Hintergrund</li>
               </ul>
-              <div className="product-price">€19 <span>/ Monat</span></div>
-              <div className="product-cta" style={{ marginTop: '1.5rem' }}>
-                <Link href="/mailpilot" className="btn-primary" style={{ width: '100%', textAlign: 'center' }}>Mehr erfahren</Link>
+              <div style={{ marginTop: '1.5rem', background: '#f0fdfa', borderRadius: '10px', padding: '0.85rem 1rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <i className="ph-fill ph-clock" style={{ color: 'var(--primary)', fontSize: '1.2rem', flexShrink: 0 }}></i>
+                <span style={{ fontSize: '0.9rem', color: 'var(--primary)', fontWeight: 600 }}>Spart dir bis zu 20 Stunden im Monat</span>
+              </div>
+              <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
+                <Link href="/kontakt?produkt=mailpilot" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block' }}>Jetzt anfragen</Link>
               </div>
             </div>
           </div>
@@ -156,11 +162,11 @@ export default function Home() {
           <div className="cta-banner fade-up">
             <div className="cta-text">
               <h3>Bereit loszulegen?</h3>
-              <p>Einmal einrichten, dauerhaft Zeit sparen. Kein Vertrag, monatlich kündbar.</p>
+              <p>Einmal einrichten, dauerhaft Zeit sparen. Preis klären wir gemeinsam im Gespräch.</p>
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <Link href="/autochat" className="btn-primary">AutoChat – €29/Monat</Link>
-              <Link href="/mailpilot" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>MailPilot – €19/Monat</Link>
+              <Link href="/kontakt?produkt=autochat" className="btn-primary">AutoChat anfragen</Link>
+              <Link href="/kontakt?produkt=mailpilot" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>MailPilot anfragen</Link>
             </div>
           </div>
         </div>
@@ -169,7 +175,10 @@ export default function Home() {
       {/* FOOTER */}
       <footer>
         <div className="container-wide footer-inner">
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Flowly. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:support@flowly.de" style={{ color: 'var(--primary)' }}>support@flowly.de</a> · Jonas Kalwa</span></p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Flowly. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:jkbusiness@gmail.com" style={{ color: 'var(--primary)' }}>jkbusiness@gmail.com</a></span></p>
+            <a href="https://jonaskalwa.de" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Ein Projekt von Jonas Kalwa →</a>
+          </div>
           <div className="footer-links">
             <Link href="/impressum">Impressum</Link>
             <span className="separator">|</span>
