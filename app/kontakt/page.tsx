@@ -30,7 +30,7 @@ function KontaktForm() {
           <label>Ich interessiere mich für</label>
           <select defaultValue={produkt}>
             <option value="">Bitte wählen</option>
-            <option value="autochat">AutoChat – WhatsApp automatisch beantworten (€29/Monat)</option>
+            <option value="autochat">AutoChat – WhatsApp automatisch beantworten (€49/Monat)</option>
             <option value="mailpilot">MailPilot – E-Mails automatisch sortieren (€19/Monat)</option>
             <option value="beides">Beides</option>
           </select>
