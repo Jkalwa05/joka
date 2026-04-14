@@ -118,10 +118,10 @@ export default function MailPilot() {
         <div className="container-wide">
           <div className="cta-banner">
             <div className="cta-text">
-              <h3>Preis nach Gespräch.</h3>
-              <p>Einrichtung inklusive. Wir schauen uns deinen Bedarf an und finden den passenden Preis.</p>
+              <h3>€29 pro Monat. Kein Vertrag.</h3>
+              <p>Monatlich kündbar. Einrichtung inklusive.</p>
             </div>
-            <Link href="/kontakt?produkt=mailpilot" className="btn-primary">Jetzt anfragen</Link>
+            <Link href="/kontakt?produkt=mailpilot" className="btn-primary">Jetzt starten</Link>
           </div>
         </div>
       </section>
