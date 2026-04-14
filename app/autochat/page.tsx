@@ -30,7 +30,7 @@ export default function AutoChat() {
               Kunden schreiben dir – AutoChat antwortet sofort. Rund um die Uhr, in deinem Namen, mit deinen Infos. Du merkst es kaum, sie aber schon.
             </p>
             <div className="hero-btns">
-              <Link href="/kontakt?produkt=autochat" className="btn-primary">Jetzt starten – €29/Monat</Link>
+              <Link href="/kontakt?produkt=autochat" className="btn-primary">Jetzt anfragen</Link>
               <a href="#wie-es-funktioniert" className="btn-secondary">Wie es funktioniert</a>
             </div>
           </div>
@@ -120,10 +120,10 @@ export default function AutoChat() {
         <div className="container-wide">
           <div className="cta-banner">
             <div className="cta-text">
-              <h3>€29 pro Monat. Kein Vertrag.</h3>
-              <p>Monatlich kündbar. Einrichtung inklusive. Erster Monat – du siehst selbst ob es sich lohnt.</p>
+              <h3>Preis nach Gespräch.</h3>
+              <p>Einrichtung inklusive. Wir schauen uns deinen Betrieb an und finden den passenden Preis.</p>
             </div>
-            <Link href="/kontakt?produkt=autochat" className="btn-primary">Jetzt starten</Link>
+            <Link href="/kontakt?produkt=autochat" className="btn-primary">Jetzt anfragen</Link>
           </div>
         </div>
       </section>

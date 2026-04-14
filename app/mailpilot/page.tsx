@@ -30,7 +30,7 @@ export default function MailPilot() {
               MailPilot liest dein Postfach, sortiert jede Mail in den richtigen Ordner und trägt Termine direkt in deinen Google Kalender ein. Kein manuelles Aufräumen mehr.
             </p>
             <div className="hero-btns">
-              <Link href="/kontakt?produkt=mailpilot" className="btn-primary">Jetzt starten – €19/Monat</Link>
+              <Link href="/kontakt?produkt=mailpilot" className="btn-primary">Jetzt anfragen</Link>
               <a href="#wie-es-funktioniert" className="btn-secondary">Wie es funktioniert</a>
             </div>
           </div>
@@ -118,10 +118,10 @@ export default function MailPilot() {
         <div className="container-wide">
           <div className="cta-banner">
             <div className="cta-text">
-              <h3>€19 pro Monat. Kein Vertrag.</h3>
-              <p>Monatlich kündbar. Einrichtung inklusive. Dein Postfach, endlich aufgeräumt.</p>
+              <h3>Preis nach Gespräch.</h3>
+              <p>Einrichtung inklusive. Wir schauen uns deinen Bedarf an und finden den passenden Preis.</p>
             </div>
-            <Link href="/kontakt?produkt=mailpilot" className="btn-primary">Jetzt starten</Link>
+            <Link href="/kontakt?produkt=mailpilot" className="btn-primary">Jetzt anfragen</Link>
           </div>
         </div>
       </section>
