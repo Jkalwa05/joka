@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'AutoChat – WhatsApp automatisch beantworten | Flowly',
-  description: 'AutoChat beantwortet deine WhatsApp-Nachrichten automatisch – Öffnungszeiten, Preise, Terminanfragen. Für Friseure, Restaurants und lokale Geschäfte. Ab €29/Monat.',
+  description: 'AutoChat beantwortet deine WhatsApp-Nachrichten automatisch – Öffnungszeiten, Preise, Terminanfragen. Für Friseure, Restaurants und lokale Geschäfte. Ab €49/Monat.',
 }
 
 export default function AutoChat() {
@@ -120,7 +120,7 @@ export default function AutoChat() {
         <div className="container-wide">
           <div className="cta-banner">
             <div className="cta-text">
-              <h3>€29 pro Monat. Kein Vertrag.</h3>
+              <h3>€49 pro Monat. Kein Vertrag.</h3>
               <p>Monatlich kündbar. Einrichtung inklusive.</p>
             </div>
             <Link href="/kontakt?produkt=autochat" className="btn-primary">Jetzt starten</Link>

@@ -74,7 +74,7 @@ export default function Home() {
                 <span style={{ fontSize: '0.9rem', color: 'var(--primary)', fontWeight: 600 }}>Spart dir bis zu 30 Stunden im Monat</span>
               </div>
               <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
-                <div className="product-price">€29 <span>/ Monat</span></div>
+                <div className="product-price">€49 <span>/ Monat</span></div>
                 <Link href="/kontakt?produkt=autochat" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '1rem' }}>Jetzt starten</Link>
               </div>
             </div>
@@ -164,10 +164,10 @@ export default function Home() {
           <div className="cta-banner fade-up">
             <div className="cta-text">
               <h3>Bereit loszulegen?</h3>
-              <p>Einmal einrichten, dauerhaft Zeit sparen. Je €29/Monat, kein Vertrag.</p>
+              <p>Einmal einrichten, dauerhaft Zeit sparen. Kein Vertrag, monatlich kündbar.</p>
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <Link href="/kontakt?produkt=autochat" className="btn-primary">AutoChat – €29/Monat</Link>
+              <Link href="/kontakt?produkt=autochat" className="btn-primary">AutoChat – €49/Monat</Link>
               <Link href="/kontakt?produkt=mailpilot" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>MailPilot – €29/Monat</Link>
             </div>
           </div>
