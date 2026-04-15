@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'AutoChat – WhatsApp automatisch beantworten | Flowly',
+  title: 'AutoChat – WhatsApp automatisch beantworten | Joka',
   description: 'AutoChat beantwortet deine WhatsApp-Nachrichten automatisch – Öffnungszeiten, Preise, Terminanfragen. Für Friseure, Restaurants und lokale Geschäfte. Ab €39/Monat.',
 }
 
@@ -11,7 +11,7 @@ export default function AutoChat() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">Flowly<span className="dot">_</span></Link>
+          <Link href="/" className="brand">Joka<span className="dot">_</span></Link>
           <div className="nav-items">
             <Link href="/autochat" style={{ color: 'var(--primary)', fontWeight: 700 }}>AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
@@ -131,7 +131,7 @@ export default function AutoChat() {
       <footer>
         <div className="container-wide footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Flowly. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:jkbusiness@gmail.com" style={{ color: 'var(--primary)' }}>jkbusiness@gmail.com</a></span></p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Joka. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:jkbusiness@gmail.com" style={{ color: 'var(--primary)' }}>jkbusiness@gmail.com</a></span></p>
             <a href="https://jonaskalwa.de" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Ein Projekt von Jonas Kalwa →</a>
           </div>
           <div className="footer-links">
