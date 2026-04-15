@@ -3,8 +3,8 @@ import Script from 'next/script'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Flowly – WhatsApp & E-Mail automatisch beantworten',
-  description: 'Flowly automatisiert deinen WhatsApp und deine E-Mails. WhatsApp automatisch beantworten, E-Mails sortieren, Termine in Google Kalender eintragen – einmal einrichten, dauerhaft sparen.',
+  title: 'Joka – WhatsApp & E-Mail automatisch beantworten',
+  description: 'Joka automatisiert deinen WhatsApp und deine E-Mails. WhatsApp automatisch beantworten, E-Mails sortieren, Termine in Google Kalender eintragen – einmal einrichten, dauerhaft sparen.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

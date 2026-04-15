@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'MailPilot – E-Mails automatisch sortieren & Termine eintragen | Flowly',
+  title: 'MailPilot – E-Mails automatisch sortieren & Termine eintragen | Joka',
   description: 'MailPilot liest dein Gmail oder Outlook, sortiert E-Mails automatisch in Ordner und trägt Termine in deinen Google Kalender ein. Für Freelancer und Selbstständige. Ab €19/Monat.',
 }
 
@@ -11,7 +11,7 @@ export default function MailPilot() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">Flowly<span className="dot">_</span></Link>
+          <Link href="/" className="brand">Joka<span className="dot">_</span></Link>
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot" style={{ color: 'var(--primary)', fontWeight: 700 }}>MailPilot</Link>
@@ -129,7 +129,7 @@ export default function MailPilot() {
       <footer>
         <div className="container-wide footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Flowly. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:jkbusiness@gmail.com" style={{ color: 'var(--primary)' }}>jkbusiness@gmail.com</a></span></p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Joka. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:jkbusiness@gmail.com" style={{ color: 'var(--primary)' }}>jkbusiness@gmail.com</a></span></p>
             <a href="https://jonaskalwa.de" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Ein Projekt von Jonas Kalwa →</a>
           </div>
           <div className="footer-links">

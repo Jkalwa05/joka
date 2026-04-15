@@ -1,7 +1,7 @@
 {
-  "name": "flowly",
+  "name": "joka",
   "version": "1.0.0",
-  "description": "Flowly – Automatisierung für lokale Businesses",
+  "description": "Joka – Automatisierung für lokale Businesses",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
