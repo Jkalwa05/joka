@@ -31,15 +31,15 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <header className="hero-section">
+      <header className="hero-section" style={{ paddingBottom: '8rem' }}>
         <div className="container-wide">
-          <div style={{ maxWidth: '820px' }}>
-            <div className="status-badge fade-in"><span className="status-dot"></span> Jetzt verfügbar</div>
-            <h1 className="fade-in">Dein Joker.<br />Wenn es um Automatisierung geht.</h1>
-            <p className="fade-in delay-1" style={{ fontSize: '1.25rem', maxWidth: '600px' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+            <div className="status-badge fade-in" style={{ margin: '0 auto 2rem auto' }}><span className="status-dot"></span> Jetzt verfügbar</div>
+            <h1 className="fade-in" style={{ fontSize: 'clamp(2.4rem, 4.5vw, 4rem)', letterSpacing: '-2px' }}>Dein Joker. Wenn es um Automatisierung geht.</h1>
+            <p className="fade-in delay-1" style={{ fontSize: '1.25rem', maxWidth: '600px', margin: '0 auto' }}>
               WhatsApp automatisch beantworten. E-Mails automatisch sortieren. Einmal einrichten – und du sparst täglich Stunden.
             </p>
-            <div className="hero-btns fade-in delay-2">
+            <div className="hero-btns fade-in delay-2" style={{ justifyContent: 'center' }}>
               <Link href="/autochat" className="btn-primary">AutoChat entdecken</Link>
               <Link href="/mailpilot" className="btn-secondary">MailPilot entdecken</Link>
             </div>

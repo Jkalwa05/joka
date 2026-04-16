@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import CheckoutButton from '../components/CheckoutButton'
 
 export const metadata: Metadata = {
   title: 'MailPilot – E-Mails automatisch sortieren & Termine eintragen | Joka',
@@ -21,7 +22,7 @@ export default function MailPilot() {
       </nav>
 
       {/* HERO */}
-      <header className="hero-section" style={{ minHeight: '65vh' }}>
+      <header className="hero-section" style={{ minHeight: '65vh', paddingBottom: '8rem' }}>
         <div className="container-wide">
           <div style={{ maxWidth: '760px' }}>
             <span className="sub-label">MailPilot</span>
@@ -121,7 +122,7 @@ export default function MailPilot() {
               <h3>€29 pro Monat. Kein Vertrag.</h3>
               <p>Monatlich kündbar. Einrichtung inklusive.</p>
             </div>
-            <Link href="/kontakt?produkt=mailpilot" className="btn-primary">Jetzt starten</Link>
+            <CheckoutButton product="mailpilot" className="btn-primary">Jetzt starten</CheckoutButton>
           </div>
         </div>
       </section>

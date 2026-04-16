@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import CheckoutButton from '../components/CheckoutButton'
 
 export const metadata: Metadata = {
   title: 'AutoChat – WhatsApp automatisch beantworten | Joka',
@@ -21,7 +22,7 @@ export default function AutoChat() {
       </nav>
 
       {/* HERO */}
-      <header className="hero-section" style={{ minHeight: '65vh' }}>
+      <header className="hero-section" style={{ minHeight: '65vh', paddingBottom: '8rem' }}>
         <div className="container-wide">
           <div style={{ maxWidth: '760px' }}>
             <span className="sub-label">AutoChat</span>
@@ -123,7 +124,7 @@ export default function AutoChat() {
               <h3>€39 pro Monat. Kein Vertrag.</h3>
               <p>Monatlich kündbar. Einrichtung inklusive.</p>
             </div>
-            <Link href="/kontakt?produkt=autochat" className="btn-primary">Jetzt starten</Link>
+            <CheckoutButton product="autochat" className="btn-primary">Jetzt starten</CheckoutButton>
           </div>
         </div>
       </section>
