@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Kunden ───────────────────────────────────────────────────────────────────
+
+model Customer {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Stripe
+  stripeCustomerId     String?  @unique
+  subscriptionStatus   SubscriptionStatus @default(INACTIVE)
+
+  // Produkte
+  autoChatConfig  AutoChatConfig?
+  mailPilotConfig MailPilotConfig?
+  googleTokens    GoogleToken[]
+}
+
+enum SubscriptionStatus {
+  INACTIVE
+  ACTIVE
+  PAST_DUE
+  CANCELED
+}
+
+// ─── AutoChat ────────────────────────────────────────────────────────────────
+
+model AutoChatConfig {
+  id         String   @id @default(cuid())
+  customerId String   @unique
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  // WhatsApp
+  phoneNumberId   String?  // Meta Phone Number ID
+  wabaId          String?  // WhatsApp Business Account ID
+  accessToken     String?  // Meta System User Token (encrypted)
+  phoneNumber     String?  // z.B. +4915123456789
+
+  // Business-Infos für den Bot
+  businessName    String?
+  businessAddress String?
+  openingHours    String?  // JSON string: { "mo": "9-17", "di": "9-17", ... }
+  services        String?  // Freitext oder JSON mit Leistungen + Preisen
+  systemPrompt    String?  // Custom Instructions für Claude
+
+  // Google Calendar (Lesezugriff)
+  calendarId      String?  // Google Calendar ID zum Prüfen von Terminen
+
+  conversations   Conversation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Conversation {
+  id             String         @id @default(cuid())
+  autoChatConfig AutoChatConfig @relation(fields: [autoChatConfigId], references: [id], onDelete: Cascade)
+  autoChatConfigId String
+
+  customerPhone  String   // Endkunde (nicht Joka-Kunde)
+  messages       Message[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([autoChatConfigId, customerPhone])
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId String
+
+  role    MessageRole
+  content String
+
+  createdAt DateTime @default(now())
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+}
+
+// ─── MailPilot ────────────────────────────────────────────────────────────────
+
+model MailPilotConfig {
+  id         String   @id @default(cuid())
+  customerId String   @unique
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  gmailAddress  String?  // verbundene Gmail-Adresse
+  calendarId    String?  // Google Calendar ID (Schreibzugriff)
+
+  // Gmail Watch (Push Notifications)
+  gmailHistoryId  String?  // letzter verarbeiteter historyId
+  gmailWatchExpiry DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Google OAuth Tokens ──────────────────────────────────────────────────────
+
+model GoogleToken {
+  id         String   @id @default(cuid())
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  scope        String   // z.B. "gmail calendar"
+  accessToken  String
+  refreshToken String?
+  expiresAt    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([customerId, scope])
+}
