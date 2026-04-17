@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
 
   const session = await stripe.billingPortal.sessions.create({
     customer: customer.stripeCustomerId,
+    configuration: 'bpc_1TN9q6CFCHiYNuj6fVva5D78',
     return_url: `${process.env.NEXTAUTH_URL}/mein-abo`,
   })
 
