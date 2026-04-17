@@ -167,6 +167,42 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="section bg-light">
+        <div className="container-wide" style={{ maxWidth: '780px' }}>
+          <div className="center-text fade-up">
+            <span className="sub-label">FAQ</span>
+            <h2>Häufige Fragen.</h2>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {[
+              { q: 'Muss ich etwas installieren?', a: 'Nein. Joka läuft komplett im Hintergrund – kein Download, keine App, kein Aufwand.' },
+              { q: 'Was passiert wenn die KI eine Frage nicht beantworten kann?', a: 'AutoChat antwortet ehrlich, dass es die Frage nicht beantworten kann, und weist den Kunden darauf hin, sich direkt zu melden. Über deine Inbox kannst du jederzeit selbst übernehmen.' },
+              { q: 'Kann ich jederzeit kündigen?', a: 'Ja. Kein Vertrag, monatlich kündbar. Über "Mein Abo" kannst du dein Abo jederzeit selbst verwalten.' },
+              { q: 'Sind meine Daten sicher?', a: 'Ja. Alle Daten werden verschlüsselt auf EU-Servern gespeichert. Kein Passwort wird bei uns hinterlegt. Die Verbindung zu WhatsApp und Gmail läuft ausschließlich über offizielle APIs – sicher und jederzeit widerrufbar.' },
+              { q: 'Wie lange dauert die Einrichtung?', a: 'AutoChat ist nach einem kurzen Einrichtungs-Call einsatzbereit. MailPilot läuft nach dem Google-Login vollautomatisch an – das dauert unter 5 Minuten.' },
+            ].map(({ q, a }, i) => (
+              <details key={i} style={{ background: 'white', borderRadius: '12px', border: '1px solid rgba(0,0,0,0.06)', padding: '1.25rem 1.5rem', cursor: 'pointer' }}>
+                <summary style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-main)', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+                  {q}
+                  <span style={{ color: 'var(--primary)', fontSize: '1.2rem', flexShrink: 0 }}>+</span>
+                </summary>
+                <p style={{ marginTop: '0.75rem', marginBottom: 0, fontSize: '0.95rem', lineHeight: 1.7 }}>{a}</p>
+              </details>
+            ))}
+          </div>
+
+          {/* Datenschutz-Hinweis */}
+          <div style={{ marginTop: '2.5rem', display: 'flex', alignItems: 'center', gap: '1rem', background: 'white', borderRadius: '14px', padding: '1rem 1.5rem', border: '1px solid rgba(0,0,0,0.06)' }}>
+            <i className="ph-duotone ph-shield-check" style={{ fontSize: '1.8rem', color: 'var(--primary)', flexShrink: 0 }}></i>
+            <p style={{ margin: 0, fontSize: '0.88rem', lineHeight: 1.6 }}>
+              <strong style={{ color: 'var(--text-main)' }}>DSGVO-konform & sicher.</strong>{' '}
+              Deine Daten werden verschlüsselt auf EU-Servern gespeichert. Keine Passwörter, keine Weitergabe. <Link href="/datenschutz" style={{ color: 'var(--primary)' }}>Datenschutzerklärung →</Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="section">
         <div className="container-wide">
