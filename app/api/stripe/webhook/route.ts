@@ -54,6 +54,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     return;
   }
 
+  const numberType = session.metadata?.numberType
   const customer = await prisma.customer.upsert({
     where: { email },
     update: {
@@ -106,7 +107,18 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
             <tr><td style="padding:8px 16px 8px 0;color:#64748b">Kontakt</td><td><strong>${businessContact || "–"}</strong></td></tr>
           </table>
 
-          ${product === "autochat" ? `
+          ${product === "autochat" ? (numberType === "new" ? `
+          <div style="background:#fef3c7;border:2px solid #fcd34d;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.5rem">
+            <h3 style="color:#92400e;margin:0 0 1rem 0">📱 Neue WhatsApp-Nummer für Kunden einrichten</h3>
+            <p style="color:#78350f;margin:0 0 0.75rem 0;font-size:14px">Der Kunde möchte eine <strong>neue Nummer</strong> – er hat keine eigene angegeben.</p>
+            <ol style="color:#78350f;font-size:14px;margin:0;padding-left:1.25rem;line-height:2">
+              <li>Kaufe eine virtuelle Nummer (z.B. <a href="https://www.sipgate.de" style="color:#92400e">sipgate.de</a>, ~€3/Monat oder einmalig €5 Prepaid)</li>
+              <li>Registriere die Nummer in deinem Meta Business Portfolio als neue WhatsApp Business-Nummer</li>
+              <li>Trage <strong>phoneNumberId</strong>, <strong>accessToken</strong> und <strong>businessName</strong> in Supabase unter AutoChatConfig für diesen Kunden ein</li>
+              <li>Schicke dem Kunden (<a href="mailto:${email}" style="color:#92400e">${email}</a>) eine E-Mail mit seiner neuen Nummer</li>
+            </ol>
+          </div>
+          ` : `
           <div style="background:#fffbeb;border:2px solid #fcd34d;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.5rem">
             <h3 style="color:#92400e;margin:0 0 1rem 0">⚠️ AutoChat manuell einrichten – Anleitung</h3>
             <p style="color:#78350f;margin:0 0 0.75rem 0;font-size:14px">Der Kunde hat seine WhatsApp-Nummer <strong>${businessContact}</strong> angegeben. Gehe jetzt so vor:</p>
@@ -124,7 +136,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
             </ol>
             <p style="color:#92400e;font-size:13px;margin-top:1rem;margin-bottom:0">💡 Tipp: Ruf den Kunden kurz an um die Verbindung zu bestätigen und teste mit einer Testnachricht.</p>
           </div>
-          ` : `
+          `) : `
           <div style="background:#f0fdfa;border:2px solid #99f6e4;border-radius:12px;padding:1rem 1.5rem;margin-bottom:1.5rem">
             <p style="color:#0d9488;font-weight:600;margin:0">✓ MailPilot läuft vollautomatisch nach Google OAuth. Keine Aktion nötig.</p>
           </div>
