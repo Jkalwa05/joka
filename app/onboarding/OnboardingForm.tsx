@@ -30,7 +30,7 @@ export default function OnboardingForm({ customerId, product, email }: Props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ customerId, ...form }),
     })
-    router.push('/onboarding/success?product=autochat')
+    router.push('/onboarding/success?product=' + product)
   }
 
   if (product === 'mailpilot') {
