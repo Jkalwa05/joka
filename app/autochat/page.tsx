@@ -135,6 +135,8 @@ export default function AutoChat() {
             <a href="https://jonaskalwa.de" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Ein Projekt von Jonas Kalwa →</a>
           </div>
           <div className="footer-links">
+            <Link href="/mein-abo">Mein Abo</Link>
+            <span className="separator">|</span>
             <Link href="/impressum">Impressum</Link>
             <span className="separator">|</span>
             <Link href="/datenschutz">Datenschutz</Link>
