@@ -10,8 +10,8 @@ function KontaktForm() {
 
   return (
     <div className="form-card">
-      <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Jetzt starten.</h2>
-      <p style={{ marginBottom: '2rem' }}>Trag dich ein – wir melden uns innerhalb von 24h und richten alles gemeinsam ein.</p>
+      <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Fragen? Meld dich.</h2>
+      <p style={{ marginBottom: '2rem' }}>Schreib uns kurz – wir antworten innerhalb von 24h.</p>
 
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="grp">
@@ -39,7 +39,7 @@ function KontaktForm() {
           <label>Kurze Beschreibung (optional)</label>
           <textarea rows={3} placeholder="Was machst du, was beschäftigt dich?" />
         </div>
-        <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '0.5rem' }}>Anfrage absenden</button>
+        <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '0.5rem' }}>Nachricht senden</button>
       </form>
     </div>
   )
@@ -54,7 +54,7 @@ export default function Kontakt() {
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
-            <Link href="/kontakt" className="btn-primary small">Kostenlos starten</Link>
+            <Link href="/kontakt" className="btn-primary small">Fragen?</Link>
           </div>
         </div>
       </nav>

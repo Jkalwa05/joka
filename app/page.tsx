@@ -25,7 +25,7 @@ export default function Home() {
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
-            <Link href="/kontakt" className="btn-primary small">Kostenlos starten</Link>
+            <Link href="/kontakt" className="btn-primary small">Fragen?</Link>
           </div>
         </div>
       </nav>
@@ -75,7 +75,7 @@ export default function Home() {
               </div>
               <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
                 <div className="product-price">€39 <span>/ Monat</span></div>
-                <Link href="/kontakt?produkt=autochat" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '1rem' }}>Jetzt starten</Link>
+                <Link href="/bestellen?produkt=autochat" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '1rem' }}>Jetzt abonnieren</Link>
               </div>
             </div>
 
@@ -97,7 +97,7 @@ export default function Home() {
               </div>
               <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
                 <div className="product-price">€29 <span>/ Monat</span></div>
-                <Link href="/kontakt?produkt=mailpilot" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '1rem' }}>Jetzt starten</Link>
+                <Link href="/bestellen?produkt=mailpilot" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '1rem' }}>Jetzt abonnieren</Link>
               </div>
             </div>
           </div>
@@ -167,8 +167,8 @@ export default function Home() {
               <p>Einmal einrichten, dauerhaft Zeit sparen. Kein Vertrag, monatlich kündbar.</p>
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <Link href="/kontakt?produkt=autochat" className="btn-primary">AutoChat – €39/Monat</Link>
-              <Link href="/kontakt?produkt=mailpilot" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>MailPilot – €29/Monat</Link>
+              <Link href="/bestellen?produkt=autochat" className="btn-primary">AutoChat – €39/Monat</Link>
+              <Link href="/bestellen?produkt=mailpilot" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>MailPilot – €29/Monat</Link>
             </div>
           </div>
         </div>

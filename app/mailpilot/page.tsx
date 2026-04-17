@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import CheckoutButton from '../components/CheckoutButton'
 
 export const metadata: Metadata = {
   title: 'MailPilot – E-Mails automatisch sortieren & Termine eintragen | Joka',
@@ -16,7 +15,7 @@ export default function MailPilot() {
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot" style={{ color: 'var(--primary)', fontWeight: 700 }}>MailPilot</Link>
-            <Link href="/kontakt" className="btn-primary small">Kostenlos starten</Link>
+            <Link href="/kontakt" className="btn-primary small">Fragen?</Link>
           </div>
         </div>
       </nav>
@@ -122,7 +121,7 @@ export default function MailPilot() {
               <h3>€29 pro Monat. Kein Vertrag.</h3>
               <p>Monatlich kündbar. Einrichtung inklusive.</p>
             </div>
-            <CheckoutButton product="mailpilot" className="btn-primary">Jetzt starten</CheckoutButton>
+            <Link href="/bestellen?produkt=mailpilot" className="btn-primary">Jetzt abonnieren</Link>
           </div>
         </div>
       </section>
