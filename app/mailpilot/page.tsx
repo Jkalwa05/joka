@@ -40,7 +40,7 @@ export default function MailPilot() {
       {/* WIE ES FUNKTIONIERT */}
       <section id="wie-es-funktioniert" className="section bg-light">
         <div className="container-wide">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}>
+          <div className="two-col">
             <div>
               <span className="sub-label">Wie es funktioniert</span>
               <h2>Einmal verbinden. Für immer aufgeräumt.</h2>
