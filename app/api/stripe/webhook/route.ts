@@ -112,7 +112,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
             <h3 style="color:#92400e;margin:0 0 1rem 0">📱 Neue WhatsApp-Nummer für Kunden einrichten</h3>
             <p style="color:#78350f;margin:0 0 0.75rem 0;font-size:14px">Der Kunde möchte eine <strong>neue Nummer</strong> – er hat keine eigene angegeben.</p>
             <ol style="color:#78350f;font-size:14px;margin:0;padding-left:1.25rem;line-height:2">
-              <li>Kaufe eine virtuelle Nummer (z.B. <a href="https://www.sipgate.de" style="color:#92400e">sipgate.de</a>, ~€3/Monat oder einmalig €5 Prepaid)</li>
+              <li>Kaufe eine virtuelle Nummer bei <a href="https://satellite.me" style="color:#92400e;font-weight:700">satellite.me →</a> (~€5/Monat, kein Gewerbe nötig, sofort verfügbar)</li>
               <li>Registriere die Nummer in deinem Meta Business Portfolio als neue WhatsApp Business-Nummer</li>
               <li>Trage <strong>phoneNumberId</strong>, <strong>accessToken</strong> und <strong>businessName</strong> in Supabase unter AutoChatConfig für diesen Kunden ein</li>
               <li>Schicke dem Kunden (<a href="mailto:${email}" style="color:#92400e">${email}</a>) eine E-Mail mit seiner neuen Nummer</li>
