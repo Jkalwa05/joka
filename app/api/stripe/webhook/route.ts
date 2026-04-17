@@ -46,7 +46,9 @@ export async function POST(req: NextRequest) {
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const email = session.customer_email ?? session.customer_details?.email;
   const product = session.metadata?.product;
-  console.log("email:", email, "product:", product);
+  const name = session.metadata?.name || email?.split("@")[0] || "Unbekannt";
+  const businessContact = session.metadata?.businessContact || "";
+  console.log("email:", email, "product:", product, "businessContact:", businessContact);
   if (!email || !product) {
     console.error("Fehlende Daten — email:", email, "product:", product);
     return;
@@ -55,23 +57,23 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const customer = await prisma.customer.upsert({
     where: { email },
     update: {
+      name,
       stripeCustomerId: session.customer as string,
       subscriptionStatus: "ACTIVE",
     },
     create: {
       email,
-      name: email.split("@")[0],
+      name,
       stripeCustomerId: session.customer as string,
       subscriptionStatus: "ACTIVE",
     },
   });
 
-  // Produkt-Config anlegen falls noch nicht vorhanden
   if (product === "autochat") {
     await prisma.autoChatConfig.upsert({
       where: { customerId: customer.id },
-      update: {},
-      create: { customerId: customer.id },
+      update: { phoneNumber: businessContact || undefined },
+      create: { customerId: customer.id, phoneNumber: businessContact || undefined },
     });
   } else if (product === "mailpilot") {
     await prisma.mailPilotConfig.upsert({
