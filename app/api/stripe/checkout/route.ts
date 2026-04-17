@@ -9,7 +9,7 @@ const PRICE_IDS: Record<string, string> = {
 };
 
 export async function POST(req: NextRequest) {
-  const { product, email, name, businessContact, trial } = await req.json();
+  const { product, email, name, businessContact, numberType, trial } = await req.json();
 
   const priceId = PRICE_IDS[product];
   if (!priceId) {
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     ...(trial ? { subscription_data: { trial_period_days: 30 } } : {}),
     success_url: `${process.env.NEXTAUTH_URL}/onboarding?session_id={CHECKOUT_SESSION_ID}&product=${product}`,
     cancel_url: `${process.env.NEXTAUTH_URL}/bestellen?produkt=${product}${trial ? '&trial=1' : ''}`,
-    metadata: { product, name: name || '', businessContact: businessContact || '' },
+    metadata: { product, name: name || '', businessContact: businessContact || '', numberType: numberType || '' },
   });
 
   return NextResponse.json({ url: session.url });

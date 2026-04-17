@@ -9,9 +9,6 @@ const PRODUCTS = {
     name: 'AutoChat',
     price: '€39',
     description: 'WhatsApp automatisch beantworten – 24/7, in deinem Namen.',
-    contactLabel: 'Deine WhatsApp Business-Nummer',
-    contactPlaceholder: '+49 151 12345678',
-    contactHelp: 'Die Nummer, auf der deine Kunden dir schreiben. AutoChat antwortet ab morgen automatisch.',
   },
   mailpilot: {
     name: 'MailPilot',
@@ -30,6 +27,7 @@ function BestellenForm() {
   const product = produktKey && PRODUCTS[produktKey] ? PRODUCTS[produktKey] : null
 
   const [form, setForm] = useState({ name: '', email: '', businessContact: '', agreed: false })
+  const [numberType, setNumberType] = useState<'existing' | 'new' | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -49,7 +47,8 @@ function BestellenForm() {
         product: produktKey,
         email: form.email,
         name: form.name,
-        businessContact: form.businessContact,
+        businessContact: produktKey === 'autochat' ? (numberType === 'new' ? 'NEUE_NUMMER' : form.businessContact) : form.businessContact,
+        numberType: produktKey === 'autochat' ? numberType : undefined,
         trial,
       }),
     })
@@ -122,17 +121,88 @@ function BestellenForm() {
             required
           />
         </div>
-        <div className="grp">
-          <label>{product.contactLabel}</label>
-          <input
-            type="text"
-            placeholder={product.contactPlaceholder}
-            value={form.businessContact}
-            onChange={(e) => update('businessContact', e.target.value)}
-            required
-          />
-          <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.4rem' }}>{product.contactHelp}</p>
-        </div>
+        {produktKey === 'autochat' ? (
+          <div className="grp">
+            <label>WhatsApp-Nummer für AutoChat</label>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.25rem' }}>
+              {/* Option: Bestehende Nummer */}
+              <div
+                onClick={() => setNumberType('existing')}
+                style={{
+                  border: `2px solid ${numberType === 'existing' ? 'var(--primary)' : '#e2e8f0'}`,
+                  borderRadius: '12px', padding: '1rem 1.25rem', cursor: 'pointer',
+                  background: numberType === 'existing' ? '#f0fdfa' : 'white', transition: '0.2s',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', border: `2px solid ${numberType === 'existing' ? 'var(--primary)' : '#cbd5e1'}`, background: numberType === 'existing' ? 'var(--primary)' : 'white', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {numberType === 'existing' && <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'white' }} />}
+                  </div>
+                  <strong style={{ fontSize: '0.95rem', color: 'var(--text-main)' }}>Ich habe bereits eine Nummer</strong>
+                </div>
+                {numberType === 'existing' && (
+                  <div style={{ marginTop: '1rem' }}>
+                    <div style={{ background: '#fef2f2', border: '1.5px solid #fca5a5', borderRadius: '10px', padding: '1rem 1.25rem', marginBottom: '1rem' }}>
+                      <p style={{ color: '#991b1b', fontWeight: 700, fontSize: '0.9rem', margin: '0 0 0.5rem 0' }}>⚠️ Wichtiger Hinweis</p>
+                      <p style={{ color: '#b91c1c', fontSize: '0.85rem', margin: 0, lineHeight: 1.6 }}>
+                        Diese Nummer wird <strong>vollständig von AutoChat übernommen</strong>. Du kannst sie danach <strong>nicht mehr</strong> in der normalen WhatsApp-App nutzen – alle Nachrichten laufen nur noch über die KI. Verwende daher eine <strong>dedizierte Geschäftsnummer</strong>, nicht deine persönliche Nummer.
+                      </p>
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="+49 151 12345678"
+                      value={form.businessContact}
+                      onChange={(e) => update('businessContact', e.target.value)}
+                      required={numberType === 'existing'}
+                      style={{ width: '100%', padding: '0.85rem 1rem', border: '2px solid #e2e8f0', borderRadius: '8px', fontFamily: 'var(--font-ui)', fontSize: '1rem', background: '#f8f9fa' }}
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Option: Neue Nummer */}
+              <div
+                onClick={() => setNumberType('new')}
+                style={{
+                  border: `2px solid ${numberType === 'new' ? 'var(--primary)' : '#e2e8f0'}`,
+                  borderRadius: '12px', padding: '1rem 1.25rem', cursor: 'pointer',
+                  background: numberType === 'new' ? '#f0fdfa' : 'white', transition: '0.2s',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{ width: '18px', height: '18px', borderRadius: '50%', border: `2px solid ${numberType === 'new' ? 'var(--primary)' : '#cbd5e1'}`, background: numberType === 'new' ? 'var(--primary)' : 'white', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {numberType === 'new' && <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'white' }} />}
+                  </div>
+                  <div>
+                    <strong style={{ fontSize: '0.95rem', color: 'var(--text-main)' }}>Neue Nummer für mich einrichten</strong>
+                    <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', background: '#f0fdfa', color: 'var(--primary)', padding: '1px 8px', borderRadius: '50px', fontWeight: 700 }}>Im Abo enthalten</span>
+                  </div>
+                </div>
+                {numberType === 'new' && (
+                  <div style={{ marginTop: '1rem', background: '#f0fdfa', borderRadius: '8px', padding: '0.85rem 1rem' }}>
+                    <p style={{ color: 'var(--primary)', fontSize: '0.85rem', margin: 0, lineHeight: 1.6 }}>
+                      ✓ Wir richten dir eine eigene WhatsApp-Nummer ein – komplett kostenlos im Abo enthalten.<br />
+                      ✓ Du bekommst die Nummer per E-Mail und packst sie einfach auf deine Website.<br />
+                      ✓ Deine persönliche Nummer bleibt unberührt.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="grp">
+            <label>{(product as typeof PRODUCTS['mailpilot']).contactLabel}</label>
+            <input
+              type="text"
+              placeholder={(product as typeof PRODUCTS['mailpilot']).contactPlaceholder}
+              value={form.businessContact}
+              onChange={(e) => update('businessContact', e.target.value)}
+              required
+            />
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.4rem' }}>{(product as typeof PRODUCTS['mailpilot']).contactHelp}</p>
+          </div>
+        )}
 
         <div style={{ background: '#fffbeb', border: '1.5px solid #fcd34d', borderRadius: '10px', padding: '1rem 1.25rem', marginBottom: '1.5rem', marginTop: '0.5rem' }}>
           <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', cursor: 'pointer', fontWeight: 400 }}>
@@ -155,9 +225,9 @@ function BestellenForm() {
 
         <button
           type="submit"
-          disabled={loading || !form.agreed}
+          disabled={loading || !form.agreed || (produktKey === 'autochat' && !numberType)}
           className="btn-primary"
-          style={{ width: '100%', opacity: !form.agreed ? 0.5 : 1, cursor: !form.agreed ? 'not-allowed' : 'pointer' }}
+          style={{ width: '100%', opacity: (!form.agreed || (produktKey === 'autochat' && !numberType)) ? 0.5 : 1, cursor: (!form.agreed || (produktKey === 'autochat' && !numberType)) ? 'not-allowed' : 'pointer' }}
         >
           {loading ? 'Wird weitergeleitet...' : trial ? `1 Monat gratis starten →` : `Weiter zur Zahlung → ${product.price}/Monat`}
         </button>
