@@ -219,23 +219,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* JK AUTOMATION BANNER */}
-      <section style={{ background: 'var(--primary)', padding: '1.25rem 0' }}>
-        <div className="container-wide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ width: '36px', height: '36px', background: 'rgba(255,255,255,0.15)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <i className="ph-duotone ph-lightning" style={{ color: 'white', fontSize: '1.1rem' }}></i>
-            </div>
-            <div>
-              <p style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', margin: 0 }}>Weitere Automationen im Kopf?</p>
-              <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.82rem', margin: 0 }}>Wir schauen gemeinsam, was möglich ist.</p>
-            </div>
-          </div>
-          <a href="https://jonaskalwa.de" target="_blank" rel="noopener noreferrer" style={{ background: 'white', color: 'var(--primary)', padding: '0.6rem 1.4rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.88rem', textDecoration: 'none', flexShrink: 0, whiteSpace: 'nowrap' }}>
-            JK Automation ansehen →
-          </a>
-        </div>
-      </section>
+      {/* JK AUTOMATION BANNER – ausgeblendet bis jonaskalwa.de fertig */}
 
       {/* TRIAL WIDGET */}
       {showWidget && (
