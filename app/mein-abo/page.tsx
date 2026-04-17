@@ -51,7 +51,7 @@ export default function MeinAbo() {
                 Falls ein Joka-Konto mit dieser E-Mail existiert, hast du soeben einen Link erhalten um dein Abo zu verwalten.
               </p>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                Nichts erhalten? Schau im Spam-Ordner oder schreib uns: <a href="mailto:jkbusiness@gmail.com" style={{ color: 'var(--primary)' }}>jkbusiness@gmail.com</a>
+                Nichts erhalten? Schau im Spam-Ordner oder schreib uns: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a>
               </p>
             </div>
           ) : (
@@ -89,7 +89,7 @@ export default function MeinAbo() {
               </form>
 
               <p style={{ marginTop: '1.5rem', fontSize: '0.82rem', color: 'var(--text-muted)', textAlign: 'center' }}>
-                Fragen? <a href="mailto:jkbusiness@gmail.com" style={{ color: 'var(--primary)' }}>jkbusiness@gmail.com</a>
+                Fragen? <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a>
               </p>
             </div>
           )}
@@ -99,7 +99,7 @@ export default function MeinAbo() {
       <footer>
         <div className="container-wide footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Joka. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:jkbusiness@gmail.com" style={{ color: 'var(--primary)' }}>jkbusiness@gmail.com</a></span></p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Joka. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
             <a href="https://jonaskalwa.de" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Ein Projekt von Jonas Kalwa →</a>
           </div>
           <div className="footer-links">

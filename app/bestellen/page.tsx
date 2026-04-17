@@ -58,7 +58,7 @@ function BestellenForm() {
     if (data.url) {
       window.location.href = data.url
     } else {
-      setError('Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreib uns an jkbusiness@gmail.com.')
+      setError('Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreib uns an joka.chat.business@gmail.com.')
       setLoading(false)
     }
   }
@@ -161,6 +161,9 @@ function BestellenForm() {
         >
           {loading ? 'Wird weitergeleitet...' : trial ? `1 Monat gratis starten →` : `Weiter zur Zahlung → ${product.price}/Monat`}
         </button>
+        <Link href="/kontakt" className="btn-secondary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '0.75rem' }}>
+          Fragen? Wir helfen dir
+        </Link>
       </form>
     </div>
   )
@@ -194,7 +197,7 @@ export default function Bestellen() {
       <footer>
         <div className="container-wide footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Joka. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:jkbusiness@gmail.com" style={{ color: 'var(--primary)' }}>jkbusiness@gmail.com</a></span></p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Joka. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
             <a href="https://jonaskalwa.de" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Ein Projekt von Jonas Kalwa →</a>
           </div>
           <div className="footer-links">

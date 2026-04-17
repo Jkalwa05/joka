@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     },
     body: JSON.stringify({
       from: 'Joka Anfragen <onboarding@resend.dev>',
-      to: 'kalwajonas@gmail.com',
+      to: 'joka.chat.business@gmail.com',
       reply_to: email,
       subject: `Neue Anfrage von ${name}`,
       html: `
