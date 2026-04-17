@@ -185,7 +185,7 @@ export default function Home() {
 
       {/* TRIAL WIDGET */}
       {showWidget && (
-        <div style={{
+        <div className="trial-widget" style={{
           position: 'fixed', bottom: '1.5rem', left: '50%', transform: 'translateX(-50%)',
           zIndex: 9999, display: 'flex', alignItems: 'center', gap: '1rem',
           background: 'var(--text-main)', color: 'white', padding: '0.85rem 1.25rem 0.85rem 1.5rem',

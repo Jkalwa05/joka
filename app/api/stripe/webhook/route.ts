@@ -82,6 +82,31 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       create: { customerId: customer.id },
     });
   }
+
+  const produktLabel = product === "autochat" ? "AutoChat (€39/Monat)" : "MailPilot (€29/Monat)";
+  await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "Joka <onboarding@resend.dev>",
+      to: "joka.chat.business@gmail.com",
+      subject: `🎉 Neuer Kunde: ${name} – ${produktLabel}`,
+      html: `
+        <h2>Neuer Kunde bei Joka!</h2>
+        <table style="border-collapse:collapse;font-size:15px;">
+          <tr><td style="padding:6px 16px 6px 0;color:#64748b">Name</td><td><strong>${name}</strong></td></tr>
+          <tr><td style="padding:6px 16px 6px 0;color:#64748b">E-Mail</td><td><a href="mailto:${email}">${email}</a></td></tr>
+          <tr><td style="padding:6px 16px 6px 0;color:#64748b">Produkt</td><td><strong>${produktLabel}</strong></td></tr>
+          <tr><td style="padding:6px 16px 6px 0;color:#64748b">Kontakt</td><td>${businessContact || "–"}</td></tr>
+        </table>
+        ${product === "autochat" ? "<p style='margin-top:1rem;color:#d97706;font-weight:600'>⚠️ AutoChat einrichten: phoneNumberId + accessToken manuell in DB eintragen.</p>" : "<p style='margin-top:1rem;color:#0d9488;font-weight:600'>✓ MailPilot läuft automatisch nach Google OAuth.</p>"}
+        <p style="margin-top:1rem"><a href="https://joka.chat/admin?key=${process.env.ADMIN_KEY}" style="background:#006266;color:white;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600">Admin Dashboard →</a></p>
+      `,
+    }),
+  }).catch((err) => console.error("Benachrichtigungs-E-Mail fehlgeschlagen:", err));
 }
 
 async function handleSubscriptionCanceled(sub: Stripe.Subscription) {
