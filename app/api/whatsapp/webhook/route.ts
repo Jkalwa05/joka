@@ -59,6 +59,9 @@ export async function POST(req: NextRequest) {
     data: { conversationId: conversation.id, role: 'USER', content: text },
   })
 
+  // KI pausiert → nicht antworten
+  if (conversation.aiPaused) return NextResponse.json({ received: true })
+
   // System Prompt zusammenbauen
   const systemPrompt =
     config.systemPrompt ??
