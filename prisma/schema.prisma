@@ -20,6 +20,10 @@ model Customer {
   stripeCustomerId     String?  @unique
   subscriptionStatus   SubscriptionStatus @default(INACTIVE)
 
+  // Inbox Auth
+  inboxToken       String?   @unique
+  inboxTokenExpiry DateTime?
+
   // Produkte
   autoChatConfig  AutoChatConfig?
   mailPilotConfig MailPilotConfig?
@@ -68,6 +72,7 @@ model Conversation {
   autoChatConfigId String
 
   customerPhone  String   // Endkunde (nicht Joka-Kunde)
+  aiPaused       Boolean  @default(false)
   messages       Message[]
 
   createdAt DateTime @default(now())
