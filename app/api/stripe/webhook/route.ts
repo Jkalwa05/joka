@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
+import crypto from "crypto";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -70,6 +71,14 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     },
   });
 
+  // Onboarding-Token generieren und speichern
+  const inboxToken = crypto.randomBytes(32).toString("hex");
+  const inboxTokenExpiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000); // 1 Jahr
+  await prisma.customer.update({
+    where: { id: customer.id },
+    data: { inboxToken, inboxTokenExpiry },
+  });
+
   if (product === "autochat") {
     await prisma.autoChatConfig.upsert({
       where: { customerId: customer.id },
@@ -82,6 +91,44 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       update: {},
       create: { customerId: customer.id },
     });
+  }
+
+  // Kunden-Willkommensmail für AutoChat
+  if (product === "autochat") {
+    const onboardingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/onboarding/autochat?token=${inboxToken}`;
+    const inboxLink = `${process.env.NEXT_PUBLIC_BASE_URL}/inbox?token=${inboxToken}`;
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Joka <onboarding@resend.dev>",
+        to: email,
+        subject: "Willkommen bei AutoChat – jetzt einrichten",
+        html: `
+          <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:2rem">
+            <h2 style="color:#0f172a;margin-bottom:0.25rem">Willkommen, ${name}! 👋</h2>
+            <p style="color:#64748b;margin-top:0">Dein AutoChat-Abo ist aktiv. Jetzt fehlt nur noch eines: deine Business-Infos.</p>
+
+            <div style="background:#f0fdfa;border:2px solid #99f6e4;border-radius:14px;padding:1.5rem;margin:1.5rem 0">
+              <p style="color:#0d9488;font-weight:700;margin:0 0 0.75rem 0;font-size:1rem">Schritt 1 – Deine Infos hinterlegen</p>
+              <p style="color:#0f766e;font-size:0.9rem;margin:0 0 1rem 0">Trag einmalig deine Öffnungszeiten, Preise und Leistungen ein. AutoChat antwortet dann automatisch damit.</p>
+              <a href="${onboardingLink}" style="display:inline-block;background:#006266;color:white;padding:0.75rem 1.5rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:0.95rem">Jetzt einrichten →</a>
+            </div>
+
+            <div style="background:#f8f9fa;border:1px solid rgba(0,0,0,0.06);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem">
+              <p style="color:#0f172a;font-weight:700;margin:0 0 0.5rem 0;font-size:0.95rem">Schritt 2 – Deine Inbox</p>
+              <p style="color:#64748b;font-size:0.85rem;margin:0 0 0.75rem 0">Hier siehst du alle Konversationen und kannst bei Bedarf selbst antworten oder die KI pausieren.</p>
+              <a href="${inboxLink}" style="display:inline-block;background:#f1f5f9;color:#0f172a;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:0.85rem">Zur Inbox →</a>
+            </div>
+
+            <p style="color:#94a3b8;font-size:0.82rem">Fragen? Schreib uns einfach: <a href="mailto:joka.chat.business@gmail.com" style="color:#006266">joka.chat.business@gmail.com</a></p>
+          </div>
+        `,
+      }),
+    }).catch((err) => console.error("Kunden-Willkommensmail fehlgeschlagen:", err));
   }
 
   const produktLabel = product === "autochat" ? "AutoChat (€39/Monat)" : "MailPilot (€29/Monat)";
