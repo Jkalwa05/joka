@@ -183,31 +183,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* JK AUTOMATION BANNER */}
+      <section style={{ background: 'var(--primary)', padding: '1.25rem 0' }}>
+        <div className="container-wide" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div style={{ width: '36px', height: '36px', background: 'rgba(255,255,255,0.15)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <i className="ph-duotone ph-lightning" style={{ color: 'white', fontSize: '1.1rem' }}></i>
+            </div>
+            <div>
+              <p style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', margin: 0 }}>Weitere Automationen im Kopf?</p>
+              <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.82rem', margin: 0 }}>Wir schauen gemeinsam, was möglich ist.</p>
+            </div>
+          </div>
+          <a href="https://jonaskalwa.de" target="_blank" rel="noopener noreferrer" style={{ background: 'white', color: 'var(--primary)', padding: '0.6rem 1.4rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.88rem', textDecoration: 'none', flexShrink: 0, whiteSpace: 'nowrap' }}>
+            JK Automation ansehen →
+          </a>
+        </div>
+      </section>
+
       {/* TRIAL WIDGET */}
       {showWidget && (
         <div className="trial-widget" style={{
           position: 'fixed', bottom: '1.5rem', left: '50%', transform: 'translateX(-50%)',
-          zIndex: 9999, display: 'flex', alignItems: 'center', gap: '1rem',
-          background: 'var(--text-main)', color: 'white', padding: '0.85rem 1.25rem 0.85rem 1.5rem',
-          borderRadius: '50px', boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
+          zIndex: 9999, display: 'flex', alignItems: 'center', gap: '1.25rem',
+          background: 'white', color: 'var(--text-main)',
+          padding: '0.75rem 0.75rem 0.75rem 1.5rem',
+          borderRadius: '50px', boxShadow: '0 8px 40px rgba(0,0,0,0.15)',
+          border: '1px solid rgba(0,0,0,0.07)',
           whiteSpace: 'nowrap',
         }}>
-          <span style={{ fontSize: '1.1rem' }}>🎁</span>
-          <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Jetzt einen Monat gratis testen</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}>
+            <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-main)', fontFamily: 'var(--font-heading)' }}>1 Monat kostenlos testen</span>
+            <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Kein Risiko · Jederzeit kündbar</span>
+          </div>
           <Link
             href="/bestellen?trial=1"
             className="btn-primary small"
-            style={{ background: 'var(--primary)', flexShrink: 0 }}
+            style={{ flexShrink: 0, fontSize: '0.88rem' }}
           >
-            Gratis starten
+            Jetzt starten
           </Link>
           <button
             onClick={dismissWidget}
             aria-label="Schließen"
             style={{
-              background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)',
-              cursor: 'pointer', fontSize: '1.2rem', lineHeight: 1, padding: '0 0.25rem',
-              flexShrink: 0,
+              background: 'none', border: 'none', color: 'var(--text-muted)',
+              cursor: 'pointer', fontSize: '1.1rem', lineHeight: 1,
+              padding: '0 0.5rem 0 0', flexShrink: 0,
             }}
           >
             ×
