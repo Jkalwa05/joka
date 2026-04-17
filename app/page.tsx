@@ -116,7 +116,7 @@ export default function Home() {
       {/* HOW IT WORKS */}
       <section className="section">
         <div className="container-wide">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}>
+          <div className="two-col">
             <div className="fade-up">
               <span className="sub-label">So einfach geht's</span>
               <h2>Einrichten in unter 20 Minuten.</h2>
@@ -210,7 +210,6 @@ export default function Home() {
           padding: '0.75rem 0.75rem 0.75rem 1.5rem',
           borderRadius: '50px', boxShadow: '0 8px 40px rgba(0,0,0,0.15)',
           border: '1px solid rgba(0,0,0,0.07)',
-          whiteSpace: 'nowrap',
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}>
             <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-main)', fontFamily: 'var(--font-heading)' }}>1 Monat kostenlos testen</span>

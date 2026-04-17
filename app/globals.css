@@ -126,6 +126,9 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); background: wh
 .grp input, .grp select, .grp textarea { width: 100%; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 8px; font-family: var(--font-ui); transition: 0.3s; font-size: 1rem; background: #f8f9fa; }
 .grp input:focus, .grp select:focus, .grp textarea:focus { border-color: var(--primary); outline: none; background: white; }
 
+/* --- TWO COL GRID --- */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+
 /* --- MOBILE --- */
 @media (max-width: 1024px) {
     .products-grid { grid-template-columns: 1fr; }
@@ -143,8 +146,7 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); background: wh
     .container-wide { padding: 0 1.25rem; }
 
     /* Nav */
-    .nav-items { gap: 1rem; }
-    .nav-items a:not([class*="btn"]) { font-size: 0.9rem; }
+    .nav-items a:not([class*="btn"]) { display: none; }
     .small { padding: 0.5rem 1rem; font-size: 0.85rem; }
 
     /* Hero */
@@ -153,7 +155,7 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); background: wh
     .hero-btns a { text-align: center; }
 
     /* 2-column grids → 1 column */
-    div[style*="grid-template-columns: 1fr 1fr"] { display: flex !important; flex-direction: column !important; gap: 3rem !important; }
+    .two-col { grid-template-columns: 1fr; gap: 2.5rem; }
 
     /* Product cards */
     .product-card { padding: 2rem; }
