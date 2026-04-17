@@ -26,6 +26,7 @@ const PRODUCTS = {
 function BestellenForm() {
   const params = useSearchParams()
   const produktKey = params.get('produkt') as 'autochat' | 'mailpilot' | null
+  const trial = params.get('trial') === '1'
   const product = produktKey && PRODUCTS[produktKey] ? PRODUCTS[produktKey] : null
 
   const [form, setForm] = useState({ name: '', email: '', businessContact: '', agreed: false })
@@ -49,6 +50,7 @@ function BestellenForm() {
         email: form.email,
         name: form.name,
         businessContact: form.businessContact,
+        trial,
       }),
     })
 
@@ -62,13 +64,19 @@ function BestellenForm() {
   }
 
   if (!product) {
+    const trialParam = trial ? '&trial=1' : ''
     return (
       <div className="form-card" style={{ textAlign: 'center' }}>
-        <h2 style={{ marginBottom: '1rem' }}>Kein Produkt gewählt</h2>
-        <p style={{ marginBottom: '2rem' }}>Bitte wähle ein Produkt:</p>
+        {trial && (
+          <div style={{ background: '#f0fdfa', border: '1.5px solid #99f6e4', borderRadius: '12px', padding: '0.85rem 1.25rem', marginBottom: '1.5rem', color: 'var(--primary)', fontWeight: 700, fontSize: '1rem' }}>
+            🎁 1 Monat gratis – kein Risiko, jederzeit kündbar
+          </div>
+        )}
+        <h2 style={{ marginBottom: '1rem' }}>Welches Produkt möchtest du testen?</h2>
+        <p style={{ marginBottom: '2rem' }}>Wähle dein Produkt – der erste Monat ist kostenlos.</p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/bestellen?produkt=autochat" className="btn-primary">AutoChat – €39/Monat</Link>
-          <Link href="/bestellen?produkt=mailpilot" className="btn-secondary">MailPilot – €29/Monat</Link>
+          <Link href={`/bestellen?produkt=autochat${trialParam}`} className="btn-primary">AutoChat – €39/Monat</Link>
+          <Link href={`/bestellen?produkt=mailpilot${trialParam}`} className="btn-secondary">MailPilot – €29/Monat</Link>
         </div>
       </div>
     )
@@ -85,7 +93,12 @@ function BestellenForm() {
         <span style={{ fontWeight: 800, fontSize: '1.4rem', color: 'var(--primary)', whiteSpace: 'nowrap' }}>{product.price}<span style={{ fontSize: '0.85rem', fontWeight: 400, color: 'var(--text-muted)' }}> / Monat</span></span>
       </div>
 
-      <h2 style={{ fontSize: '1.8rem', marginBottom: '0.4rem' }}>Jetzt abonnieren</h2>
+      {trial && (
+        <div style={{ background: '#f0fdfa', border: '1.5px solid #99f6e4', borderRadius: '12px', padding: '0.85rem 1.25rem', marginBottom: '1.5rem', color: 'var(--primary)', fontWeight: 700, fontSize: '1rem', textAlign: 'center' }}>
+          🎁 1 Monat gratis – danach {product.price}/Monat, jederzeit kündbar
+        </div>
+      )}
+      <h2 style={{ fontSize: '1.8rem', marginBottom: '0.4rem' }}>{trial ? '1 Monat gratis starten' : 'Jetzt abonnieren'}</h2>
       <p style={{ marginBottom: '2rem', color: 'var(--text-muted)' }}>Füll das Formular aus – danach gehst du zur sicheren Zahlung via Stripe. Monatlich kündbar.</p>
 
       <form onSubmit={handleSubmit}>
@@ -146,7 +159,7 @@ function BestellenForm() {
           className="btn-primary"
           style={{ width: '100%', opacity: !form.agreed ? 0.5 : 1, cursor: !form.agreed ? 'not-allowed' : 'pointer' }}
         >
-          {loading ? 'Wird weitergeleitet...' : `Weiter zur Zahlung → ${product.price}/Monat`}
+          {loading ? 'Wird weitergeleitet...' : trial ? `1 Monat gratis starten →` : `Weiter zur Zahlung → ${product.price}/Monat`}
         </button>
       </form>
     </div>

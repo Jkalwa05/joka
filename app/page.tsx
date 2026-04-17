@@ -1,10 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
+  const [showWidget, setShowWidget] = useState(false)
+
   useEffect(() => {
+    if (!sessionStorage.getItem('trial-widget-dismissed')) setShowWidget(true)
+
     const handleScroll = () => {
       document.querySelectorAll('.fade-in, .fade-up').forEach((el) => {
         const rect = el.getBoundingClientRect()
@@ -15,6 +19,11 @@ export default function Home() {
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  function dismissWidget() {
+    sessionStorage.setItem('trial-widget-dismissed', '1')
+    setShowWidget(false)
+  }
 
   return (
     <>
@@ -173,6 +182,38 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* TRIAL WIDGET */}
+      {showWidget && (
+        <div style={{
+          position: 'fixed', bottom: '1.5rem', left: '50%', transform: 'translateX(-50%)',
+          zIndex: 9999, display: 'flex', alignItems: 'center', gap: '1rem',
+          background: 'var(--text-main)', color: 'white', padding: '0.85rem 1.25rem 0.85rem 1.5rem',
+          borderRadius: '50px', boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
+          whiteSpace: 'nowrap',
+        }}>
+          <span style={{ fontSize: '1.1rem' }}>🎁</span>
+          <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Jetzt einen Monat gratis testen</span>
+          <Link
+            href="/bestellen?trial=1"
+            className="btn-primary small"
+            style={{ background: 'var(--primary)', flexShrink: 0 }}
+          >
+            Gratis starten
+          </Link>
+          <button
+            onClick={dismissWidget}
+            aria-label="Schließen"
+            style={{
+              background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)',
+              cursor: 'pointer', fontSize: '1.2rem', lineHeight: 1, padding: '0 0.25rem',
+              flexShrink: 0,
+            }}
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       {/* FOOTER */}
       <footer>
