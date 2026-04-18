@@ -20,7 +20,7 @@ const PRODUCTS = {
   },
   bundle: {
     name: 'AutoChat + MailPilot',
-    price: '€59',
+    price: '€49',
     description: 'Beide Tools zusammen – WhatsApp automatisch beantworten & E-Mails sortieren.',
   },
 }
