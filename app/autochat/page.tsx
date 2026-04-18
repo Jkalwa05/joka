@@ -57,9 +57,9 @@ export default function AutoChat() {
               <p style={{ marginBottom: '2rem' }}>Deine Kunden schreiben weiterhin dieselbe Nummer wie immer. Im Hintergrund beantwortet AutoChat jede Nachricht – basierend auf Infos, die du einmal hinterlegst.</p>
               <div className="steps">
                 {[
-                  { n: '01', title: 'Infos hinterlegen', desc: 'Du gibst uns deine Öffnungszeiten, Preise und häufige Fragen. Einmalig, dauert 5 Minuten.' },
-                  { n: '02', title: 'WhatsApp verbinden', desc: 'In einem kurzen Call verbinden wir deine Geschäftsnummer. Deine Kunden merken nichts.' },
-                  { n: '03', title: 'AutoChat antwortet', desc: 'Ab sofort beantwortet AutoChat jede Nachricht automatisch – auch nachts und am Wochenende.' },
+                  { n: '01', title: 'Infos hinterlegen', desc: 'Du trägst Öffnungszeiten, Preise und häufige Fragen selbst ein – in deinem Onboarding-Bereich. Dauert 5 Minuten.' },
+                  { n: '02', title: 'WhatsApp verbinden', desc: 'Wir verbinden deine Geschäftsnummer einmalig mit dem System – kurze Einrichtung, kein Aufwand für dich danach.' },
+                  { n: '03', title: 'AutoChat antwortet', desc: 'Ab sofort beantwortet AutoChat jede Nachricht automatisch und trägt Terminwünsche direkt in deinen Google Kalender ein.' },
                 ].map(({ n, title, desc }) => (
                   <div key={n} className="step">
                     <span className="step-num">{n}</span>

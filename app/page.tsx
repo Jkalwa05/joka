@@ -188,8 +188,8 @@ export default function Home() {
             <div className="steps fade-up delay-1">
               {[
                 { n: '01', title: 'Produkt wählen & abonnieren', desc: 'AutoChat, MailPilot oder beides – Zahlung per Kreditkarte, jederzeit kündbar.' },
-                { n: '02', title: 'Kurzer Einrichtungs-Call', desc: 'Wir verbinden dein WhatsApp oder Gmail in einem 15-Minuten-Telefonat. Du brauchst nichts vorzubereiten.' },
-                { n: '03', title: 'Fertig. Läuft.', desc: 'Ab jetzt antwortet dein WhatsApp automatisch und deine Mails sortieren sich von selbst.' },
+                { n: '02', title: 'Einmalig einrichten', desc: 'MailPilot verbindest du selbst in 2 Minuten per Google- oder Outlook-Login. Bei AutoChat richten wir deine WhatsApp-Nummer kurz gemeinsam ein.' },
+                { n: '03', title: 'Fertig. Läuft.', desc: 'Ab jetzt antwortet dein WhatsApp automatisch, Mails sortieren sich von selbst und Termine landen direkt im Kalender.' },
               ].map(({ n, title, desc }) => (
                 <div key={n} className="step">
                   <span className="step-num">{n}</span>
