@@ -30,7 +30,7 @@ export default function AutoChat() {
               Kunden schreiben dir – AutoChat antwortet sofort. Rund um die Uhr, in deinem Namen, mit deinen Infos. Du merkst es kaum, sie aber schon.
             </p>
             <div className="hero-btns">
-              <Link href="/kontakt?produkt=autochat" className="btn-primary">Jetzt anfragen</Link>
+              <Link href="/kontakt?produkt=autochat" className="btn-primary">Jetzt buchen</Link>
               <a href="#wie-es-funktioniert" className="btn-secondary">Wie es funktioniert</a>
             </div>
           </div>

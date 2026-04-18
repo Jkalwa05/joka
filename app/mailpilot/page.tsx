@@ -30,7 +30,7 @@ export default function MailPilot() {
               MailPilot liest dein Postfach, sortiert jede Mail in den richtigen Ordner und trägt Termine direkt in deinen Google Kalender ein. Kein manuelles Aufräumen mehr.
             </p>
             <div className="hero-btns">
-              <Link href="/kontakt?produkt=mailpilot" className="btn-primary">Jetzt anfragen</Link>
+              <Link href="/kontakt?produkt=mailpilot" className="btn-primary">Jetzt buchen</Link>
               <a href="#wie-es-funktioniert" className="btn-secondary">Wie es funktioniert</a>
             </div>
           </div>
