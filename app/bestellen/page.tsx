@@ -126,13 +126,7 @@ function BestellenForm() {
             required
           />
         </div>
-        {produktKey === 'bundle' ? (
-          <div style={{ background: '#f0fdfa', border: '1.5px solid #99f6e4', borderRadius: '12px', padding: '1rem 1.25rem', marginBottom: '1.5rem' }}>
-            <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--primary)', lineHeight: 1.6 }}>
-              <strong>Nach der Zahlung kontaktieren wir dich</strong> – wir richten AutoChat (WhatsApp) und MailPilot (E-Mail) gemeinsam mit dir in einem kurzen Call ein.
-            </p>
-          </div>
-        ) : produktKey === 'autochat' ? (
+        {(produktKey === 'autochat' || produktKey === 'bundle') ? (
           <div className="grp">
             <label>WhatsApp-Nummer für AutoChat</label>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.25rem' }}>
@@ -201,7 +195,17 @@ function BestellenForm() {
               </div>
             </div>
           </div>
-        ) : (
+        ) : null}
+
+        {produktKey === 'bundle' && (
+          <div style={{ background: '#f0fdfa', border: '1.5px solid #99f6e4', borderRadius: '12px', padding: '1rem 1.25rem', marginBottom: '1.5rem' }}>
+            <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--primary)', lineHeight: 1.6 }}>
+              <strong>MailPilot (E-Mail):</strong> Nach der Zahlung schickst du uns deinen Gmail-Zugang – wir verbinden alles in einem kurzen Call.
+            </p>
+          </div>
+        )}
+
+        {produktKey === 'mailpilot' && (
           <div className="grp">
             <label>{(product as typeof PRODUCTS['mailpilot']).contactLabel}</label>
             <input
@@ -236,9 +240,9 @@ function BestellenForm() {
 
         <button
           type="submit"
-          disabled={loading || !form.agreed || (produktKey === 'autochat' && !numberType)}
+          disabled={loading || !form.agreed || ((produktKey === 'autochat' || produktKey === 'bundle') && !numberType)}
           className="btn-primary"
-          style={{ width: '100%', opacity: (!form.agreed || (produktKey === 'autochat' && !numberType)) ? 0.5 : 1, cursor: (!form.agreed || (produktKey === 'autochat' && !numberType)) ? 'not-allowed' : 'pointer' }}
+          style={{ width: '100%', opacity: (!form.agreed || ((produktKey === 'autochat' || produktKey === 'bundle') && !numberType)) ? 0.5 : 1, cursor: (!form.agreed || ((produktKey === 'autochat' || produktKey === 'bundle') && !numberType)) ? 'not-allowed' : 'pointer' }}
         >
           {loading ? 'Wird weitergeleitet...' : trial ? `1 Monat gratis starten →` : `Weiter zur Zahlung → ${product.price}/Monat`}
         </button>
