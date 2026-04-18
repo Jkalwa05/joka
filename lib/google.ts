@@ -23,6 +23,13 @@ export function getAuthUrl(customerId: string) {
   })
 }
 
+export async function hasGoogleConnection(customerId: string): Promise<boolean> {
+  const token = await prisma.googleToken.findUnique({
+    where: { customerId_scope: { customerId, scope: 'gmail calendar' } },
+  })
+  return !!token
+}
+
 export async function getClientForCustomer(customerId: string) {
   const token = await prisma.googleToken.findUnique({
     where: { customerId_scope: { customerId, scope: 'gmail calendar' } },

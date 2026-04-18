@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
   const { tokens } = await oauth2Client.getToken(code)
   oauth2Client.setCredentials(tokens)
 
-  // Gmail-Adresse abrufen
+  // E-Mail-Adresse abrufen
   const oauth2 = google.oauth2({ version: 'v2', auth: oauth2Client })
   const { data: userInfo } = await oauth2.userinfo.get()
   const email = userInfo.email ?? ''
@@ -37,30 +37,50 @@ export async function GET(req: NextRequest) {
     },
   })
 
-  // MailPilotConfig mit Gmail-Adresse aktualisieren
-  await prisma.mailPilotConfig.update({
-    where: { customerId },
-    data: { gmailAddress: email },
-  })
+  // Was für ein Kunde ist das? MailPilot, AutoChat, beides?
+  const [mailConfig, autoConfig] = await Promise.all([
+    prisma.mailPilotConfig.findUnique({ where: { customerId } }),
+    prisma.autoChatConfig.findUnique({ where: { customerId } }),
+  ])
 
-  // Gmail Watch starten (Push Notifications via Pub/Sub)
-  try {
-    const watch = await startGmailWatch(customerId)
+  // MailPilot: Gmail-Adresse speichern + Watch starten
+  if (mailConfig) {
     await prisma.mailPilotConfig.update({
       where: { customerId },
-      data: {
-        gmailHistoryId: watch.historyId ?? undefined,
-        gmailWatchExpiry: watch.expiration
-          ? new Date(Number(watch.expiration))
-          : undefined,
-      },
+      data: { gmailAddress: email },
     })
-  } catch (err) {
-    console.error('Gmail Watch konnte nicht gestartet werden:', err)
-    // Kein Hard-Fail — Watch kann später manuell gestartet werden
+    try {
+      const watch = await startGmailWatch(customerId)
+      await prisma.mailPilotConfig.update({
+        where: { customerId },
+        data: {
+          gmailHistoryId: watch.historyId ?? undefined,
+          gmailWatchExpiry: watch.expiration
+            ? new Date(Number(watch.expiration))
+            : undefined,
+        },
+      })
+    } catch (err) {
+      console.error('Gmail Watch konnte nicht gestartet werden:', err)
+    }
   }
 
-  return NextResponse.redirect(
-    `${process.env.NEXTAUTH_URL}/onboarding/success?product=mailpilot`
-  )
+  // AutoChat: Kalender markieren als verbunden
+  if (autoConfig && !autoConfig.calendarId) {
+    await prisma.autoChatConfig.update({
+      where: { customerId },
+      data: { calendarId: 'primary' },
+    })
+  }
+
+  // Redirect: MailPilot-Kunden zur Success-Page, AutoChat-only-Kunden zurück zur Inbox
+  if (mailConfig) {
+    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/onboarding/success?product=mailpilot`)
+  }
+
+  const customer = await prisma.customer.findUnique({ where: { id: customerId }, select: { inboxToken: true } })
+  const redirectUrl = customer?.inboxToken
+    ? `${process.env.NEXTAUTH_URL}/onboarding/autochat?token=${customer.inboxToken}&calendar=connected`
+    : `${process.env.NEXTAUTH_URL}/dashboard`
+  return NextResponse.redirect(redirectUrl)
 }

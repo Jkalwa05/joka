@@ -2,8 +2,17 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'MailPilot – E-Mails automatisch sortieren & Termine eintragen | Joka',
-  description: 'MailPilot liest dein Gmail oder Outlook, sortiert E-Mails automatisch in Ordner und trägt Termine in deinen Google Kalender ein. Für Freelancer und Selbstständige. Ab €19/Monat.',
+  title: 'MailPilot – E-Mails automatisch sortieren & Termine eintragen',
+  description:
+    'MailPilot liest dein Gmail oder Outlook, sortiert E-Mails automatisch in Ordner und trägt Termine in deinen Kalender ein. Für Freelancer, Berater und Selbstständige. Ab €29/Monat.',
+  alternates: { canonical: '/mailpilot' },
+  openGraph: {
+    title: 'MailPilot – E-Mails automatisch sortieren & Termine eintragen',
+    description:
+      'Funktioniert mit Gmail und Outlook. Rechnungen, Anfragen, Werbung – jede Mail landet im richtigen Ordner. Termine automatisch im Kalender.',
+    url: '/mailpilot',
+    type: 'website',
+  },
 }
 
 export default function MailPilot() {
@@ -89,6 +98,36 @@ export default function MailPilot() {
                 <div style={{ textAlign: 'center', marginTop: '0.75rem', fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 600 }}>✓ 4 Mails automatisch sortiert</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WAS BRINGT DIR DAS */}
+      <section className="section">
+        <div className="container-wide">
+          <div className="center-text">
+            <span className="sub-label">Dein Nutzen</span>
+            <h2>Was MailPilot dir bringt.</h2>
+            <p>Weniger Klicks. Weniger Stress. Mehr Fokus.</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginTop: '2.5rem' }}>
+            {[
+              { title: 'Dein Posteingang ist aufgeräumt', desc: 'Jede eingehende Mail landet im richtigen Ordner. Keine Rechnungen mehr, die in der Werbung untergehen. Keine Newsletter, die zwischen echten Anfragen stören.' },
+              { title: 'Keine Termine mehr übersehen', desc: 'Steht ein Termin in einer Mail, wird er automatisch in deinen Kalender eingetragen. Egal ob Google Kalender oder Outlook Kalender – läuft im Hintergrund.' },
+              { title: '20 Stunden pro Monat gespart', desc: 'Du scrollst nicht mehr durch 80 Mails am Tag. MailPilot macht die Vorsortierung, du siehst nur die relevanten.' },
+              { title: 'Funktioniert mit Gmail UND Outlook', desc: 'Egal welches Postfach du nutzt – MailPilot verbindet sich sicher per offizieller Google- oder Microsoft-API. Kein Wechsel nötig.' },
+              { title: 'Rechnungen findest du sofort wieder', desc: 'Alle Rechnungen landen automatisch im Finanzen-Ordner. Keine Suche mehr wenn der Steuerberater anruft.' },
+              { title: 'DSGVO-konform & jederzeit kündbar', desc: 'Server in der EU. Kein Passwort wird gespeichert. Du kannst den Zugriff in den Google- oder Microsoft-Einstellungen mit einem Klick widerrufen.' },
+            ].map(({ title, desc }) => (
+              <div key={title} style={{ background: 'white', borderRadius: '16px', padding: '1.5rem 1.75rem', border: '1px solid rgba(0,0,0,0.05)' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.6rem' }}>
+                  <i className="ph-fill ph-check-circle" style={{ color: 'var(--primary)', fontSize: '1.4rem', flexShrink: 0, marginTop: '2px' }}></i>
+                  <h3 style={{ fontSize: '1.05rem', margin: 0 }}>{title}</h3>
+                </div>
+                <p style={{ fontSize: '0.92rem', margin: 0, lineHeight: 1.6, paddingLeft: '2.15rem' }}>{desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

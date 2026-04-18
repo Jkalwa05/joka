@@ -148,6 +148,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* WAS BRINGT DIR DAS */}
+      <section className="section">
+        <div className="container-wide">
+          <div className="center-text fade-up">
+            <span className="sub-label">Was du davon hast</span>
+            <h2>Konkret: Was Joka für dich macht.</h2>
+            <p>Kein Marketing-Gerede. Das sind die Dinge, die du ab Tag 1 spürst.</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginTop: '2.5rem' }}>
+            {[
+              { icon: 'ph-duotone ph-clock-countdown', title: '30+ Stunden im Monat gespart', desc: 'Du antwortest nicht mehr manuell auf jede WhatsApp-Nachricht. AutoChat erledigt 80–90% der Routine-Fragen. Der Rest landet strukturiert in deiner Inbox.' },
+              { icon: 'ph-duotone ph-phone-outgoing', title: 'Keine Anrufe nachts um 22 Uhr', desc: 'Kunden wollen sofort Antwort – auch abends. AutoChat antwortet sekundenschnell, du bleibst ungestört und verlierst keinen Auftrag.' },
+              { icon: 'ph-duotone ph-calendar-plus', title: 'Termine direkt im Kalender', desc: 'Wenn ein Kunde per WhatsApp oder Mail einen Termin anfragt, landet er automatisch in deinem Google Kalender oder Outlook. Keine doppelte Arbeit mehr.' },
+              { icon: 'ph-duotone ph-funnel', title: 'Nur echte Anfragen erreichen dich', desc: 'Werbung, Newsletter und Spam werden automatisch sortiert. Deine Inbox zeigt nur die Mails, die wirklich deine Aufmerksamkeit brauchen.' },
+              { icon: 'ph-duotone ph-smiley', title: 'Kunden sind zufriedener', desc: 'Sofortige Antwort auf jede Frage – auch wenn du gerade arbeitest oder im Urlaub bist. Kein "wir melden uns" – direkt die Info, die der Kunde braucht.' },
+              { icon: 'ph-duotone ph-currency-eur', title: 'Rechnet sich ab Tag 1', desc: 'Eine Stunde deiner Arbeitszeit kostet mehr als ein ganzer Monat Joka. Ab der ersten eingesparten Stunde zahlt sich der Dienst aus.' },
+            ].map(({ icon, title, desc }) => (
+              <div key={title} style={{ background: 'white', borderRadius: '16px', padding: '1.75rem', border: '1px solid rgba(0,0,0,0.05)' }} className="fade-up">
+                <i className={icon} style={{ color: 'var(--primary)', fontSize: '2rem', marginBottom: '1rem', display: 'inline-block' }}></i>
+                <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{title}</h3>
+                <p style={{ fontSize: '0.92rem', margin: 0, lineHeight: 1.6 }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* HOW IT WORKS */}
       <section className="section">
         <div className="container-wide">

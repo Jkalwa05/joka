@@ -14,6 +14,7 @@ function AutoChatOnboardingForm() {
     openingHours: '',
     services: '',
   })
+  const [calendarConnected, setCalendarConnected] = useState(false)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
@@ -25,7 +26,13 @@ function AutoChatOnboardingForm() {
       .then(r => r.json())
       .then(data => {
         if (data.error) { setError('Link ungültig oder abgelaufen.'); setLoading(false); return }
-        setForm(data)
+        setForm({
+          businessName: data.businessName ?? '',
+          businessAddress: data.businessAddress ?? '',
+          openingHours: data.openingHours ?? '',
+          services: data.services ?? '',
+        })
+        setCalendarConnected(!!data.calendarConnected)
         setLoading(false)
       })
   }, [token])
@@ -132,6 +139,27 @@ function AutoChatOnboardingForm() {
           {saving ? 'Wird gespeichert...' : 'Infos speichern →'}
         </button>
       </form>
+
+      {/* Google Kalender verbinden */}
+      <div style={{ marginTop: '2rem', padding: '1.25rem 1.5rem', background: calendarConnected ? '#f0fdfa' : '#f8f9fa', borderRadius: '14px', border: `1px solid ${calendarConnected ? 'rgba(0,98,102,0.2)' : 'rgba(0,0,0,0.06)'}` }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+          <i className="ph-duotone ph-calendar-check" style={{ color: 'var(--primary)', fontSize: '1.5rem' }}></i>
+          <strong style={{ fontSize: '1rem', color: 'var(--text-main)' }}>Google Kalender verbinden</strong>
+          {calendarConnected && (
+            <span style={{ marginLeft: 'auto', background: 'var(--primary)', color: 'white', padding: '2px 10px', borderRadius: '50px', fontSize: '0.72rem', fontWeight: 700 }}>✓ Verbunden</span>
+          )}
+        </div>
+        <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', margin: '0 0 1rem 0', lineHeight: 1.55 }}>
+          {calendarConnected
+            ? 'Perfekt. AutoChat trägt neue Terminwünsche ab sofort direkt in deinen Google Kalender ein.'
+            : 'Wenn ein Kunde auf WhatsApp einen Termin wünscht, trägt AutoChat ihn automatisch in deinen Google Kalender ein und bestätigt dem Kunden sofort.'}
+        </p>
+        {!calendarConnected && (
+          <a href={`/api/auth/google/connect?token=${token}`} className="btn-primary" style={{ display: 'inline-block', fontSize: '0.9rem' }}>
+            Mit Google verbinden →
+          </a>
+        )}
+      </div>
 
       {/* Hilfe benötigt */}
       <div style={{ marginTop: '2rem', padding: '1.25rem 1.5rem', background: '#f8f9fa', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.06)', textAlign: 'center' }}>
