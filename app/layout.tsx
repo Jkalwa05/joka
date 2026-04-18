@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     'Chatbot WhatsApp Business',
     'Joka',
   ],
-  authors: [{ name: 'Jonas Kalwa', url: 'https://jonaskalwa.de' }],
+  authors: [{ name: 'Jonas Kalwa', url: 'https://www.linkedin.com/in/jonas-kalwa-3333612a1/' }],
   creator: 'Jonas Kalwa',
   publisher: 'Joka',
   alternates: { canonical: '/' },
@@ -65,7 +65,7 @@ const jsonLdOrg = {
   url: SITE_URL,
   logo: `${SITE_URL}/og.png`,
   email: 'joka.chat.business@gmail.com',
-  sameAs: ['https://jonaskalwa.de'],
+  sameAs: ['https://www.linkedin.com/in/jonas-kalwa-3333612a1/'],
   founder: { '@type': 'Person', name: 'Jonas Kalwa' },
   areaServed: 'DE',
 }
