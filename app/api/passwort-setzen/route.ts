@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Ungültiger oder abgelaufener Link.' }, { status: 401 })
   }
 
-  const passwordHash = await bcrypt.hash(password, 12)
+  const passwordHash = await bcrypt.hash(password, 10)
   await prisma.customer.update({
     where: { id: customer.id },
     data: { passwordHash },
