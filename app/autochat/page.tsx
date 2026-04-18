@@ -60,6 +60,7 @@ export default function AutoChat() {
                   </div>
                 ))}
               </div>
+              <Link href="/kontakt" className="btn-primary" style={{ display: 'block', width: '100%', textAlign: 'center', marginTop: '1.5rem' }}>Fragen?</Link>
             </div>
 
             {/* MOCKUP */}
@@ -90,14 +91,6 @@ export default function AutoChat() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* FRAGEN CTA */}
-      <section className="section">
-        <div className="container-wide" style={{ textAlign: 'center' }}>
-          <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>Klingt gut – aber du hast noch eine Frage?</p>
-          <Link href="/kontakt" className="btn-primary" style={{ fontSize: '1.2rem', padding: '1rem 2.5rem' }}>Fragen?</Link>
         </div>
       </section>
 
