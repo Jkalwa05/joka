@@ -129,7 +129,7 @@ export default function Home() {
               <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', textDecoration: 'line-through' }}>€68 / Monat</div>
               <div style={{ color: 'white', fontSize: '2.2rem', fontWeight: 800, lineHeight: 1 }}>€59 <span style={{ fontSize: '0.9rem', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}>/ Monat</span></div>
               <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem', marginTop: '0.25rem', marginBottom: '1rem' }}>Du sparst €9 im Monat</div>
-              <Link href="/bestellen?produkt=bundle" className="btn-primary" style={{ background: 'white', color: 'var(--primary)', fontWeight: 700 }}>Jetzt abonnieren</Link>
+              <Link href="/bestellen?produkt=bundle" style={{ display: 'inline-block', background: 'white', color: '#0d3d35', fontWeight: 700, padding: '0.75rem 1.75rem', borderRadius: '50px', fontSize: '1rem', textDecoration: 'none' }}>Jetzt abonnieren</Link>
             </div>
           </div>
         </div>
