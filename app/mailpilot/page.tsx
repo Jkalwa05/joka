@@ -30,7 +30,7 @@ export default function MailPilot() {
               MailPilot liest dein Postfach, sortiert jede Mail in den richtigen Ordner und trägt Termine direkt in deinen Google Kalender ein. Kein manuelles Aufräumen mehr.
             </p>
             <div className="hero-btns">
-              <Link href="/kontakt?produkt=mailpilot" className="btn-primary">Jetzt buchen</Link>
+              <Link href="/bestellen?produkt=mailpilot" className="btn-primary">Jetzt abonnieren</Link>
               <a href="#wie-es-funktioniert" className="btn-secondary">Wie es funktioniert</a>
             </div>
           </div>
@@ -91,8 +91,16 @@ export default function MailPilot() {
         </div>
       </section>
 
-      {/* FEATURES */}
+      {/* FRAGEN CTA */}
       <section className="section">
+        <div className="container-wide" style={{ textAlign: 'center' }}>
+          <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>Klingt gut – aber du hast noch eine Frage?</p>
+          <Link href="/kontakt" className="btn-primary" style={{ fontSize: '1.2rem', padding: '1rem 2.5rem' }}>Fragen?</Link>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section className="section bg-light">
         <div className="container-wide">
           <div className="center-text">
             <span className="sub-label">Features</span>
