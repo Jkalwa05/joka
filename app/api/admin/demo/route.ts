@@ -81,7 +81,16 @@ export async function GET(req: NextRequest) {
     ])
   }
 
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? req.nextUrl.origin
-  const loginUrl = `${base}/auto-login?token=${token}`
-  return NextResponse.redirect(loginUrl)
+  const html = `<!DOCTYPE html>
+<html lang="de">
+<head><meta charset="UTF-8"><title>Joka Demo</title></head>
+<body style="font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f8f9fa">
+<p style="color:#006266;font-size:1.1rem">Wird eingeloggt…</p>
+<script>
+  try { localStorage.setItem('inboxToken', ${JSON.stringify(token)}); } catch(e) {}
+  window.location.replace('/dashboard');
+</script>
+</body>
+</html>`
+  return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
 }
