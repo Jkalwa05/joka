@@ -70,6 +70,7 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/inbox?token=${token}`
+  const base = process.env.NEXT_PUBLIC_BASE_URL ?? req.nextUrl.origin
+  const url = `${base}/passwort-setzen?token=${token}`
   return NextResponse.json({ url, token })
 }
