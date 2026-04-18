@@ -15,6 +15,7 @@ export default function AutoChat() {
           <div className="nav-items">
             <Link href="/autochat" style={{ color: 'var(--primary)', fontWeight: 700 }}>AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
+            <Link href="/inbox" style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 500 }}>Anmelden</Link>
             <Link href="/kontakt" className="btn-primary small">Fragen?</Link>
           </div>
         </div>
