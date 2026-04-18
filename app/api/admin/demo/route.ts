@@ -82,6 +82,6 @@ export async function GET(req: NextRequest) {
   }
 
   const base = process.env.NEXT_PUBLIC_BASE_URL ?? req.nextUrl.origin
-  const url = `${base}/passwort-setzen?token=${token}`
-  return NextResponse.json({ url, token })
+  const loginUrl = `${base}/auto-login?token=${token}`
+  return NextResponse.redirect(loginUrl)
 }
