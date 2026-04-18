@@ -1,23 +1,20 @@
-import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { constantTimeEqual } from '@/lib/security'
 import crypto from 'crypto'
+import DemoSetup from './DemoSetup'
 
-const COOKIE_NAME = 'joka_admin'
+export const dynamic = 'force-dynamic'
 
-function authorized(req: NextRequest): boolean {
+export default async function DemoPage({ searchParams }: { searchParams: { key?: string } }) {
   const adminKey = process.env.ADMIN_KEY ?? ''
-  if (!adminKey) return false
-  const cookie = req.cookies.get(COOKIE_NAME)?.value
-  if (cookie && constantTimeEqual(cookie, adminKey)) return true
-  const query = req.nextUrl.searchParams.get('key')
-  if (query && constantTimeEqual(query, adminKey)) return true
-  return false
-}
+  const providedKey = searchParams.key ?? ''
 
-export async function GET(req: NextRequest) {
-  if (!authorized(req)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!adminKey || !providedKey || !constantTimeEqual(providedKey, adminKey)) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif' }}>
+        <p style={{ color: '#dc2626' }}>Unauthorized – ungültiger Admin-Key.</p>
+      </div>
+    )
   }
 
   const email = 'demo@joka.chat'
@@ -26,7 +23,7 @@ export async function GET(req: NextRequest) {
 
   const customer = await prisma.customer.upsert({
     where: { email },
-    update: { inboxToken: token, inboxTokenExpiry: expiry },
+    update: { inboxToken: token, inboxTokenExpiry: expiry, subscriptionStatus: 'ACTIVE' },
     create: {
       email,
       name: 'Demo Account',
@@ -78,19 +75,22 @@ export async function GET(req: NextRequest) {
           },
         },
       }),
+      prisma.conversation.create({
+        data: {
+          autoChatConfigId: config.id,
+          customerPhone: '+491605551122',
+          aiPaused: true,
+          needsReview: true,
+          messages: {
+            create: [
+              { role: 'USER', content: 'Ich hätte gerne einen Termin nächste Woche, am besten Mittwoch Nachmittag?' },
+              { role: 'ASSISTANT', content: 'Gerne! Einen Moment, ich prüfe das für dich.' },
+            ],
+          },
+        },
+      }),
     ])
   }
 
-  const html = `<!DOCTYPE html>
-<html lang="de">
-<head><meta charset="UTF-8"><title>Joka Demo</title></head>
-<body style="font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f8f9fa">
-<p style="color:#006266;font-size:1.1rem">Wird eingeloggt…</p>
-<script>
-  try { localStorage.setItem('inboxToken', ${JSON.stringify(token)}); } catch(e) {}
-  window.location.replace('/dashboard');
-</script>
-</body>
-</html>`
-  return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+  return <DemoSetup token={token} />
 }
