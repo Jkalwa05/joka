@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { getWhatsAppReply } from '@/lib/claude'
+import { getWhatsAppReply, parseAppointmentIntent } from '@/lib/claude'
 import { sendWhatsAppMessage } from '@/lib/whatsapp'
 import { verifyHmacSignature } from '@/lib/security'
+import { hasGoogleConnection, createCalendarEvent } from '@/lib/google'
 
 const APPOINTMENT_KEYWORDS = ['termin', 'buchen', 'reservier', 'verfügbar', 'frei haben', 'frei am', 'frei um', 'wann kann', 'wann habt', 'noch platz', 'appointment']
 
@@ -78,11 +79,57 @@ export async function POST(req: NextRequest) {
   }
 
   const lowerText = text.toLowerCase()
-  if (APPOINTMENT_KEYWORDS.some((kw) => lowerText.includes(kw))) {
+  const maybeAppointment = APPOINTMENT_KEYWORDS.some((kw) => lowerText.includes(kw))
+
+  // Historie vorab laden (neueste 20, chronologisch)
+  const recent = await prisma.message.findMany({
+    where: { conversationId: conversation.id },
+    orderBy: { createdAt: 'desc' },
+    take: 20,
+  })
+  recent.reverse()
+  const history: { role: 'user' | 'assistant'; content: string }[] = recent.map((m) => ({
+    role: m.role === 'USER' ? 'user' : 'assistant',
+    content: m.content,
+  }))
+
+  // TERMINWUNSCH: Wenn Kalender verbunden, versuche automatische Buchung
+  if (maybeAppointment) {
+    const calendarConnected = await hasGoogleConnection(config.customerId)
+
+    if (calendarConnected) {
+      const parsed = await parseAppointmentIntent(
+        text,
+        { businessName: config.businessName, services: config.services, openingHours: config.openingHours },
+        history
+      )
+
+      if (parsed) {
+        try {
+          await createCalendarEvent(config.customerId, `${parsed.title} (${from})`, parsed.date, parsed.time)
+          const humanDate = new Date(parsed.date + (parsed.time ? `T${parsed.time}` : 'T00:00')).toLocaleDateString('de-DE', {
+            weekday: 'long', day: '2-digit', month: 'long',
+          })
+          const confirm = parsed.time
+            ? `Dein Termin am ${humanDate} um ${parsed.time} Uhr ist eingetragen. Bis dann!`
+            : `Dein Termin am ${humanDate} ist eingetragen. Bis dann!`
+
+          await Promise.all([
+            prisma.message.create({ data: { conversationId: conversation.id, role: 'USER', content: text } }),
+            prisma.message.create({ data: { conversationId: conversation.id, role: 'ASSISTANT', content: confirm } }),
+            sendWhatsAppMessage(from, confirm, phoneNumberId, config.accessToken),
+          ])
+          return NextResponse.json({ received: true })
+        } catch (err) {
+          console.error('[whatsapp] Kalender-Event fehlgeschlagen:', err)
+          // Fallback: markiere für manuelle Prüfung (siehe unten)
+        }
+      }
+    }
+
+    // Kein Kalender / Parsing fehlgeschlagen → manuelle Prüfung
     await Promise.all([
-      prisma.message.create({
-        data: { conversationId: conversation.id, role: 'USER', content: text },
-      }),
+      prisma.message.create({ data: { conversationId: conversation.id, role: 'USER', content: text } }),
       prisma.conversation.update({
         where: { id: conversation.id },
         data: { aiPaused: true, needsReview: true },
@@ -90,14 +137,6 @@ export async function POST(req: NextRequest) {
     ])
     return NextResponse.json({ received: true })
   }
-
-  // Historie OHNE aktuelle User-Nachricht laden (neueste 20, chronologisch rekonstruiert)
-  const recent = await prisma.message.findMany({
-    where: { conversationId: conversation.id },
-    orderBy: { createdAt: 'desc' },
-    take: 20,
-  })
-  recent.reverse()
 
   const systemPrompt =
     config.systemPrompt ??
@@ -108,13 +147,6 @@ Leistungen & Preise: ${config.services ?? 'nicht angegeben'}
 
 Antworte kurz und freundlich auf Deutsch. Wenn du etwas nicht weißt, sage es ehrlich.`
 
-  const history: { role: 'user' | 'assistant'; content: string }[] = []
-  for (const m of recent) {
-    history.push({
-      role: m.role === 'USER' ? 'user' : 'assistant',
-      content: m.content,
-    })
-  }
   history.push({ role: 'user', content: text })
 
   // Parallel: User-Message speichern + Claude-Antwort holen

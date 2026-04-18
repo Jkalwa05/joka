@@ -2,8 +2,17 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'AutoChat – WhatsApp automatisch beantworten | Joka',
-  description: 'AutoChat beantwortet deine WhatsApp-Nachrichten automatisch – Öffnungszeiten, Preise, Terminanfragen. Für Friseure, Restaurants und lokale Geschäfte. Ab €39/Monat.',
+  title: 'AutoChat – WhatsApp automatisch beantworten',
+  description:
+    'AutoChat beantwortet deine WhatsApp-Nachrichten automatisch – 24/7, in deinem Namen, mit deinen Preisen und Öffnungszeiten. Termine landen direkt in deinem Google Kalender. Ab €39/Monat.',
+  alternates: { canonical: '/autochat' },
+  openGraph: {
+    title: 'AutoChat – WhatsApp automatisch beantworten',
+    description:
+      '24/7 Antworten auf WhatsApp, Terminbuchung direkt in den Google Kalender, deine Nummer bleibt deine Nummer.',
+    url: '/autochat',
+    type: 'website',
+  },
 }
 
 export default function AutoChat() {
@@ -154,8 +163,52 @@ export default function AutoChat() {
         </div>
       </section>
 
-      {/* FEATURES */}
+      {/* WAS BRINGT DIR DAS */}
       <section className="section bg-light">
+        <div className="container-wide">
+          <div className="center-text">
+            <span className="sub-label">Dein Nutzen</span>
+            <h2>Was AutoChat dir bringt.</h2>
+            <p>Nicht Features. Ergebnisse.</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginTop: '2.5rem' }}>
+            {[
+              { title: 'Du verlierst keine Anfrage mehr', desc: 'Jede WhatsApp-Nachricht wird beantwortet – auch nachts, im Urlaub oder wenn du gerade Kunden bedienst. Niemand bekommt ein "wir melden uns später".' },
+              { title: '30 Stunden pro Monat weniger Handarbeit', desc: 'Öffnungszeiten, Preise, Adresse, häufige Fragen – das beantwortet AutoChat vollautomatisch. Du musst nicht mehr denselben Satz 40× am Tag schreiben.' },
+              { title: 'Termine landen automatisch im Kalender', desc: 'Verbindest du deinen Google Kalender, erkennt AutoChat Terminwünsche und trägt sie direkt ein. Der Kunde bekommt sofort die Bestätigung.' },
+              { title: 'Kunden antworten schneller zurück', desc: 'Wer sofort Antwort bekommt, bleibt im Gespräch. Das erhöht die Buchungsquote messbar – besonders bei jüngeren Kunden, die keine Anrufe mehr mögen.' },
+              { title: 'Du bist nicht mehr ans Handy gefesselt', desc: 'Fokus aufs Wesentliche – deine Arbeit. AutoChat filtert Routine-Fragen raus und zeigt dir nur, was wirklich deine Aufmerksamkeit braucht.' },
+              { title: 'Professioneller Auftritt, ohne Zusatzpersonal', desc: 'Dein Business wirkt 24/7 erreichbar wie eine große Firma – du bezahlst aber nur für AutoChat, nicht für eine Rezeption.' },
+            ].map(({ title, desc }) => (
+              <div key={title} style={{ background: 'white', borderRadius: '16px', padding: '1.5rem 1.75rem', border: '1px solid rgba(0,0,0,0.05)' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.6rem' }}>
+                  <i className="ph-fill ph-check-circle" style={{ color: 'var(--primary)', fontSize: '1.4rem', flexShrink: 0, marginTop: '2px' }}></i>
+                  <h3 style={{ fontSize: '1.05rem', margin: 0 }}>{title}</h3>
+                </div>
+                <p style={{ fontSize: '0.92rem', margin: 0, lineHeight: 1.6, paddingLeft: '2.15rem' }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ marginTop: '3rem', background: 'white', borderRadius: '16px', padding: '2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.5rem', textAlign: 'center', border: '1px solid rgba(0,0,0,0.05)' }}>
+            {[
+              { n: '24/7', label: 'Verfügbarkeit' },
+              { n: '< 5s', label: 'Antwortzeit' },
+              { n: '~85%', label: 'Fragen ohne dich gelöst' },
+              { n: '€39', label: 'pro Monat, kündbar' },
+            ].map(({ n, label }) => (
+              <div key={label}>
+                <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--primary)', fontFamily: 'var(--font-heading)', lineHeight: 1 }}>{n}</div>
+                <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.4rem' }}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section className="section">
         <div className="container-wide">
           <div className="center-text">
             <span className="sub-label">Features</span>

@@ -9,11 +9,15 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Ungültig' }, { status: 401 })
   }
   const cfg = customer.autoChatConfig
+  const googleToken = await prisma.googleToken.findUnique({
+    where: { customerId_scope: { customerId: customer.id, scope: 'gmail calendar' } },
+  })
   return NextResponse.json({
     businessName: cfg.businessName ?? '',
     businessAddress: cfg.businessAddress ?? '',
     openingHours: cfg.openingHours ?? '',
     services: cfg.services ?? '',
+    calendarConnected: !!googleToken,
   })
 }
 

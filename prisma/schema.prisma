@@ -29,6 +29,7 @@ model Customer {
   autoChatConfig  AutoChatConfig?
   mailPilotConfig MailPilotConfig?
   googleTokens    GoogleToken[]
+  microsoftToken  MicrosoftToken?
 }
 
 enum SubscriptionStatus {
@@ -106,15 +107,28 @@ model MailPilotConfig {
   customerId String   @unique
   customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
-  gmailAddress  String?  // verbundene Gmail-Adresse
+  provider      MailProvider @default(GMAIL)
+
+  gmailAddress  String?  // verbundene Gmail-Adresse (provider=GMAIL)
   calendarId    String?  // Google Calendar ID (Schreibzugriff)
 
   // Gmail Watch (Push Notifications)
   gmailHistoryId  String?  // letzter verarbeiteter historyId
   gmailWatchExpiry DateTime?
 
+  // Outlook / Microsoft 365
+  outlookAddress            String?
+  outlookSubscriptionId     String?
+  outlookSubscriptionExpiry DateTime?
+  outlookDeltaLink          String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum MailProvider {
+  GMAIL
+  OUTLOOK
 }
 
 // ─── Google OAuth Tokens ──────────────────────────────────────────────────────
@@ -133,4 +147,17 @@ model GoogleToken {
   updatedAt DateTime @updatedAt
 
   @@unique([customerId, scope])
+}
+
+model MicrosoftToken {
+  id           String   @id @default(cuid())
+  customerId   String   @unique
+  customer     Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  accessToken  String
+  refreshToken String?
+  expiresAt    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

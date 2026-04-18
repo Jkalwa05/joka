@@ -35,20 +35,32 @@ export default function OnboardingForm({ customerId, product, email }: Props) {
 
   if (product === 'mailpilot') {
     return (
-      <div style={{ maxWidth: '520px', margin: '4rem auto', padding: '0 1.5rem' }}>
+      <div style={{ maxWidth: '560px', margin: '4rem auto', padding: '0 1.5rem' }}>
         <span className="sub-label">Schritt 1 von 1</span>
-        <h1 style={{ marginBottom: '0.5rem' }}>Gmail verbinden</h1>
+        <h1 style={{ marginBottom: '0.5rem' }}>Postfach verbinden</h1>
         <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
-          Verbinde dein Google-Konto damit MailPilot deine E-Mails automatisch sortieren kann.
+          Verbinde dein Gmail oder Outlook damit MailPilot deine E-Mails automatisch sortieren und Termine eintragen kann.
           Eingeloggt als <strong>{email}</strong>.
         </p>
-        <a
-          href={`/api/auth/google?customerId=${customerId}`}
-          className="btn-primary"
-          style={{ display: 'inline-block' }}
-        >
-          Mit Google verbinden
-        </a>
+        <div style={{ display: 'grid', gap: '1rem' }}>
+          <a
+            href={`/api/auth/google?customerId=${customerId}`}
+            className="btn-primary"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'center', fontSize: '1rem' }}
+          >
+            <i className="ph-fill ph-google-logo"></i> Mit Gmail verbinden
+          </a>
+          <a
+            href={`/api/auth/microsoft?customerId=${customerId}`}
+            className="btn-secondary"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'center', fontSize: '1rem' }}
+          >
+            <i className="ph-fill ph-microsoft-outlook-logo"></i> Mit Outlook verbinden
+          </a>
+        </div>
+        <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '1.5rem' }}>
+          Du kannst später jederzeit den Zugriff in deinen Google- oder Microsoft-Sicherheitseinstellungen widerrufen.
+        </p>
       </div>
     )
   }
