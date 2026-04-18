@@ -74,28 +74,37 @@ export async function getNewMessages(customerId: string, sinceHistoryId: string)
     labelId: 'INBOX',
   })
 
-  const messages: { id: string; subject: string; snippet: string; threadId: string }[] = []
-
+  const ids: string[] = []
+  const seen = new Set<string>()
   for (const record of historyRes.data.history ?? []) {
     for (const added of record.messagesAdded ?? []) {
       const msgId = added.message?.id
-      if (!msgId) continue
-      const msg = await gmail.users.messages.get({
-        userId: 'me',
-        id: msgId,
-        format: 'metadata',
-        metadataHeaders: ['Subject'],
-      })
-      const subject =
-        msg.data.payload?.headers?.find((h) => h.name === 'Subject')?.value ?? '(kein Betreff)'
-      messages.push({
-        id: msgId,
-        subject,
-        snippet: msg.data.snippet ?? '',
-        threadId: msg.data.threadId ?? '',
-      })
+      if (msgId && !seen.has(msgId)) {
+        seen.add(msgId)
+        ids.push(msgId)
+      }
     }
   }
+
+  const results = await Promise.all(
+    ids.map((id) =>
+      gmail.users.messages
+        .get({ userId: 'me', id, format: 'metadata', metadataHeaders: ['Subject'] })
+        .then((msg) => ({
+          id,
+          subject:
+            msg.data.payload?.headers?.find((h) => h.name === 'Subject')?.value ?? '(kein Betreff)',
+          snippet: msg.data.snippet ?? '',
+          threadId: msg.data.threadId ?? '',
+        }))
+        .catch((err) => {
+          console.error(`gmail.messages.get fehlgeschlagen (${id}):`, err)
+          return null
+        })
+    )
+  )
+
+  const messages = results.filter((m): m is NonNullable<typeof m> => m !== null)
 
   return {
     messages,
@@ -142,19 +151,20 @@ export async function createCalendarEvent(
   const auth = await getClientForCustomer(customerId)
   const calendar = google.calendar({ version: 'v3', auth })
 
-  const startDateTime = time ? `${date}T${time}:00` : date
-  const isAllDay = !time
-
   await calendar.events.insert({
     calendarId: 'primary',
     requestBody: {
       summary: title,
-      ...(isAllDay
-        ? { start: { date }, end: { date } }
-        : {
-            start: { dateTime: startDateTime, timeZone: 'Europe/Berlin' },
-            end: { dateTime: startDateTime, timeZone: 'Europe/Berlin' },
-          }),
+      ...(time
+        ? (() => {
+            const start = new Date(`${date}T${time}:00`)
+            const end = new Date(start.getTime() + 60 * 60 * 1000)
+            return {
+              start: { dateTime: start.toISOString(), timeZone: 'Europe/Berlin' },
+              end: { dateTime: end.toISOString(), timeZone: 'Europe/Berlin' },
+            }
+          })()
+        : { start: { date }, end: { date } }),
     },
   })
 }

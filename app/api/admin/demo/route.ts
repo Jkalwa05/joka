@@ -1,15 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { constantTimeEqual } from '@/lib/security'
 import crypto from 'crypto'
 
+const COOKIE_NAME = 'joka_admin'
+
+function authorized(req: NextRequest): boolean {
+  const adminKey = process.env.ADMIN_KEY ?? ''
+  if (!adminKey) return false
+  const cookie = req.cookies.get(COOKIE_NAME)?.value
+  if (cookie && constantTimeEqual(cookie, adminKey)) return true
+  const query = req.nextUrl.searchParams.get('key')
+  if (query && constantTimeEqual(query, adminKey)) return true
+  return false
+}
+
 export async function GET(req: NextRequest) {
-  if (req.nextUrl.searchParams.get('key') !== process.env.ADMIN_KEY) {
+  if (!authorized(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   const email = 'demo@joka.chat'
   const token = crypto.randomBytes(32).toString('hex')
-  const expiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) // 1 Jahr
+  const expiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
 
   const customer = await prisma.customer.upsert({
     where: { email },
@@ -24,7 +37,7 @@ export async function GET(req: NextRequest) {
     },
   })
 
-  await prisma.autoChatConfig.upsert({
+  const config = await prisma.autoChatConfig.upsert({
     where: { customerId: customer.id },
     update: {},
     create: {
@@ -36,12 +49,10 @@ export async function GET(req: NextRequest) {
     },
   })
 
-  // Demo-Gespräche anlegen
-  const config = await prisma.autoChatConfig.findUnique({ where: { customerId: customer.id } })
-  if (config) {
-    const existing = await prisma.conversation.count({ where: { autoChatConfigId: config.id } })
-    if (existing === 0) {
-      await prisma.conversation.create({
+  const existing = await prisma.conversation.count({ where: { autoChatConfigId: config.id } })
+  if (existing === 0) {
+    await Promise.all([
+      prisma.conversation.create({
         data: {
           autoChatConfigId: config.id,
           customerPhone: '+491511234567',
@@ -54,8 +65,8 @@ export async function GET(req: NextRequest) {
             ],
           },
         },
-      })
-      await prisma.conversation.create({
+      }),
+      prisma.conversation.create({
         data: {
           autoChatConfigId: config.id,
           customerPhone: '+491709876543',
@@ -66,8 +77,8 @@ export async function GET(req: NextRequest) {
             ],
           },
         },
-      })
-    }
+      }),
+    ])
   }
 
   const base = process.env.NEXT_PUBLIC_BASE_URL ?? req.nextUrl.origin

@@ -1,32 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { verifyPassword } from '@/lib/password'
+import { rateLimit } from '@/lib/security'
+import { getIp } from '@/lib/auth'
 import crypto from 'crypto'
+
+const GENERIC_ERROR = 'E-Mail oder Passwort falsch.'
 
 export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json()
-    if (!email || !password) return NextResponse.json({ error: 'E-Mail und Passwort erforderlich.' }, { status: 400 })
+    if (!email || !password) {
+      return NextResponse.json({ error: GENERIC_ERROR }, { status: 401 })
+    }
+
+    const ip = getIp(req)
+    if (!rateLimit(`login:${ip}`, 10, 60_000) || !rateLimit(`login:email:${String(email).toLowerCase()}`, 10, 60_000)) {
+      return NextResponse.json({ error: 'Zu viele Versuche. Bitte kurz warten.' }, { status: 429 })
+    }
 
     const customer = await prisma.customer.findUnique({ where: { email } })
+    const hasUsableAccount =
+      !!customer && customer.subscriptionStatus !== 'CANCELED' && !!customer.passwordHash
 
-    if (!customer || customer.subscriptionStatus === 'CANCELED') {
-      return NextResponse.json({ error: 'Kein aktives Konto gefunden.' }, { status: 401 })
-    }
+    // timing-stabile Prüfung: verifyPassword läuft in allen Pfaden (Dummy-Hash fallback intern)
+    const valid = verifyPassword(password, customer?.passwordHash ?? null)
 
-    if (!customer.passwordHash) {
-      return NextResponse.json({ error: 'Noch kein Passwort gesetzt. Bitte nutze den Link aus deiner Willkommens-E-Mail.' }, { status: 401 })
-    }
-
-    const valid = verifyPassword(password, customer.passwordHash)
-    if (!valid) {
-      return NextResponse.json({ error: 'E-Mail oder Passwort falsch.' }, { status: 401 })
+    if (!hasUsableAccount || !valid) {
+      return NextResponse.json({ error: GENERIC_ERROR }, { status: 401 })
     }
 
     const token = crypto.randomBytes(32).toString('hex')
     const expiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
     await prisma.customer.update({
-      where: { id: customer.id },
+      where: { id: customer!.id },
       data: { inboxToken: token, inboxTokenExpiry: expiry },
     })
 

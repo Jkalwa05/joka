@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
+import { escapeHtml } from "@/lib/security";
 import crypto from "crypto";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -56,27 +57,26 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   }
 
   const numberType = session.metadata?.numberType
+  // Onboarding-Token generieren und direkt mit dem upsert schreiben (spart einen DB-Roundtrip)
+  const inboxToken = crypto.randomBytes(32).toString("hex");
+  const inboxTokenExpiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000); // 1 Jahr
   const customer = await prisma.customer.upsert({
     where: { email },
     update: {
       name,
       stripeCustomerId: session.customer as string,
       subscriptionStatus: "ACTIVE",
+      inboxToken,
+      inboxTokenExpiry,
     },
     create: {
       email,
       name,
       stripeCustomerId: session.customer as string,
       subscriptionStatus: "ACTIVE",
+      inboxToken,
+      inboxTokenExpiry,
     },
-  });
-
-  // Onboarding-Token generieren und speichern
-  const inboxToken = crypto.randomBytes(32).toString("hex");
-  const inboxTokenExpiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000); // 1 Jahr
-  await prisma.customer.update({
-    where: { id: customer.id },
-    data: { inboxToken, inboxTokenExpiry },
   });
 
   if (product === "autochat" || product === "bundle") {
@@ -94,12 +94,15 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     });
   }
 
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safeBusinessContact = escapeHtml(businessContact) || "–";
+
   // Kunden-Willkommensmail für AutoChat oder Bundle
   if (product === "autochat" || product === "bundle") {
     const onboardingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/onboarding/autochat?token=${inboxToken}`;
-    const inboxLink = `${process.env.NEXT_PUBLIC_BASE_URL}/inbox?token=${inboxToken}`;
     const passwordLink = `${process.env.NEXT_PUBLIC_BASE_URL}/passwort-setzen?token=${inboxToken}`;
-    await fetch("https://api.resend.com/emails", {
+    fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
@@ -111,7 +114,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         subject: "Willkommen bei AutoChat – jetzt einrichten",
         html: `
           <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:2rem">
-            <h2 style="color:#0f172a;margin-bottom:0.25rem">Willkommen, ${name}! 👋</h2>
+            <h2 style="color:#0f172a;margin-bottom:0.25rem">Willkommen, ${safeName}! 👋</h2>
             <p style="color:#64748b;margin-top:0">Dein AutoChat-Abo ist aktiv. Jetzt fehlt nur noch eines: deine Business-Infos.</p>
 
             <div style="background:#f0fdfa;border:2px solid #99f6e4;border-radius:14px;padding:1.5rem;margin:1.5rem 0">
@@ -134,7 +137,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   }
 
   const produktLabel = product === "autochat" ? "AutoChat (€39/Monat)" : product === "mailpilot" ? "MailPilot (€29/Monat)" : "AutoChat + MailPilot Kombi (€49/Monat)";
-  await fetch("https://api.resend.com/emails", {
+  fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
@@ -143,17 +146,17 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     body: JSON.stringify({
       from: "Joka <onboarding@resend.dev>",
       to: "joka.chat.business@gmail.com",
-      subject: `🎉 Neuer Kunde: ${name} – ${produktLabel}`,
+      subject: `🎉 Neuer Kunde: ${safeName} – ${produktLabel}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:2rem">
           <h2 style="color:#0f172a;margin-bottom:0.25rem">🎉 Neuer Kunde!</h2>
           <p style="color:#64748b;margin-top:0">Ein neues Abonnement wurde abgeschlossen.</p>
 
           <table style="border-collapse:collapse;font-size:15px;width:100%;margin-bottom:1.5rem">
-            <tr><td style="padding:8px 16px 8px 0;color:#64748b;width:120px">Name</td><td><strong>${name}</strong></td></tr>
-            <tr><td style="padding:8px 16px 8px 0;color:#64748b">E-Mail</td><td><a href="mailto:${email}">${email}</a></td></tr>
+            <tr><td style="padding:8px 16px 8px 0;color:#64748b;width:120px">Name</td><td><strong>${safeName}</strong></td></tr>
+            <tr><td style="padding:8px 16px 8px 0;color:#64748b">E-Mail</td><td><a href="mailto:${safeEmail}">${safeEmail}</a></td></tr>
             <tr><td style="padding:8px 16px 8px 0;color:#64748b">Produkt</td><td><strong style="color:#006266">${produktLabel}</strong></td></tr>
-            <tr><td style="padding:8px 16px 8px 0;color:#64748b">Kontakt</td><td><strong>${businessContact || "–"}</strong></td></tr>
+            <tr><td style="padding:8px 16px 8px 0;color:#64748b">Kontakt</td><td><strong>${safeBusinessContact}</strong></td></tr>
           </table>
 
           ${(product === "autochat" || product === "bundle") ? (numberType === "new" || product === "bundle" ? `
@@ -164,18 +167,18 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
               <li>Kaufe eine virtuelle Nummer bei <a href="https://satellite.me" style="color:#92400e;font-weight:700">satellite.me →</a> (~€5/Monat, kein Gewerbe nötig, sofort verfügbar)</li>
               <li>Registriere die Nummer in deinem Meta Business Portfolio als neue WhatsApp Business-Nummer</li>
               <li>Trage <strong>phoneNumberId</strong>, <strong>accessToken</strong> und <strong>businessName</strong> in Supabase unter AutoChatConfig für diesen Kunden ein</li>
-              <li>Schicke dem Kunden (<a href="mailto:${email}" style="color:#92400e">${email}</a>) eine E-Mail mit seiner neuen Nummer</li>
+              <li>Schicke dem Kunden (<a href="mailto:${safeEmail}" style="color:#92400e">${safeEmail}</a>) eine E-Mail mit seiner neuen Nummer</li>
             </ol>
           </div>
           ` : `
           <div style="background:#fffbeb;border:2px solid #fcd34d;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.5rem">
             <h3 style="color:#92400e;margin:0 0 1rem 0">⚠️ AutoChat manuell einrichten – Anleitung</h3>
-            <p style="color:#78350f;margin:0 0 0.75rem 0;font-size:14px">Der Kunde hat seine WhatsApp-Nummer <strong>${businessContact}</strong> angegeben. Gehe jetzt so vor:</p>
+            <p style="color:#78350f;margin:0 0 0.75rem 0;font-size:14px">Der Kunde hat seine WhatsApp-Nummer <strong>${safeBusinessContact}</strong> angegeben. Gehe jetzt so vor:</p>
             <ol style="color:#78350f;font-size:14px;margin:0;padding-left:1.25rem;line-height:2">
               <li>Öffne das Terminal im Joka-Projektordner und führe aus:<br><code style="background:#fef3c7;padding:2px 6px;border-radius:4px">npx prisma studio</code></li>
               <li>Browser öffnet sich auf <strong>localhost:5555</strong></li>
               <li>Klicke auf <strong>AutoChatConfig</strong></li>
-              <li>Finde den Eintrag mit der Kundennummer <strong>${businessContact}</strong></li>
+              <li>Finde den Eintrag mit der Kundennummer <strong>${safeBusinessContact}</strong></li>
               <li>Trage ein:<br>
                 &nbsp;&nbsp;• <strong>phoneNumberId</strong>: Die Meta Phone Number ID der Kundennummer (bekommst du nach WhatsApp Business Onboarding des Kunden)<br>
                 &nbsp;&nbsp;• <strong>accessToken</strong>: Den permanenten System User Token aus dem Meta Business Portfolio<br>
@@ -197,7 +200,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
           ` : ''}
 
           <div style="display:flex;gap:1rem;flex-wrap:wrap">
-            <a href="https://joka.chat/admin?key=${process.env.ADMIN_KEY}" style="background:#006266;color:white;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:14px">Admin Dashboard →</a>
+            <a href="https://joka.chat/admin" style="background:#006266;color:white;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:14px">Admin Dashboard →</a>
             <a href="https://dashboard.stripe.com/customers" style="background:#f1f5f9;color:#0f172a;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:14px">Stripe Dashboard →</a>
           </div>
         </div>

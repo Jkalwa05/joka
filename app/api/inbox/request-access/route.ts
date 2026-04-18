@@ -1,18 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { rateLimit, escapeHtml } from '@/lib/security'
+import { getIp } from '@/lib/auth'
 import crypto from 'crypto'
 
 export async function POST(req: NextRequest) {
   const { email } = await req.json()
   if (!email) return NextResponse.json({ error: 'E-Mail fehlt' }, { status: 400 })
 
+  const ip = getIp(req)
+  if (!rateLimit(`req-access:${ip}`, 5, 60_000) || !rateLimit(`req-access:email:${String(email).toLowerCase()}`, 5, 60_000)) {
+    return NextResponse.json({ ok: true })
+  }
+
   const customer = await prisma.customer.findUnique({
     where: { email },
     include: { autoChatConfig: true },
   })
 
+  // User-Enumeration verhindern: immer ok zurückgeben
   if (!customer || !customer.autoChatConfig) {
-    return NextResponse.json({ error: 'Kein AutoChat-Konto gefunden' }, { status: 404 })
+    return NextResponse.json({ ok: true })
   }
 
   const token = crypto.randomBytes(32).toString('hex')
@@ -24,8 +32,10 @@ export async function POST(req: NextRequest) {
   })
 
   const link = `${process.env.NEXT_PUBLIC_BASE_URL}/inbox?token=${token}`
+  const safeEmail = escapeHtml(email)
 
-  await fetch('https://api.resend.com/emails', {
+  // Fire-and-forget: Antwort nicht durch Resend blockieren
+  fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
@@ -38,13 +48,13 @@ export async function POST(req: NextRequest) {
       html: `
         <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:2rem">
           <h2 style="color:#0f172a">Dein Inbox-Link</h2>
-          <p style="color:#64748b">Klick auf den Button um deine WhatsApp-Konversationen einzusehen und zu antworten.</p>
+          <p style="color:#64748b">Klick auf den Button um deine WhatsApp-Konversationen einzusehen und zu antworten (${safeEmail}).</p>
           <a href="${link}" style="display:inline-block;margin-top:1rem;background:#006266;color:white;padding:0.75rem 1.5rem;border-radius:50px;text-decoration:none;font-weight:600">Inbox öffnen →</a>
           <p style="color:#94a3b8;font-size:0.8rem;margin-top:2rem">Link ist 24 Stunden gültig.</p>
         </div>
       `,
     }),
-  })
+  }).catch((err) => console.error('[inbox/request-access] Mail fehlgeschlagen:', err))
 
   return NextResponse.json({ ok: true })
 }

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { prisma } from '@/lib/prisma'
+import { rateLimit } from '@/lib/security'
+import { getIp } from '@/lib/auth'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
@@ -11,12 +13,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'E-Mail oder Token fehlt.' }, { status: 400 })
   }
 
+  const ip = getIp(req)
+  const key = token ? `portal-token:${ip}` : `portal-email:${ip}:${String(email).toLowerCase()}`
+  if (!rateLimit(key, 5, 10 * 60_000)) {
+    return NextResponse.json({ ok: true })
+  }
+
   const customer = token
     ? await prisma.customer.findFirst({ where: { inboxToken: token, inboxTokenExpiry: { gt: new Date() } } })
     : await prisma.customer.findUnique({ where: { email } })
 
   if (!customer?.stripeCustomerId) {
-    // Kein Hinweis ob E-Mail existiert (verhindert User-Enumeration)
     return NextResponse.json({ ok: true })
   }
 
@@ -30,7 +37,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ url: session.url })
   }
 
-  await fetch('https://api.resend.com/emails', {
+  // Fire-and-forget: E-Mail-Versand blockiert die Antwort nicht
+  fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
@@ -54,7 +62,7 @@ export async function POST(req: NextRequest) {
         </div>
       `,
     }),
-  })
+  }).catch((err) => console.error('[stripe/portal] Mail fehlgeschlagen:', err))
 
   return NextResponse.json({ ok: true })
 }

@@ -9,15 +9,27 @@ export default function Home() {
   useEffect(() => {
     if (!sessionStorage.getItem('trial-widget-dismissed')) setShowWidget(true)
 
-    const handleScroll = () => {
-      document.querySelectorAll('.fade-in, .fade-up').forEach((el) => {
-        const rect = el.getBoundingClientRect()
-        if (rect.top < window.innerHeight && rect.bottom > 0) el.classList.add('visible')
-      })
+    const targets = document.querySelectorAll('.fade-in, .fade-up')
+
+    if (typeof IntersectionObserver === 'undefined') {
+      targets.forEach((el) => el.classList.add('visible'))
+      return
     }
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            observer.unobserve(entry.target)
+          }
+        }
+      },
+      { rootMargin: '0px 0px 0px 0px', threshold: 0 }
+    )
+
+    targets.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
   }, [])
 
   function dismissWidget() {

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 
 function InboxContent() {
   const params = useSearchParams()
@@ -148,9 +148,7 @@ function InboxApp({ token }: { token: string }) {
     ) ?? null)
   }
 
-  if (!conversations && !loadingConvs) {
-    loadConversations()
-  }
+  useEffect(() => { loadConversations() }, [])
 
   const selectedConv = conversations?.find(c => c.id === selected)
 

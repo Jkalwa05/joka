@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getWhatsAppReply } from '@/lib/claude'
 import { sendWhatsAppMessage } from '@/lib/whatsapp'
+import { verifyHmacSignature } from '@/lib/security'
 
 const APPOINTMENT_KEYWORDS = ['termin', 'buchen', 'reservier', 'verfügbar', 'frei haben', 'frei am', 'frei um', 'wann kann', 'wann habt', 'noch platz', 'appointment']
 
@@ -17,58 +18,86 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.json()
+  const raw = await req.text()
 
-  const entry = body.entry?.[0]
-  const change = entry?.changes?.[0]
-  const value = change?.value
+  const appSecret = process.env.WHATSAPP_APP_SECRET
+  if (appSecret) {
+    const sig = req.headers.get('x-hub-signature-256')
+    if (!verifyHmacSignature(raw, sig, appSecret, 'sha256')) {
+      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 })
+    }
+  } else {
+    console.warn('[whatsapp] WHATSAPP_APP_SECRET fehlt – Webhook-Signatur wird NICHT verifiziert')
+  }
 
+  let body: {
+    entry?: Array<{
+      changes?: Array<{
+        value?: {
+          metadata?: { phone_number_id?: string }
+          messages?: Array<{ type?: string; from?: string; text?: { body?: string } }>
+        }
+      }>
+    }>
+  }
+  try {
+    body = JSON.parse(raw)
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
+  }
+
+  const value = body.entry?.[0]?.changes?.[0]?.value
   const messageObj = value?.messages?.[0]
   if (!messageObj || messageObj.type !== 'text') {
     return NextResponse.json({ received: true })
   }
 
-  const phoneNumberId: string = value.metadata?.phone_number_id
-  const from: string = messageObj.from
-  const text: string = messageObj.text?.body ?? ''
+  const phoneNumberId = value?.metadata?.phone_number_id
+  const from = messageObj.from
+  const text = messageObj.text?.body ?? ''
 
-  if (!text || !phoneNumberId) return NextResponse.json({ received: true })
+  if (!text || !phoneNumberId || !from) return NextResponse.json({ received: true })
 
   const config = await prisma.autoChatConfig.findFirst({ where: { phoneNumberId } })
   if (!config || !config.accessToken) return NextResponse.json({ received: true })
 
-  // Fetch conversation without messages first to avoid loading history on early exits
   let conversation = await prisma.conversation.findFirst({
     where: { autoChatConfigId: config.id, customerPhone: from },
   })
-
   if (!conversation) {
     conversation = await prisma.conversation.create({
       data: { autoChatConfigId: config.id, customerPhone: from },
     })
   }
 
-  await prisma.message.create({
-    data: { conversationId: conversation.id, role: 'USER', content: text },
-  })
-
-  if (conversation.aiPaused) return NextResponse.json({ received: true })
-
-  const lowerText = text.toLowerCase()
-  if (APPOINTMENT_KEYWORDS.some(kw => lowerText.includes(kw))) {
-    await prisma.conversation.update({
-      where: { id: conversation.id },
-      data: { aiPaused: true, needsReview: true },
+  if (conversation.aiPaused) {
+    await prisma.message.create({
+      data: { conversationId: conversation.id, role: 'USER', content: text },
     })
     return NextResponse.json({ received: true })
   }
 
-  // Load message history only when AI will actually respond
-  const messages = await prisma.message.findMany({
+  const lowerText = text.toLowerCase()
+  if (APPOINTMENT_KEYWORDS.some((kw) => lowerText.includes(kw))) {
+    await Promise.all([
+      prisma.message.create({
+        data: { conversationId: conversation.id, role: 'USER', content: text },
+      }),
+      prisma.conversation.update({
+        where: { id: conversation.id },
+        data: { aiPaused: true, needsReview: true },
+      }),
+    ])
+    return NextResponse.json({ received: true })
+  }
+
+  // Historie OHNE aktuelle User-Nachricht laden (neueste 20, chronologisch rekonstruiert)
+  const recent = await prisma.message.findMany({
     where: { conversationId: conversation.id },
-    orderBy: { createdAt: 'asc' },
+    orderBy: { createdAt: 'desc' },
     take: 20,
   })
+  recent.reverse()
 
   const systemPrompt =
     config.systemPrompt ??
@@ -79,16 +108,28 @@ Leistungen & Preise: ${config.services ?? 'nicht angegeben'}
 
 Antworte kurz und freundlich auf Deutsch. Wenn du etwas nicht weißt, sage es ehrlich.`
 
-  const history = messages.map((m) => ({
-    role: m.role === 'USER' ? ('user' as const) : ('assistant' as const),
-    content: m.content,
-  }))
+  const history: { role: 'user' | 'assistant'; content: string }[] = []
+  for (const m of recent) {
+    history.push({
+      role: m.role === 'USER' ? 'user' : 'assistant',
+      content: m.content,
+    })
+  }
   history.push({ role: 'user', content: text })
 
-  const reply = await getWhatsAppReply(systemPrompt, history)
+  // Parallel: User-Message speichern + Claude-Antwort holen
+  const [, reply] = await Promise.all([
+    prisma.message.create({
+      data: { conversationId: conversation.id, role: 'USER', content: text },
+    }),
+    getWhatsAppReply(systemPrompt, history),
+  ])
 
+  // Parallel: Assistant-Message speichern + Senden
   await Promise.all([
-    prisma.message.create({ data: { conversationId: conversation.id, role: 'ASSISTANT', content: reply } }),
+    prisma.message.create({
+      data: { conversationId: conversation.id, role: 'ASSISTANT', content: reply },
+    }),
     sendWhatsAppMessage(from, reply, phoneNumberId, config.accessToken),
   ])
 

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { hashPassword } from '@/lib/password'
+import { rateLimit } from '@/lib/security'
+import { getIp } from '@/lib/auth'
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,8 +12,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Token und Passwort (min. 8 Zeichen) erforderlich.' }, { status: 400 })
     }
 
+    const ip = getIp(req)
+    if (!rateLimit(`pwset:${ip}`, 20, 60_000)) {
+      return NextResponse.json({ error: 'Zu viele Versuche. Bitte kurz warten.' }, { status: 429 })
+    }
+
     const customer = await prisma.customer.findFirst({
       where: { inboxToken: token, inboxTokenExpiry: { gt: new Date() } },
+      select: { id: true },
     })
 
     if (!customer) {

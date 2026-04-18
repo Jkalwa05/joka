@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { sendWhatsAppMessage } from '@/lib/whatsapp'
+import { validateInboxToken } from '@/lib/auth'
 
 export async function POST(req: NextRequest) {
   const { token, conversationId, text } = await req.json()
@@ -8,15 +9,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Fehlende Parameter' }, { status: 400 })
   }
 
-  const customer = await prisma.customer.findUnique({
-    where: { inboxToken: token },
-    include: { autoChatConfig: true },
-  })
-  if (!customer || !customer.inboxTokenExpiry || customer.inboxTokenExpiry < new Date()) {
+  const customer = await validateInboxToken(token)
+  if (!customer?.autoChatConfig) {
     return NextResponse.json({ error: 'Ungültig' }, { status: 401 })
   }
 
-  const config = customer.autoChatConfig!
+  const config = customer.autoChatConfig
   if (!config.phoneNumberId || !config.accessToken) {
     return NextResponse.json({ error: 'WhatsApp nicht konfiguriert' }, { status: 400 })
   }
@@ -28,14 +26,15 @@ export async function POST(req: NextRequest) {
 
   await sendWhatsAppMessage(conversation.customerPhone, text, config.phoneNumberId, config.accessToken)
 
-  await prisma.message.create({
-    data: { conversationId, role: 'ASSISTANT', content: text },
-  })
-
-  await prisma.conversation.update({
-    where: { id: conversationId },
-    data: { updatedAt: new Date(), needsReview: false },
-  })
+  await Promise.all([
+    prisma.message.create({
+      data: { conversationId, role: 'ASSISTANT', content: text },
+    }),
+    prisma.conversation.update({
+      where: { id: conversationId },
+      data: { updatedAt: new Date(), needsReview: false },
+    }),
+  ])
 
   return NextResponse.json({ ok: true })
 }
