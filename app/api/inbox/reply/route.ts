@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
   await prisma.conversation.update({
     where: { id: conversationId },
-    data: { updatedAt: new Date() },
+    data: { updatedAt: new Date(), needsReview: false },
   })
 
   return NextResponse.json({ ok: true })

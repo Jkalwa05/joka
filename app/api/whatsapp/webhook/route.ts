@@ -62,6 +62,17 @@ export async function POST(req: NextRequest) {
   // KI pausiert → nicht antworten
   if (conversation.aiPaused) return NextResponse.json({ received: true })
 
+  // Terminanfrage erkennen → KI pausieren, Gespräch zur manuellen Bearbeitung markieren
+  const appointmentKeywords = ['termin', 'buchen', 'reservier', 'verfügbar', 'frei haben', 'frei am', 'frei um', 'wann kann', 'wann habt', 'noch platz', 'appointment']
+  const lowerText = text.toLowerCase()
+  if (appointmentKeywords.some(kw => lowerText.includes(kw))) {
+    await prisma.conversation.update({
+      where: { id: conversation.id },
+      data: { aiPaused: true, needsReview: true },
+    })
+    return NextResponse.json({ received: true })
+  }
+
   // System Prompt zusammenbauen
   const systemPrompt =
     config.systemPrompt ??

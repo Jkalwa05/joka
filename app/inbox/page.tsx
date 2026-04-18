@@ -81,6 +81,7 @@ function InboxApp({ token }: { token: string }) {
     id: string
     customerPhone: string
     aiPaused: boolean
+    needsReview: boolean
     updatedAt: string
     messages: { content: string; role: string }[]
   }
@@ -176,15 +177,19 @@ function InboxApp({ token }: { token: string }) {
           )}
           {conversations?.map(conv => (
             <button key={conv.id} onClick={() => selectConversation(conv.id)} style={{
-              padding: '1rem 1.5rem', background: selected === conv.id ? '#f0fdfa' : 'transparent',
+              padding: '1rem 1.5rem',
+              background: conv.needsReview ? '#fffbeb' : selected === conv.id ? '#f0fdfa' : 'transparent',
+              borderLeft: conv.needsReview ? '3px solid #f59e0b' : '3px solid transparent',
               border: 'none', borderBottom: '1px solid rgba(0,0,0,0.04)', cursor: 'pointer',
               textAlign: 'left', transition: '0.15s',
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
                 <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-main)' }}>{conv.customerPhone}</span>
-                {conv.aiPaused && (
-                  <span style={{ fontSize: '0.65rem', background: '#fef3c7', color: '#92400e', padding: '1px 6px', borderRadius: '50px', fontWeight: 700 }}>KI aus</span>
-                )}
+                {conv.needsReview ? (
+                  <span style={{ fontSize: '0.65rem', background: '#fef3c7', color: '#92400e', padding: '1px 6px', borderRadius: '50px', fontWeight: 700 }}>📅 Termin</span>
+                ) : conv.aiPaused ? (
+                  <span style={{ fontSize: '0.65rem', background: '#f1f5f9', color: '#64748b', padding: '1px 6px', borderRadius: '50px', fontWeight: 700 }}>KI aus</span>
+                ) : null}
               </div>
               <p style={{ fontSize: '0.8rem', margin: 0, color: 'var(--text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {conv.messages[0]?.content ?? '—'}
