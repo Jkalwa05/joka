@@ -18,11 +18,16 @@ const PRODUCTS = {
     contactPlaceholder: 'dein@gmail.com',
     contactHelp: 'Das Gmail-Konto, das MailPilot ab morgen automatisch sortiert.',
   },
+  bundle: {
+    name: 'AutoChat + MailPilot',
+    price: '€59',
+    description: 'Beide Tools zusammen – WhatsApp automatisch beantworten & E-Mails sortieren.',
+  },
 }
 
 function BestellenForm() {
   const params = useSearchParams()
-  const produktKey = params.get('produkt') as 'autochat' | 'mailpilot' | null
+  const produktKey = params.get('produkt') as 'autochat' | 'mailpilot' | 'bundle' | null
   const trial = params.get('trial') === '1'
   const product = produktKey && PRODUCTS[produktKey] ? PRODUCTS[produktKey] : null
 
@@ -121,7 +126,13 @@ function BestellenForm() {
             required
           />
         </div>
-        {produktKey === 'autochat' ? (
+        {produktKey === 'bundle' ? (
+          <div style={{ background: '#f0fdfa', border: '1.5px solid #99f6e4', borderRadius: '12px', padding: '1rem 1.25rem', marginBottom: '1.5rem' }}>
+            <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--primary)', lineHeight: 1.6 }}>
+              <strong>Nach der Zahlung kontaktieren wir dich</strong> – wir richten AutoChat (WhatsApp) und MailPilot (E-Mail) gemeinsam mit dir in einem kurzen Call ein.
+            </p>
+          </div>
+        ) : produktKey === 'autochat' ? (
           <div className="grp">
             <label>WhatsApp-Nummer für AutoChat</label>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.25rem' }}>

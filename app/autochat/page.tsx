@@ -94,6 +94,65 @@ export default function AutoChat() {
         </div>
       </section>
 
+      {/* INBOX */}
+      <section className="section">
+        <div className="container-wide">
+          <div className="two-col">
+            <div>
+              <span className="sub-label">Dein Posteingang</span>
+              <h2>Du behältst die Kontrolle.</h2>
+              <p style={{ marginBottom: '1.5rem' }}>AutoChat antwortet automatisch – aber du siehst jedes Gespräch. In deinem eigenen Joka-Posteingang kannst du Unterhaltungen lesen, selbst eingreifen oder die KI für einzelne Kunden pausieren.</p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                {[
+                  { icon: 'ph-duotone ph-chat-dots', text: 'Alle Kundengespräche auf einen Blick' },
+                  { icon: 'ph-duotone ph-pencil-simple', text: 'Jederzeit selbst antworten oder übernehmen' },
+                  { icon: 'ph-duotone ph-toggle-right', text: 'KI pro Gespräch ein- oder ausschalten' },
+                  { icon: 'ph-duotone ph-bell', text: 'Benachrichtigung bei wichtigen Nachrichten' },
+                ].map(({ icon, text }) => (
+                  <li key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.95rem' }}>
+                    <i className={icon} style={{ color: 'var(--primary)', fontSize: '1.3rem', flexShrink: 0 }}></i>
+                    <span>{text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* INBOX MOCKUP */}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div style={{ background: 'white', borderRadius: '20px', width: '340px', boxShadow: '0 20px 60px rgba(0,0,0,0.1)', border: '1px solid rgba(0,0,0,0.07)', overflow: 'hidden' }}>
+                {/* Header */}
+                <div style={{ background: 'var(--primary)', padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <i className="ph-fill ph-chat-dots" style={{ color: 'white', fontSize: '1.3rem' }}></i>
+                  <strong style={{ color: 'white', fontSize: '0.95rem' }}>Joka Posteingang</strong>
+                  <span style={{ marginLeft: 'auto', background: 'rgba(255,255,255,0.2)', color: 'white', borderRadius: '50px', padding: '2px 10px', fontSize: '0.72rem', fontWeight: 700 }}>3 neu</span>
+                </div>
+                {/* Conversation list */}
+                {[
+                  { name: 'Kunde Anna M.', msg: 'Habt ihr morgen noch was frei?', time: '09:14', ai: true, unread: true },
+                  { name: 'Kunde Tom B.', msg: 'Danke! Bis Samstag.', time: 'Gestern', ai: true, unread: false },
+                  { name: 'Kunde Julia K.', msg: 'Was kostet ein Bart-Trim?', time: 'Gestern', ai: false, unread: true },
+                ].map(({ name, msg, time, ai, unread }) => (
+                  <div key={name} style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', padding: '0.85rem 1.25rem', borderBottom: '1px solid #f1f5f9', background: unread ? '#f8fffe' : 'white' }}>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: '#e2f8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <i className="ph-fill ph-user" style={{ color: 'var(--primary)', fontSize: '1rem' }}></i>
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <strong style={{ fontSize: '0.82rem', color: 'var(--text-main)' }}>{name}</strong>
+                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{time}</span>
+                      </div>
+                      <p style={{ margin: 0, fontSize: '0.76rem', color: 'var(--text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{msg}</p>
+                    </div>
+                    <span style={{ fontSize: '0.65rem', padding: '2px 7px', borderRadius: '50px', background: ai ? '#f0fdfa' : '#fef3c7', color: ai ? 'var(--primary)' : '#92400e', fontWeight: 700, flexShrink: 0 }}>{ai ? 'KI' : 'Du'}</span>
+                  </div>
+                ))}
+                <div style={{ padding: '0.85rem 1.25rem', textAlign: 'center', fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 600 }}>Alle Gespräche ansehen →</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FEATURES */}
       <section className="section bg-light">
         <div className="container-wide">

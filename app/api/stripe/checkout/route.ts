@@ -6,6 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const PRICE_IDS: Record<string, string> = {
   autochat: process.env.STRIPE_AUTOCHAT_PRICE_ID!,
   mailpilot: process.env.STRIPE_MAILPILOT_PRICE_ID!,
+  bundle: process.env.STRIPE_BUNDLE_PRICE_ID!,
 };
 
 export async function POST(req: NextRequest) {

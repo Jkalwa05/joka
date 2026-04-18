@@ -110,6 +110,28 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* BUNDLE */}
+          <div style={{ marginTop: '2rem', background: 'var(--primary)', borderRadius: '20px', padding: '2rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+            <div style={{ flex: 1 }}>
+              <span style={{ background: 'rgba(255,255,255,0.18)', color: 'white', borderRadius: '50px', padding: '3px 14px', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.05em' }}>KOMBI-PAKET</span>
+              <h3 style={{ color: 'white', fontSize: '1.6rem', margin: '0.75rem 0 0.4rem 0', letterSpacing: '-0.5px' }}>AutoChat + MailPilot</h3>
+              <p style={{ color: 'rgba(255,255,255,0.75)', margin: 0, fontSize: '0.95rem' }}>Beide Tools zusammen – WhatsApp automatisch beantworten <em>und</em> E-Mails sortieren. Einmal einrichten, dauerhaft sparen.</p>
+              <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+                {['WhatsApp 24/7 automatisch', 'E-Mails sortieren & Kalender', 'Kein Vertrag, monatlich kündbar'].map(f => (
+                  <span key={f} style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <i className="ph-bold ph-check-circle" style={{ color: 'white' }}></i> {f}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div style={{ textAlign: 'center', flexShrink: 0 }}>
+              <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', textDecoration: 'line-through' }}>€68 / Monat</div>
+              <div style={{ color: 'white', fontSize: '2.2rem', fontWeight: 800, lineHeight: 1 }}>€59 <span style={{ fontSize: '0.9rem', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}>/ Monat</span></div>
+              <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem', marginTop: '0.25rem', marginBottom: '1rem' }}>Du sparst €9 im Monat</div>
+              <Link href="/bestellen?produkt=bundle" className="btn-primary" style={{ background: 'white', color: 'var(--primary)', fontWeight: 700 }}>Jetzt abonnieren</Link>
+            </div>
+          </div>
         </div>
       </section>
 
