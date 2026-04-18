@@ -5,13 +5,15 @@ import { prisma } from '@/lib/prisma'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function POST(req: NextRequest) {
-  const { email } = await req.json()
+  const { email, token } = await req.json()
 
-  if (!email) {
-    return NextResponse.json({ error: 'E-Mail fehlt.' }, { status: 400 })
+  if (!email && !token) {
+    return NextResponse.json({ error: 'E-Mail oder Token fehlt.' }, { status: 400 })
   }
 
-  const customer = await prisma.customer.findUnique({ where: { email } })
+  const customer = token
+    ? await prisma.customer.findFirst({ where: { inboxToken: token, inboxTokenExpiry: { gt: new Date() } } })
+    : await prisma.customer.findUnique({ where: { email } })
 
   if (!customer?.stripeCustomerId) {
     // Kein Hinweis ob E-Mail existiert (verhindert User-Enumeration)
@@ -21,8 +23,12 @@ export async function POST(req: NextRequest) {
   const session = await stripe.billingPortal.sessions.create({
     customer: customer.stripeCustomerId,
     configuration: 'bpc_1TN9q6CFCHiYNuj6fVva5D78',
-    return_url: `${process.env.NEXTAUTH_URL}/mein-abo`,
+    return_url: token ? `${process.env.NEXTAUTH_URL}/dashboard` : `${process.env.NEXTAUTH_URL}/mein-abo`,
   })
+
+  if (token) {
+    return NextResponse.json({ url: session.url })
+  }
 
   await fetch('https://api.resend.com/emails', {
     method: 'POST',
