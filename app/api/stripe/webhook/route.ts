@@ -79,13 +79,14 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     data: { inboxToken, inboxTokenExpiry },
   });
 
-  if (product === "autochat") {
+  if (product === "autochat" || product === "bundle") {
     await prisma.autoChatConfig.upsert({
       where: { customerId: customer.id },
       update: { phoneNumber: businessContact || undefined },
       create: { customerId: customer.id, phoneNumber: businessContact || undefined },
     });
-  } else if (product === "mailpilot") {
+  }
+  if (product === "mailpilot" || product === "bundle") {
     await prisma.mailPilotConfig.upsert({
       where: { customerId: customer.id },
       update: {},
@@ -93,8 +94,8 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     });
   }
 
-  // Kunden-Willkommensmail für AutoChat
-  if (product === "autochat") {
+  // Kunden-Willkommensmail für AutoChat oder Bundle
+  if (product === "autochat" || product === "bundle") {
     const onboardingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/onboarding/autochat?token=${inboxToken}`;
     const inboxLink = `${process.env.NEXT_PUBLIC_BASE_URL}/inbox?token=${inboxToken}`;
     await fetch("https://api.resend.com/emails", {
@@ -131,7 +132,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     }).catch((err) => console.error("Kunden-Willkommensmail fehlgeschlagen:", err));
   }
 
-  const produktLabel = product === "autochat" ? "AutoChat (€39/Monat)" : "MailPilot (€29/Monat)";
+  const produktLabel = product === "autochat" ? "AutoChat (€39/Monat)" : product === "mailpilot" ? "MailPilot (€29/Monat)" : "AutoChat + MailPilot Kombi (€49/Monat)";
   await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -154,7 +155,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
             <tr><td style="padding:8px 16px 8px 0;color:#64748b">Kontakt</td><td><strong>${businessContact || "–"}</strong></td></tr>
           </table>
 
-          ${product === "autochat" ? (numberType === "new" ? `
+          ${(product === "autochat" || product === "bundle") ? (numberType === "new" || product === "bundle" ? `
           <div style="background:#fef3c7;border:2px solid #fcd34d;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.5rem">
             <h3 style="color:#92400e;margin:0 0 1rem 0">📱 Neue WhatsApp-Nummer für Kunden einrichten</h3>
             <p style="color:#78350f;margin:0 0 0.75rem 0;font-size:14px">Der Kunde möchte eine <strong>neue Nummer</strong> – er hat keine eigene angegeben.</p>
@@ -188,6 +189,11 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
             <p style="color:#0d9488;font-weight:600;margin:0">✓ MailPilot läuft vollautomatisch nach Google OAuth. Keine Aktion nötig.</p>
           </div>
           `}
+          ${product === "bundle" ? `
+          <div style="background:#f0fdfa;border:2px solid #99f6e4;border-radius:12px;padding:1rem 1.5rem;margin-bottom:1.5rem">
+            <p style="color:#0d9488;font-weight:600;margin:0 0 0.4rem 0">✓ MailPilot (Bundle) – läuft nach Google OAuth. Kunde verbindet Gmail selbst.</p>
+          </div>
+          ` : ''}
 
           <div style="display:flex;gap:1rem;flex-wrap:wrap">
             <a href="https://joka.chat/admin?key=${process.env.ADMIN_KEY}" style="background:#006266;color:white;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:14px">Admin Dashboard →</a>
