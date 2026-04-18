@@ -24,7 +24,7 @@ export default function SoFunktionierts() {
         <div className="container-wide" style={{ maxWidth: '780px' }}>
 
           <div style={{ marginBottom: '5rem' }}>
-            <span className="sub-label">So funktioniert's</span>
+            <span className="sub-label">Überblick</span>
             <h1 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', marginBottom: '1rem' }}>Was genau passiert im Hintergrund?</h1>
             <p style={{ fontSize: '1.15rem', maxWidth: '600px' }}>Kein Fachjargon. Einfach erklärt was passiert, nachdem du dich anmeldest.</p>
           </div>
@@ -160,7 +160,7 @@ export default function SoFunktionierts() {
           <div className="footer-links">
             <Link href="/mein-abo">Mein Abo</Link>
             <span className="separator">|</span>
-            <Link href="/so-funktionierts">So funktioniert's</Link>
+            <Link href="/so-funktionierts">Überblick</Link>
             <span className="separator">|</span>
             <Link href="/impressum">Impressum</Link>
             <span className="separator">|</span>

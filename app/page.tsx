@@ -266,7 +266,7 @@ export default function Home() {
           <div className="footer-links">
             <Link href="/mein-abo">Mein Abo</Link>
             <span className="separator">|</span>
-            <Link href="/so-funktionierts">So funktioniert's</Link>
+            <Link href="/so-funktionierts">Überblick</Link>
             <span className="separator">|</span>
             <Link href="/impressum">Impressum</Link>
             <span className="separator">|</span>
