@@ -17,39 +17,39 @@ export default async function DemoPage({ searchParams }: { searchParams: { key?:
     )
   }
 
-  const email = 'demo@joka.chat'
-  const token = crypto.randomBytes(32).toString('hex')
-  const expiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
+  try {
+    const email = 'demo@joka.chat'
+    const token = crypto.randomBytes(32).toString('hex')
+    const expiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
 
-  const customer = await prisma.customer.upsert({
-    where: { email },
-    update: { inboxToken: token, inboxTokenExpiry: expiry, subscriptionStatus: 'ACTIVE' },
-    create: {
-      email,
-      name: 'Demo Account',
-      stripeCustomerId: 'demo',
-      subscriptionStatus: 'ACTIVE',
-      inboxToken: token,
-      inboxTokenExpiry: expiry,
-    },
-  })
+    const customer = await prisma.customer.upsert({
+      where: { email },
+      update: { inboxToken: token, inboxTokenExpiry: expiry, subscriptionStatus: 'ACTIVE' },
+      create: {
+        email,
+        name: 'Demo Account',
+        stripeCustomerId: 'demo',
+        subscriptionStatus: 'ACTIVE',
+        inboxToken: token,
+        inboxTokenExpiry: expiry,
+      },
+    })
 
-  const config = await prisma.autoChatConfig.upsert({
-    where: { customerId: customer.id },
-    update: {},
-    create: {
-      customerId: customer.id,
-      businessName: 'Friseur Mustermann',
-      businessAddress: 'Musterstraße 1, 12345 Berlin',
-      openingHours: 'Mo–Fr 9–18 Uhr, Sa 9–14 Uhr',
-      services: 'Haarschnitt €18, Bart-Trim €10, Färben ab €35',
-    },
-  })
+    const config = await prisma.autoChatConfig.upsert({
+      where: { customerId: customer.id },
+      update: {},
+      create: {
+        customerId: customer.id,
+        businessName: 'Friseur Mustermann',
+        businessAddress: 'Musterstraße 1, 12345 Berlin',
+        openingHours: 'Mo–Fr 9–18 Uhr, Sa 9–14 Uhr',
+        services: 'Haarschnitt €18, Bart-Trim €10, Färben ab €35',
+      },
+    })
 
-  const existing = await prisma.conversation.count({ where: { autoChatConfigId: config.id } })
-  if (existing === 0) {
-    await Promise.all([
-      prisma.conversation.create({
+    const existing = await prisma.conversation.count({ where: { autoChatConfigId: config.id } })
+    if (existing === 0) {
+      await prisma.conversation.create({
         data: {
           autoChatConfigId: config.id,
           customerPhone: '+491511234567',
@@ -62,8 +62,8 @@ export default async function DemoPage({ searchParams }: { searchParams: { key?:
             ],
           },
         },
-      }),
-      prisma.conversation.create({
+      })
+      await prisma.conversation.create({
         data: {
           autoChatConfigId: config.id,
           customerPhone: '+491709876543',
@@ -74,23 +74,20 @@ export default async function DemoPage({ searchParams }: { searchParams: { key?:
             ],
           },
         },
-      }),
-      prisma.conversation.create({
-        data: {
-          autoChatConfigId: config.id,
-          customerPhone: '+491605551122',
-          aiPaused: true,
-          needsReview: true,
-          messages: {
-            create: [
-              { role: 'USER', content: 'Ich hätte gerne einen Termin nächste Woche, am besten Mittwoch Nachmittag?' },
-              { role: 'ASSISTANT', content: 'Gerne! Einen Moment, ich prüfe das für dich.' },
-            ],
-          },
-        },
-      }),
-    ])
-  }
+      })
+    }
 
-  return <DemoSetup token={token} />
+    return <DemoSetup token={token} />
+  } catch (err) {
+    const message = err instanceof Error ? `${err.name}: ${err.message}` : String(err)
+    const stack = err instanceof Error && err.stack ? err.stack : ''
+    console.error('Demo setup error:', err)
+    return (
+      <div style={{ minHeight: '100vh', padding: '2rem', fontFamily: 'monospace', background: '#fff' }}>
+        <h1 style={{ color: '#dc2626', fontFamily: 'sans-serif' }}>Demo Setup Error</h1>
+        <pre style={{ whiteSpace: 'pre-wrap', background: '#fef2f2', padding: '1rem', borderRadius: '8px', fontSize: '0.85rem' }}>{message}</pre>
+        {stack && <pre style={{ whiteSpace: 'pre-wrap', background: '#f9fafb', padding: '1rem', borderRadius: '8px', fontSize: '0.75rem', marginTop: '1rem' }}>{stack}</pre>}
+      </div>
+    )
+  }
 }
