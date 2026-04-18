@@ -200,7 +200,7 @@ function BestellenForm() {
         {produktKey === 'bundle' && (
           <div style={{ background: '#f0fdfa', border: '1.5px solid #99f6e4', borderRadius: '12px', padding: '1rem 1.25rem', marginBottom: '1.5rem' }}>
             <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--primary)', lineHeight: 1.6 }}>
-              <strong>MailPilot (E-Mail):</strong> Nach der Zahlung schickst du uns deinen Gmail-Zugang – wir verbinden alles in einem kurzen Call.
+              <strong>MailPilot (E-Mail):</strong> Nach der Zahlung bekommst du einen Link – Gmail verbindest du selbst in wenigen Klicks über Google.
             </p>
           </div>
         )}
