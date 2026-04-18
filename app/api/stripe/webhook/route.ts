@@ -98,6 +98,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   if (product === "autochat" || product === "bundle") {
     const onboardingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/onboarding/autochat?token=${inboxToken}`;
     const inboxLink = `${process.env.NEXT_PUBLIC_BASE_URL}/inbox?token=${inboxToken}`;
+    const passwordLink = `${process.env.NEXT_PUBLIC_BASE_URL}/passwort-setzen?token=${inboxToken}`;
     await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -120,9 +121,9 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
             </div>
 
             <div style="background:#f8f9fa;border:1px solid rgba(0,0,0,0.06);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem">
-              <p style="color:#0f172a;font-weight:700;margin:0 0 0.5rem 0;font-size:0.95rem">Schritt 2 – Deine Inbox</p>
-              <p style="color:#64748b;font-size:0.85rem;margin:0 0 0.75rem 0">Hier siehst du alle Konversationen und kannst bei Bedarf selbst antworten oder die KI pausieren.</p>
-              <a href="${inboxLink}" style="display:inline-block;background:#f1f5f9;color:#0f172a;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:0.85rem">Zur Inbox →</a>
+              <p style="color:#0f172a;font-weight:700;margin:0 0 0.5rem 0;font-size:0.95rem">Schritt 2 – Passwort setzen</p>
+              <p style="color:#64748b;font-size:0.85rem;margin:0 0 0.75rem 0">Richte einmalig dein Passwort ein – danach kannst du dich jederzeit unter joka.chat/anmelden einloggen.</p>
+              <a href="${passwordLink}" style="display:inline-block;background:#f1f5f9;color:#0f172a;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:0.85rem">Passwort setzen →</a>
             </div>
 
             <p style="color:#94a3b8;font-size:0.82rem">Fragen? Schreib uns einfach: <a href="mailto:joka.chat.business@gmail.com" style="color:#006266">joka.chat.business@gmail.com</a></p>

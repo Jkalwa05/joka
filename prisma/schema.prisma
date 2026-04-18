@@ -23,6 +23,7 @@ model Customer {
   // Inbox Auth
   inboxToken       String?   @unique
   inboxTokenExpiry DateTime?
+  passwordHash     String?
 
   // Produkte
   autoChatConfig  AutoChatConfig?

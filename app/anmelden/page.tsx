@@ -7,6 +7,7 @@ import { useState } from 'react'
 export default function Anmelden() {
   const router = useRouter()
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -18,7 +19,7 @@ export default function Anmelden() {
     const res = await fetch('/api/anmelden', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, password }),
     })
 
     const data = await res.json()
@@ -44,17 +45,15 @@ export default function Anmelden() {
         <div className="form-card" style={{ width: '100%', maxWidth: '440px' }}>
           <span className="sub-label">Kundenbereich</span>
           <h2 style={{ marginBottom: '0.5rem' }}>Anmelden</h2>
-          <p style={{ marginBottom: '2rem', color: 'var(--text-muted)' }}>Gib deine E-Mail ein – du kommst direkt in dein Dashboard.</p>
+          <p style={{ marginBottom: '2rem', color: 'var(--text-muted)' }}>Melde dich mit deiner E-Mail und deinem Passwort an.</p>
           <form onSubmit={handleSubmit}>
             <div className="grp">
               <label>E-Mail-Adresse</label>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="deine@email.de"
-              />
+              <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="deine@email.de" />
+            </div>
+            <div className="grp">
+              <label>Passwort</label>
+              <input type="password" required value={password} onChange={e => setPassword(e.target.value)} placeholder="Dein Passwort" />
             </div>
             {error && <p style={{ color: '#dc2626', fontSize: '0.9rem', marginBottom: '1rem' }}>{error}</p>}
             <button type="submit" className="btn-primary" style={{ width: '100%' }} disabled={loading}>
