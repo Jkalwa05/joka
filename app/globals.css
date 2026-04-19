@@ -177,5 +177,8 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); background: wh
     .separator { display: none; }
 
     /* Trial widget */
-    .trial-widget { left: 1rem !important; right: 1rem !important; transform: none !important; width: auto !important; border-radius: 16px !important; flex-wrap: wrap; }
+    .trial-widget { left: 1rem !important; right: 1rem !important; transform: none !important; width: auto !important; border-radius: 50px !important; flex-wrap: nowrap !important; padding: 0.5rem 0.5rem 0.5rem 1rem !important; gap: 0.75rem !important; }
+    .trial-widget .trial-subtitle { display: none; }
+    .trial-widget .trial-title { font-size: 0.82rem !important; }
+    .trial-widget .btn-primary { font-size: 0.8rem !important; padding: 0.45rem 0.9rem !important; }
 }
