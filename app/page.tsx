@@ -295,8 +295,8 @@ export default function Home() {
           border: '1px solid rgba(0,0,0,0.07)',
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}>
-            <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-main)', fontFamily: 'var(--font-heading)' }}>1 Monat kostenlos testen</span>
-            <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Kein Risiko · Jederzeit kündbar</span>
+            <span className="trial-title" style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-main)', fontFamily: 'var(--font-heading)' }}>1 Monat kostenlos testen</span>
+            <span className="trial-subtitle" style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Kein Risiko · Jederzeit kündbar</span>
           </div>
           <Link
             href="/bestellen?trial=1"
