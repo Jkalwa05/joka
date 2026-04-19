@@ -2,8 +2,8 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Joka – WhatsApp & E-Mail automatisch beantworten',
-    short_name: 'Joka',
+    name: 'joka.chat – WhatsApp & E-Mail automatisch beantworten',
+    short_name: 'joka.chat',
     description: 'WhatsApp automatisch beantworten, E-Mails sortieren, Termine eintragen.',
     start_url: '/dashboard',
     display: 'standalone',

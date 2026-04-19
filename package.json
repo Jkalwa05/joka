@@ -1,7 +1,7 @@
 {
-  "name": "joka",
+  "name": "jokachat",
   "version": "1.0.0",
-  "description": "Joka – Automatisierung für lokale Businesses",
+  "description": "joka.chat – Automatisierung für lokale Businesses",
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",

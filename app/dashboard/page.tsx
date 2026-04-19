@@ -25,13 +25,13 @@ export default function Dashboard() {
   const [tab, setTab] = useState<'inbox' | 'abo'>('inbox')
 
   useEffect(() => {
-    const t = localStorage.getItem('joka-token')
+    const t = localStorage.getItem('jokachat-token')
     if (!t) { router.push('/anmelden'); return }
     setToken(t)
   }, [router])
 
   function logout() {
-    localStorage.removeItem('joka-token')
+    localStorage.removeItem('jokachat-token')
     router.push('/anmelden')
   }
 
@@ -41,7 +41,7 @@ export default function Dashboard() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">Joka<span className="dot">_</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
           <div className="nav-items">
             <button
               onClick={() => setTab('inbox')}

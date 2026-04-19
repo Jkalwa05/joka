@@ -5,7 +5,7 @@ export default function Impressum() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">Joka<span className="dot">_</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
@@ -55,13 +55,17 @@ export default function Impressum() {
 
       <footer style={{ marginTop: '4rem' }}>
         <div className="container-wide footer-inner">
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Joka.</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.chat.</p>
           <div className="footer-links">
             <Link href="/mein-abo">Mein Abo</Link>
             <span className="separator">|</span>
             <Link href="/impressum">Impressum</Link>
             <span className="separator">|</span>
             <Link href="/datenschutz">Datenschutz</Link>
+            <span className="separator">|</span>
+            <Link href="/agb">AGB</Link>
+            <span className="separator">|</span>
+            <Link href="/widerruf">Widerruf</Link>
           </div>
         </div>
       </footer>

@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { constantTimeEqual } from '@/lib/security'
 import AdminLogin from './login'
 
-const COOKIE_NAME = 'joka_admin'
+const COOKIE_NAME = 'jokachat_admin'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7 // 7 Tage
 
 async function getCustomers() {

@@ -74,7 +74,7 @@ model Conversation {
   autoChatConfig AutoChatConfig @relation(fields: [autoChatConfigId], references: [id], onDelete: Cascade)
   autoChatConfigId String
 
-  customerPhone  String   // Endkunde (nicht Joka-Kunde)
+  customerPhone  String   // Endkunde (nicht joka.chat-Kunde)
   aiPaused       Boolean  @default(false)
   needsReview    Boolean  @default(false)
   messages       Message[]

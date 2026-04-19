@@ -31,7 +31,14 @@ function BestellenForm() {
   const trial = params.get('trial') === '1'
   const product = produktKey && PRODUCTS[produktKey] ? PRODUCTS[produktKey] : null
 
-  const [form, setForm] = useState({ name: '', email: '', businessContact: '', agreed: false })
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    businessContact: '',
+    agreed: false,
+    agreedAgb: false,
+    agreedWiderruf: false,
+  })
   const [numberType, setNumberType] = useState<'existing' | 'new' | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -45,24 +52,31 @@ function BestellenForm() {
     setLoading(true)
     setError('')
 
-    const res = await fetch('/api/stripe/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        product: produktKey,
-        email: form.email,
-        name: form.name,
-        businessContact: produktKey === 'autochat' ? (numberType === 'new' ? 'NEUE_NUMMER' : form.businessContact) : form.businessContact,
-        numberType: produktKey === 'autochat' ? numberType : undefined,
-        trial,
-      }),
-    })
+    try {
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product: produktKey,
+          email: form.email,
+          name: form.name,
+          businessContact: produktKey === 'autochat' ? (numberType === 'new' ? 'NEUE_NUMMER' : form.businessContact) : form.businessContact,
+          numberType: produktKey === 'autochat' ? numberType : undefined,
+          trial,
+        }),
+      })
 
-    const data = await res.json()
-    if (data.url) {
-      window.location.href = data.url
-    } else {
-      setError('Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreib uns an joka.chat.business@gmail.com.')
+      const data = await res.json().catch(() => null)
+      if (res.ok && data?.url) {
+        window.location.href = data.url
+        return
+      }
+
+      setError(data?.error || 'Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreib uns an joka.chat.business@gmail.com.')
+    } catch (err) {
+      console.error('[bestellen] Checkout-Fehler:', err)
+      setError('Netzwerkfehler. Bitte prüfe deine Verbindung und versuche es erneut.')
+    } finally {
       setLoading(false)
     }
   }
@@ -219,7 +233,7 @@ function BestellenForm() {
           </div>
         )}
 
-        <div style={{ background: '#fffbeb', border: '1.5px solid #fcd34d', borderRadius: '10px', padding: '1rem 1.25rem', marginBottom: '1.5rem', marginTop: '0.5rem' }}>
+        <div style={{ background: '#fffbeb', border: '1.5px solid #fcd34d', borderRadius: '10px', padding: '1rem 1.25rem', marginBottom: '0.75rem', marginTop: '0.5rem' }}>
           <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', cursor: 'pointer', fontWeight: 400 }}>
             <input
               type="checkbox"
@@ -229,7 +243,41 @@ function BestellenForm() {
               style={{ marginTop: '3px', flexShrink: 0, width: '16px', height: '16px' }}
             />
             <span style={{ fontSize: '0.9rem', lineHeight: 1.5 }}>
-              Ich bestätige, dass ich hiermit ein <strong>kostenpflichtiges Abonnement für {product.price}/Monat</strong> abschließe. Das Abo ist monatlich kündbar. Nach dem Klick werde ich zu Stripe weitergeleitet, um die Zahlung sicher abzuschließen.
+              {trial ? (
+                <>Ich bestätige, dass ich das Abo mit einem <strong>1 Monat gratis Testzeitraum</strong> starte. Erst danach werden <strong>{product.price}/Monat</strong> automatisch abgebucht. Ich kann jederzeit vor Ablauf des Testmonats kündigen, ohne dass Kosten entstehen. Nach dem Klick werde ich zu Stripe weitergeleitet, um meine Zahlungsdaten sicher zu hinterlegen.</>
+              ) : (
+                <>Ich bestätige, dass ich hiermit ein <strong>kostenpflichtiges Abonnement für {product.price}/Monat</strong> abschließe. Das Abo ist monatlich kündbar. Nach dem Klick werde ich zu Stripe weitergeleitet, um die Zahlung sicher abzuschließen.</>
+              )}
+            </span>
+          </label>
+        </div>
+
+        <div style={{ background: '#f8f9fa', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '10px', padding: '1rem 1.25rem', marginBottom: '0.75rem' }}>
+          <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', cursor: 'pointer', fontWeight: 400 }}>
+            <input
+              type="checkbox"
+              checked={form.agreedAgb}
+              onChange={(e) => update('agreedAgb', e.target.checked)}
+              required
+              style={{ marginTop: '3px', flexShrink: 0, width: '16px', height: '16px' }}
+            />
+            <span style={{ fontSize: '0.88rem', lineHeight: 1.5 }}>
+              Ich habe die <Link href="/agb" target="_blank" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>AGB</Link> und die <Link href="/datenschutz" target="_blank" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>Datenschutzerklärung</Link> gelesen und akzeptiere sie. Mit dem Einsatz von AutoChat bzw. MailPilot schließe ich zugleich den in § 8 der AGB enthaltenen Auftragsverarbeitungsvertrag (Art. 28 DSGVO) ab.
+            </span>
+          </label>
+        </div>
+
+        <div style={{ background: '#f8f9fa', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '10px', padding: '1rem 1.25rem', marginBottom: '1.5rem' }}>
+          <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', cursor: 'pointer', fontWeight: 400 }}>
+            <input
+              type="checkbox"
+              checked={form.agreedWiderruf}
+              onChange={(e) => update('agreedWiderruf', e.target.checked)}
+              required
+              style={{ marginTop: '3px', flexShrink: 0, width: '16px', height: '16px' }}
+            />
+            <span style={{ fontSize: '0.88rem', lineHeight: 1.5 }}>
+              Ich verlange ausdrücklich, dass die digitale Dienstleistung <strong>sofort nach Vertragsschluss</strong> bereitgestellt wird. Mir ist bekannt, dass mit vollständiger Vertragserfüllung mein <Link href="/widerruf" target="_blank" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>Widerrufsrecht</Link> erlischt (§ 356 Abs. 5 BGB). Das Abonnement bleibt jederzeit monatlich kündbar.
             </span>
           </label>
         </div>
@@ -240,9 +288,13 @@ function BestellenForm() {
 
         <button
           type="submit"
-          disabled={loading || !form.agreed || ((produktKey === 'autochat' || produktKey === 'bundle') && !numberType)}
+          disabled={loading || !form.agreed || !form.agreedAgb || !form.agreedWiderruf || ((produktKey === 'autochat' || produktKey === 'bundle') && !numberType)}
           className="btn-primary"
-          style={{ width: '100%', opacity: (!form.agreed || ((produktKey === 'autochat' || produktKey === 'bundle') && !numberType)) ? 0.5 : 1, cursor: (!form.agreed || ((produktKey === 'autochat' || produktKey === 'bundle') && !numberType)) ? 'not-allowed' : 'pointer' }}
+          style={{
+            width: '100%',
+            opacity: (!form.agreed || !form.agreedAgb || !form.agreedWiderruf || ((produktKey === 'autochat' || produktKey === 'bundle') && !numberType)) ? 0.5 : 1,
+            cursor: (!form.agreed || !form.agreedAgb || !form.agreedWiderruf || ((produktKey === 'autochat' || produktKey === 'bundle') && !numberType)) ? 'not-allowed' : 'pointer',
+          }}
         >
           {loading ? 'Wird weitergeleitet...' : trial ? `1 Monat gratis starten →` : `Weiter zur Zahlung → ${product.price}/Monat`}
         </button>
@@ -259,7 +311,7 @@ export default function Bestellen() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">Joka<span className="dot">_</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
@@ -283,7 +335,7 @@ export default function Bestellen() {
       <footer>
         <div className="container-wide footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Joka. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.chat. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
             <a href="https://www.linkedin.com/in/jonas-kalwa-3333612a1/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Ein Projekt von Jonas Kalwa →</a>
           </div>
           <div className="footer-links">
@@ -292,6 +344,10 @@ export default function Bestellen() {
             <Link href="/impressum">Impressum</Link>
             <span className="separator">|</span>
             <Link href="/datenschutz">Datenschutz</Link>
+            <span className="separator">|</span>
+            <Link href="/agb">AGB</Link>
+            <span className="separator">|</span>
+            <Link href="/widerruf">Widerruf</Link>
           </div>
         </div>
       </footer>

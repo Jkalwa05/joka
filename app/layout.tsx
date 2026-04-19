@@ -10,11 +10,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://joka.chat'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Joka – WhatsApp & E-Mail automatisch beantworten',
-    template: '%s | Joka',
+    default: 'joka.chat – WhatsApp & E-Mail automatisch beantworten',
+    template: '%s | joka.chat',
   },
   description:
-    'Joka automatisiert deinen WhatsApp und deine E-Mails. WhatsApp automatisch beantworten, E-Mails sortieren, Termine in Google Kalender eintragen – einmal einrichten, dauerhaft Zeit sparen.',
+    'joka.chat automatisiert deinen WhatsApp und deine E-Mails. WhatsApp automatisch beantworten, E-Mails sortieren, Termine in Google Kalender eintragen – einmal einrichten, dauerhaft Zeit sparen.',
   keywords: [
     'WhatsApp automatisch beantworten',
     'WhatsApp Bot Deutsch',
@@ -25,11 +25,11 @@ export const metadata: Metadata = {
     'KI für Friseur',
     'Automatisierung Restaurant',
     'Chatbot WhatsApp Business',
-    'Joka',
+    'joka.chat',
   ],
   authors: [{ name: 'Jonas Kalwa', url: 'https://www.linkedin.com/in/jonas-kalwa-3333612a1/' }],
   creator: 'Jonas Kalwa',
-  publisher: 'Joka',
+  publisher: 'joka.chat',
   alternates: { canonical: '/' },
   robots: {
     index: true,
@@ -40,15 +40,15 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'de_DE',
     url: SITE_URL,
-    siteName: 'Joka',
-    title: 'Joka – WhatsApp & E-Mail automatisch beantworten',
+    siteName: 'joka.chat',
+    title: 'joka.chat – WhatsApp & E-Mail automatisch beantworten',
     description:
       'WhatsApp automatisch beantworten, E-Mails sortieren, Termine in Google Kalender oder Outlook eintragen. Einmal einrichten, täglich Stunden sparen.',
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Joka – Automatisierung für lokale Businesses' }],
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'joka.chat – Automatisierung für lokale Businesses' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Joka – WhatsApp & E-Mail automatisch beantworten',
+    title: 'joka.chat – WhatsApp & E-Mail automatisch beantworten',
     description:
       'WhatsApp automatisch beantworten, E-Mails sortieren, Termine eintragen. Einmal einrichten, dauerhaft sparen.',
     images: ['/og.png'],
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
 const jsonLdOrg = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Joka',
+  name: 'joka.chat',
   url: SITE_URL,
   logo: `${SITE_URL}/og.png`,
   email: 'joka.chat.business@gmail.com',
@@ -73,20 +73,20 @@ const jsonLdOrg = {
 const jsonLdWebsite = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Joka',
+  name: 'joka.chat',
   url: SITE_URL,
   inLanguage: 'de-DE',
-  publisher: { '@type': 'Organization', name: 'Joka' },
+  publisher: { '@type': 'Organization', name: 'joka.chat' },
 }
 
 const jsonLdSoftware = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'Joka',
+  name: 'joka.chat',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
   description:
-    'Joka automatisiert WhatsApp-Antworten und sortiert E-Mails in Gmail oder Outlook. Termine werden automatisch in Google Kalender oder Outlook Kalender eingetragen.',
+    'joka.chat automatisiert WhatsApp-Antworten und sortiert E-Mails in Gmail oder Outlook. Termine werden automatisch in Google Kalender oder Outlook Kalender eingetragen.',
   offers: [
     { '@type': 'Offer', name: 'AutoChat', price: '39', priceCurrency: 'EUR', url: `${SITE_URL}/bestellen?produkt=autochat` },
     { '@type': 'Offer', name: 'MailPilot', price: '29', priceCurrency: 'EUR', url: `${SITE_URL}/bestellen?produkt=mailpilot` },
@@ -104,7 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" href="/icon-512.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Joka" />
+        <meta name="apple-mobile-web-app-title" content="joka.chat" />
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
