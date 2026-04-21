@@ -22,9 +22,19 @@ export async function GET(req: NextRequest) {
 
   // Bis zu 5 Versuche — Webhook kann kurz verzögert sein
   for (let i = 0; i < 5; i++) {
-    const customer = await prisma.customer.findUnique({ where: { email } })
+    const customer = await prisma.customer.findUnique({
+      where: { email },
+      include: { mailPilotConfig: true },
+    })
     if (customer) {
-      return NextResponse.json({ customerId: customer.id, email, product, inboxToken: customer.inboxToken })
+      return NextResponse.json({
+        customerId: customer.id,
+        email,
+        product,
+        inboxToken: customer.inboxToken,
+        hasPassword: !!customer.passwordHash,
+        gmailConnected: !!customer.mailPilotConfig?.gmailAddress,
+      })
     }
     await new Promise((r) => setTimeout(r, 1000))
   }

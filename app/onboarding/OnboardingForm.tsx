@@ -8,13 +8,15 @@ type Props = {
   product: string
   email: string
   inboxToken: string
+  hasPassword: boolean
+  gmailConnected: boolean
 }
 
-export default function OnboardingForm({ customerId, product, email, inboxToken }: Props) {
+export default function OnboardingForm({ customerId, product, email, inboxToken, hasPassword, gmailConnected }: Props) {
   const router = useRouter()
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [passwordSaved, setPasswordSaved] = useState(false)
+  const [passwordSaved, setPasswordSaved] = useState(hasPassword)
   const [passwordError, setPasswordError] = useState('')
   const [savingPassword, setSavingPassword] = useState(false)
 
@@ -64,6 +66,17 @@ export default function OnboardingForm({ customerId, product, email, inboxToken 
       body: JSON.stringify({ customerId, ...form }),
     })
     router.push('/onboarding/success?product=' + product)
+  }
+
+  if (product === 'mailpilot' && hasPassword && gmailConnected) {
+    return (
+      <div style={{ maxWidth: '480px', margin: '4rem auto', padding: '0 1.5rem', textAlign: 'center' }}>
+        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✓</div>
+        <h1 style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>Du bist bereits eingerichtet!</h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Passwort und Gmail sind bereits verbunden.</p>
+        <a href="/anmelden" className="btn-primary" style={{ display: 'inline-block' }}>Zum Dashboard →</a>
+      </div>
+    )
   }
 
   if (!passwordSaved) {

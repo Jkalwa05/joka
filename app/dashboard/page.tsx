@@ -19,16 +19,32 @@ type Message = {
   createdAt: string
 }
 
+type Me = { email: string; name: string; products: { autochat: boolean; mailpilot: boolean }; gmailConnected: boolean }
+
 export default function Dashboard() {
   const router = useRouter()
   const [token, setToken] = useState<string | null>(null)
   const [tab, setTab] = useState<'inbox' | 'abo'>('inbox')
+  const [me, setMe] = useState<Me | null>(null)
 
   useEffect(() => {
-    const t = localStorage.getItem('jokachat-token')
+    const urlToken = new URLSearchParams(window.location.search).get('token')
+    const stored = localStorage.getItem('jokachat-token')
+    const t = urlToken || stored
     if (!t) { router.push('/anmelden'); return }
+    if (urlToken) {
+      localStorage.setItem('jokachat-token', urlToken)
+      window.history.replaceState({}, '', '/dashboard')
+    }
     setToken(t)
   }, [router])
+
+  useEffect(() => {
+    if (!token) return
+    fetch(`/api/me?token=${token}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data) setMe(data) })
+  }, [token])
 
   function logout() {
     localStorage.removeItem('jokachat-token')
@@ -63,7 +79,9 @@ export default function Dashboard() {
       </nav>
 
       {tab === 'inbox' ? (
-        <InboxTab token={token} />
+        me?.products.mailpilot && !me?.products.autochat
+          ? <MailPilotTab gmailConnected={me.gmailConnected} />
+          : <InboxTab token={token} />
       ) : (
         <AboTab token={token} />
       )}
@@ -206,6 +224,30 @@ function InboxTab({ token }: { token: string }) {
                 {sending ? '...' : 'Senden'}
               </button>
             </div>
+          </>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function MailPilotTab({ gmailConnected }: { gmailConnected: boolean }) {
+  return (
+    <div style={{ paddingTop: '70px', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-body)' }}>
+      <div className="form-card" style={{ maxWidth: '480px', textAlign: 'center' }}>
+        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📬</div>
+        <h2 style={{ marginBottom: '0.75rem' }}>MailPilot</h2>
+        {gmailConnected ? (
+          <>
+            <div style={{ background: '#f0fdfa', border: '1px solid #99f6e4', borderRadius: '10px', padding: '1rem 1.25rem', marginBottom: '1.5rem', color: '#0d9488', fontWeight: 600 }}>
+              ✓ Gmail ist verbunden – E-Mails werden automatisch sortiert.
+            </div>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Neue E-Mails werden automatisch kategorisiert. Termine landen direkt in deinem Google Kalender.</p>
+          </>
+        ) : (
+          <>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>Gmail ist noch nicht verbunden.</p>
+            <a href="/onboarding" className="btn-primary" style={{ display: 'inline-block' }}>Gmail verbinden →</a>
           </>
         )}
       </div>
