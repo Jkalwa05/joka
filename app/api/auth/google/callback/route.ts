@@ -73,14 +73,15 @@ export async function GET(req: NextRequest) {
     })
   }
 
-  // Redirect: MailPilot-Kunden zur Success-Page, AutoChat-only-Kunden zurück zur Inbox
+  const customer = await prisma.customer.findUnique({ where: { id: customerId }, select: { inboxToken: true } })
+  const inboxToken = customer?.inboxToken ?? ''
+
   if (mailConfig) {
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/onboarding/success?product=mailpilot`)
+    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/dashboard?token=${inboxToken}`)
   }
 
-  const customer = await prisma.customer.findUnique({ where: { id: customerId }, select: { inboxToken: true } })
-  const redirectUrl = customer?.inboxToken
-    ? `${process.env.NEXTAUTH_URL}/onboarding/autochat?token=${customer.inboxToken}&calendar=connected`
+  const redirectUrl = inboxToken
+    ? `${process.env.NEXTAUTH_URL}/onboarding/autochat?token=${inboxToken}&calendar=connected`
     : `${process.env.NEXTAUTH_URL}/dashboard`
   return NextResponse.redirect(redirectUrl)
 }

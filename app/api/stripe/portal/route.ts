@@ -27,11 +27,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true })
   }
 
-  const session = await stripe.billingPortal.sessions.create({
-    customer: customer.stripeCustomerId,
-    configuration: 'bpc_1TN9q6CFCHiYNuj6fVva5D78',
-    return_url: token ? `${process.env.NEXTAUTH_URL}/dashboard` : `${process.env.NEXTAUTH_URL}/mein-abo`,
-  })
+  let session: { url: string }
+  try {
+    session = await stripe.billingPortal.sessions.create({
+      customer: customer.stripeCustomerId,
+      return_url: token ? `${process.env.NEXTAUTH_URL}/dashboard` : `${process.env.NEXTAUTH_URL}/mein-abo`,
+    })
+  } catch (err) {
+    console.error('Stripe portal error:', err)
+    return NextResponse.json({ error: 'Stripe Portal nicht verfügbar.' }, { status: 500 })
+  }
 
   if (token) {
     return NextResponse.json({ url: session.url })
@@ -45,7 +50,7 @@ export async function POST(req: NextRequest) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'joka.chat <onboarding@resend.dev>',
+      from: 'joka.chat <noreply@joka.chat>',
       to: email,
       subject: 'Dein joka.chat-Abo verwalten',
       html: `
