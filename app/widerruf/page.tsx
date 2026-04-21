@@ -63,7 +63,7 @@ export default function Widerruf() {
             <div style={{ background: '#f8f9fa', borderRadius: '12px', padding: '1.5rem 1.75rem', border: '1px solid rgba(0,0,0,0.06)' }}>
               <h3 style={{ marginBottom: '1rem', color: 'var(--text-main)' }}>Muster-Widerrufsformular</h3>
               <p style={{ marginBottom: '1rem', fontSize: '0.88rem' }}>(Wenn du den Vertrag widerrufen willst, dann fülle dieses Formular aus und sende es zurück.)</p>
-              <div style={{ fontSize: '0.9rem', fontFamily: 'monospace', whiteSpace: 'pre-wrap', background: 'white', padding: '1rem 1.25rem', borderRadius: '8px', border: '1px solid #e2e8f0', lineHeight: 1.8 }}>
+              <div style={{ fontSize: '0.9rem', fontFamily: 'monospace', whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', wordBreak: 'break-all', background: 'white', padding: '1rem 1.25rem', borderRadius: '8px', border: '1px solid #e2e8f0', lineHeight: 1.8, overflowX: 'auto', maxWidth: '100%' }}>
 {`An:
 Jonas Kalwa – joka.chat
 Dinkelkamp 30
