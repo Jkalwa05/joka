@@ -76,29 +76,43 @@ export async function classifyEmail(subject: string, snippet: string): Promise<{
   label: string
   calendarEvent: { title: string; date: string; time?: string } | null
 }> {
+  const today = new Date().toISOString().slice(0, 10)
   const response = await anthropic.messages.create({
     model: 'claude-haiku-4-5-20251001',
-    max_tokens: 200,
+    max_tokens: 300,
+    system: 'Du bist ein E-Mail-Klassifizierer. Antworte ausschließlich mit rohem JSON, ohne Markdown, ohne Erklärungen.',
     messages: [
       {
         role: 'user',
-        content: `Klassifiziere diese E-Mail und antworte NUR mit JSON (kein Markdown):
+        content: `Klassifiziere diese E-Mail. Heute: ${today}
 
 Betreff: ${subject}
 Vorschau: ${snippet}
 
-JSON-Format:
-{
-  "label": "Finanzen" | "Termine" | "Anfragen" | "Werbung" | "Sonstiges",
-  "calendarEvent": null | { "title": "string", "date": "YYYY-MM-DD", "time": "HH:MM" }
-}`,
+Wähle das passendste Label:
+- "Termine": E-Mails mit Datum/Uhrzeit, Terminanfragen, Kalendereinladungen, Meetings
+- "Finanzen": Rechnungen, Zahlungen, Kontoauszüge, Bestellbestätigungen mit Preis
+- "Anfragen": Fragen, Kontaktaufnahmen, Support-Anfragen
+- "Werbung": Newsletter, Angebote, Marketing
+- "Sonstiges": alles andere
+
+Falls ein konkretes Datum+Uhrzeit erkennbar ist, fülle calendarEvent aus, sonst null.
+
+{"label":"...","calendarEvent":null}
+oder
+{"label":"...","calendarEvent":{"title":"...","date":"YYYY-MM-DD","time":"HH:MM"}}`,
       },
     ],
   })
-  const text = response.content[0].type === 'text' ? response.content[0].text : '{}'
+  const raw = response.content[0].type === 'text' ? response.content[0].text : ''
+  const text = raw.replace(/```(?:json)?\n?/g, '').trim()
   try {
-    return JSON.parse(text)
+    const parsed = JSON.parse(text)
+    const validLabels = ['Finanzen', 'Termine', 'Anfragen', 'Werbung', 'Sonstiges']
+    if (!validLabels.includes(parsed.label)) parsed.label = 'Sonstiges'
+    return parsed
   } catch {
+    console.error('[classifyEmail] JSON parse failed, raw:', raw)
     return { label: 'Sonstiges', calendarEvent: null }
   }
 }
