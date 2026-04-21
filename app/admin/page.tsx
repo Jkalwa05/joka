@@ -3,15 +3,10 @@ import { redirect } from 'next/navigation'
 import { constantTimeEqual } from '@/lib/security'
 
 async function getCustomers() {
-  try {
-    return await prisma.customer.findMany({
-      orderBy: { createdAt: 'desc' },
-      include: { autoChatConfig: true, mailPilotConfig: true },
-    })
-  } catch (e) {
-    console.error('Admin getCustomers error:', e)
-    return []
-  }
+  return prisma.customer.findMany({
+    orderBy: { createdAt: 'desc' },
+    include: { autoChatConfig: true, mailPilotConfig: true },
+  })
 }
 
 export default async function AdminPage({
@@ -26,7 +21,14 @@ export default async function AdminPage({
     redirect('/')
   }
 
-  const customers = await getCustomers()
+  let customers
+  let dbError = false
+  try {
+    customers = await getCustomers()
+  } catch {
+    customers = []
+    dbError = true
+  }
 
   const statusColor: Record<string, string> = {
     ACTIVE: '#0d9488',
@@ -40,7 +42,9 @@ export default async function AdminPage({
       <div style={{ marginBottom: '2rem' }}>
         <span className="sub-label">Intern</span>
         <h1>Admin Dashboard</h1>
-        <p style={{ color: 'var(--text-muted)' }}>{customers.length} Kunden gesamt</p>
+        <p style={{ color: dbError ? '#ef4444' : 'var(--text-muted)' }}>
+          {dbError ? '⚠ Datenbankfehler – Supabase vermutlich pausiert. Seite neu laden.' : `${customers.length} Kunden gesamt`}
+        </p>
       </div>
 
       <div style={{ overflowX: 'auto' }}>
