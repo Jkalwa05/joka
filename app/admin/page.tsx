@@ -3,10 +3,15 @@ import { redirect } from 'next/navigation'
 import { constantTimeEqual } from '@/lib/security'
 
 async function getCustomers() {
-  return prisma.customer.findMany({
-    orderBy: { createdAt: 'desc' },
-    include: { autoChatConfig: true, mailPilotConfig: true },
-  })
+  try {
+    return await prisma.customer.findMany({
+      orderBy: { createdAt: 'desc' },
+      include: { autoChatConfig: true, mailPilotConfig: true },
+    })
+  } catch (e) {
+    console.error('Admin getCustomers error:', e)
+    return []
+  }
 }
 
 export default async function AdminPage({
