@@ -76,15 +76,22 @@ export async function classifyEmail(subject: string, snippet: string): Promise<{
   label: string
   calendarEvent: { title: string; date: string; time?: string } | null
 }> {
+  console.log('[classifyEmail] start, subject:', subject.slice(0, 80))
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.error('[classifyEmail] ANTHROPIC_API_KEY is not set!')
+    return { label: 'Sonstiges', calendarEvent: null }
+  }
   const today = new Date().toISOString().slice(0, 10)
-  const response = await anthropic.messages.create({
-    model: 'claude-haiku-4-5-20251001',
-    max_tokens: 300,
-    system: 'Du bist ein E-Mail-Klassifizierer. Antworte ausschließlich mit rohem JSON, ohne Markdown, ohne Erklärungen.',
-    messages: [
-      {
-        role: 'user',
-        content: `Klassifiziere diese E-Mail. Heute: ${today}
+  let raw = ''
+  try {
+    const response = await anthropic.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 300,
+      system: 'Du bist ein E-Mail-Klassifizierer. Antworte ausschließlich mit rohem JSON, ohne Markdown, ohne Erklärungen.',
+      messages: [
+        {
+          role: 'user',
+          content: `Klassifiziere diese E-Mail. Heute: ${today}
 
 Betreff: ${subject}
 Vorschau: ${snippet}
@@ -101,10 +108,15 @@ Falls ein konkretes Datum+Uhrzeit erkennbar ist, fülle calendarEvent aus, sonst
 {"label":"...","calendarEvent":null}
 oder
 {"label":"...","calendarEvent":{"title":"...","date":"YYYY-MM-DD","time":"HH:MM"}}`,
-      },
-    ],
-  })
-  const raw = response.content[0].type === 'text' ? response.content[0].text : ''
+        },
+      ],
+    })
+    raw = response.content[0].type === 'text' ? response.content[0].text : ''
+    console.log('[classifyEmail] Claude response:', raw)
+  } catch (err) {
+    console.error('[classifyEmail] Anthropic API call failed:', err)
+    return { label: 'Sonstiges', calendarEvent: null }
+  }
   const text = raw.replace(/```(?:json)?\n?/g, '').trim()
   try {
     const parsed = JSON.parse(text)
