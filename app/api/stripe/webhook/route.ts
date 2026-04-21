@@ -229,7 +229,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
           ` : ''}
 
           <div style="display:flex;gap:1rem;flex-wrap:wrap">
-            <a href="https://joka.chat/admin" style="background:#006266;color:white;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:14px">Admin Dashboard →</a>
+            <a href="${process.env.NEXT_PUBLIC_BASE_URL}/admin?key=${process.env.ADMIN_KEY}" style="background:#006266;color:white;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:14px">Admin Dashboard →</a>
             <a href="https://dashboard.stripe.com/customers" style="background:#f1f5f9;color:#0f172a;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:14px">Stripe Dashboard →</a>
           </div>
         </div>
