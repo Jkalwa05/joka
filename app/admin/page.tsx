@@ -1,11 +1,6 @@
 import { prisma } from '@/lib/prisma'
-import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { constantTimeEqual } from '@/lib/security'
-import AdminLogin from './login'
-
-const COOKIE_NAME = 'jokachat_admin'
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 7 // 7 Tage
 
 async function getCustomers() {
   return prisma.customer.findMany({
@@ -20,29 +15,10 @@ export default async function AdminPage({
   searchParams: { key?: string }
 }) {
   const adminKey = process.env.ADMIN_KEY ?? ''
-  const cookieStore = cookies()
-  const cookieKey = cookieStore.get(COOKIE_NAME)?.value ?? ''
   const queryKey = searchParams.key ?? ''
 
-  const hasValidCookie = adminKey && cookieKey && constantTimeEqual(cookieKey, adminKey)
-
-  // Login via Query-Param → Cookie setzen, dann auf /admin ohne Param umleiten (Key raus aus URL/Referer)
-  if (!hasValidCookie && queryKey) {
-    if (adminKey && constantTimeEqual(queryKey, adminKey)) {
-      cookieStore.set(COOKIE_NAME, adminKey, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'lax',
-        path: '/admin',
-        maxAge: COOKIE_MAX_AGE,
-      })
-      redirect('/admin')
-    }
+  if (!adminKey || !queryKey || !constantTimeEqual(queryKey, adminKey)) {
     redirect('/')
-  }
-
-  if (!hasValidCookie) {
-    return <AdminLogin />
   }
 
   const customers = await getCustomers()
