@@ -98,6 +98,35 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const safeEmail = escapeHtml(email);
   const safeBusinessContact = escapeHtml(businessContact) || "–";
 
+  // Kunden-Willkommensmail für MailPilot
+  if (product === "mailpilot") {
+    const onboardingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/onboarding?session_id=${session.id}&product=mailpilot`;
+    fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "joka.chat <noreply@joka.chat>",
+        to: email,
+        subject: "Willkommen bei MailPilot – jetzt einrichten",
+        html: `
+          <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:2rem">
+            <h2 style="color:#0f172a;margin-bottom:0.25rem">Willkommen, ${safeName}! 👋</h2>
+            <p style="color:#64748b;margin-top:0">Dein MailPilot-Abo ist aktiv. Klick unten, um dein Passwort festzulegen und Gmail zu verbinden.</p>
+            <div style="background:#f0fdfa;border:2px solid #99f6e4;border-radius:14px;padding:1.5rem;margin:1.5rem 0">
+              <p style="color:#0d9488;font-weight:700;margin:0 0 0.75rem 0;font-size:1rem">Jetzt einrichten</p>
+              <p style="color:#0f766e;font-size:0.9rem;margin:0 0 1rem 0">Passwort festlegen und Gmail verbinden – dauert 2 Minuten.</p>
+              <a href="${onboardingLink}" style="display:inline-block;background:#006266;color:white;padding:0.75rem 1.5rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:0.95rem">Einrichten →</a>
+            </div>
+            <p style="color:#94a3b8;font-size:0.82rem">Fragen? <a href="mailto:joka.chat.business@gmail.com" style="color:#006266">joka.chat.business@gmail.com</a></p>
+          </div>
+        `,
+      }),
+    }).catch((err) => console.error("MailPilot-Willkommensmail fehlgeschlagen:", err));
+  }
+
   // Kunden-Willkommensmail für AutoChat oder Bundle
   if (product === "autochat" || product === "bundle") {
     const onboardingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/onboarding/autochat?token=${inboxToken}`;
