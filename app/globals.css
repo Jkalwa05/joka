@@ -146,7 +146,9 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); background: wh
     .container-wide { padding: 0 1.25rem; }
 
     /* Nav */
+    .nav-items { gap: 1rem; }
     .nav-items a:not([class*="btn"]) { display: none; }
+    .nav-items a[href="/anmelden"] { display: inline-block; color: var(--primary); font-weight: 600; font-size: 0.9rem; }
     .small { padding: 0.5rem 1rem; font-size: 0.85rem; }
 
     /* Hero */
