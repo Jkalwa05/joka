@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
   for (let i = 0; i < 5; i++) {
     const customer = await prisma.customer.findUnique({ where: { email } })
     if (customer) {
-      return NextResponse.json({ customerId: customer.id, email, product })
+      return NextResponse.json({ customerId: customer.id, email, product, inboxToken: customer.inboxToken })
     }
     await new Promise((r) => setTimeout(r, 1000))
   }
