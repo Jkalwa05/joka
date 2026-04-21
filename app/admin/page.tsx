@@ -21,12 +21,11 @@ export default async function AdminPage({
     redirect('/')
   }
 
-  let customers
+  let customers: Awaited<ReturnType<typeof getCustomers>> = []
   let dbError = false
   try {
     customers = await getCustomers()
   } catch {
-    customers = []
     dbError = true
   }
 
