@@ -31,7 +31,7 @@ export default async function OnboardingPage({ searchParams }: Props) {
     )
   }
 
-  const { customerId, email } = await res.json()
+  const { customerId, email, inboxToken } = await res.json()
 
-  return <OnboardingForm customerId={customerId} product={product} email={email} />
+  return <OnboardingForm customerId={customerId} product={product} email={email} inboxToken={inboxToken} />
 }

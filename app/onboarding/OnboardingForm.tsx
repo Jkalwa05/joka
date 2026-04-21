@@ -7,10 +7,17 @@ type Props = {
   customerId: string
   product: string
   email: string
+  inboxToken: string
 }
 
-export default function OnboardingForm({ customerId, product, email }: Props) {
+export default function OnboardingForm({ customerId, product, email, inboxToken }: Props) {
   const router = useRouter()
+  const [password, setPassword] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
+  const [passwordSaved, setPasswordSaved] = useState(false)
+  const [passwordError, setPasswordError] = useState('')
+  const [savingPassword, setSavingPassword] = useState(false)
+
   const [saving, setSaving] = useState(false)
   const [form, setForm] = useState({
     businessName: '',
@@ -21,6 +28,32 @@ export default function OnboardingForm({ customerId, product, email }: Props) {
 
   const update = (field: string, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }))
+
+  async function handlePasswordSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setPasswordError('')
+    if (password.length < 8) {
+      setPasswordError('Passwort muss mindestens 8 Zeichen haben.')
+      return
+    }
+    if (password !== passwordConfirm) {
+      setPasswordError('Passwörter stimmen nicht überein.')
+      return
+    }
+    setSavingPassword(true)
+    const res = await fetch('/api/passwort-setzen', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: inboxToken, password }),
+    })
+    setSavingPassword(false)
+    if (!res.ok) {
+      const { error } = await res.json()
+      setPasswordError(error || 'Fehler beim Speichern.')
+      return
+    }
+    setPasswordSaved(true)
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -33,10 +66,55 @@ export default function OnboardingForm({ customerId, product, email }: Props) {
     router.push('/onboarding/success?product=' + product)
   }
 
+  if (!passwordSaved) {
+    return (
+      <div style={{ maxWidth: '480px', margin: '4rem auto', padding: '0 1.5rem' }}>
+        <span className="sub-label">Schritt 1 von 2</span>
+        <h1 style={{ marginBottom: '0.5rem' }}>Passwort festlegen</h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
+          Lege dein Passwort fest. Du kannst dich danach unter{' '}
+          <strong>joka.chat/anmelden</strong> mit <strong>{email}</strong> einloggen.
+        </p>
+        <form onSubmit={handlePasswordSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <div>
+            <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.4rem' }}>
+              Passwort (mind. 8 Zeichen) *
+            </label>
+            <input
+              required
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={inputStyle}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.4rem' }}>
+              Passwort wiederholen *
+            </label>
+            <input
+              required
+              type="password"
+              value={passwordConfirm}
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+              style={inputStyle}
+            />
+          </div>
+          {passwordError && (
+            <p style={{ color: '#ef4444', fontSize: '0.9rem', margin: 0 }}>{passwordError}</p>
+          )}
+          <button type="submit" disabled={savingPassword} className="btn-primary" style={{ alignSelf: 'flex-start' }}>
+            {savingPassword ? 'Wird gespeichert...' : 'Weiter →'}
+          </button>
+        </form>
+      </div>
+    )
+  }
+
   if (product === 'mailpilot') {
     return (
       <div style={{ maxWidth: '560px', margin: '4rem auto', padding: '0 1.5rem' }}>
-        <span className="sub-label">Schritt 1 von 1</span>
+        <span className="sub-label">Schritt 2 von 2</span>
         <h1 style={{ marginBottom: '0.5rem' }}>Postfach verbinden</h1>
         <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
           Verbinde dein Gmail oder Outlook damit MailPilot deine E-Mails automatisch sortieren und Termine eintragen kann.
@@ -67,7 +145,7 @@ export default function OnboardingForm({ customerId, product, email }: Props) {
 
   return (
     <div style={{ maxWidth: '520px', margin: '4rem auto', padding: '0 1.5rem' }}>
-      <span className="sub-label">Schritt 1 von 1</span>
+      <span className="sub-label">Schritt 2 von 2</span>
       <h1 style={{ marginBottom: '0.5rem' }}>Dein Business einrichten</h1>
       <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
         Diese Infos nutzt AutoChat um deine Kunden zu antworten. Dauert 5 Minuten.
