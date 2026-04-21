@@ -45,15 +45,17 @@ export default async function AdminPage({
               <th style={th}>Name / E-Mail</th>
               <th style={th}>Produkt</th>
               <th style={th}>Geschäftskontakt</th>
-              <th style={th}>WhatsApp eingerichtet</th>
+              <th style={th}>WhatsApp</th>
+              <th style={th}>Gmail / Outlook</th>
               <th style={th}>Status</th>
               <th style={th}>Seit</th>
             </tr>
           </thead>
           <tbody>
             {customers.map((c) => {
-              const businessContact = c.autoChatConfig?.phoneNumber || c.mailPilotConfig?.gmailAddress || '–'
-              const whatsappReady = c.autoChatConfig ? (c.autoChatConfig.phoneNumberId && c.autoChatConfig.accessToken ? '✓ Ja' : '✗ Ausstehend') : '–'
+              const businessContact = c.autoChatConfig?.phoneNumber || c.mailPilotConfig?.gmailAddress || c.mailPilotConfig?.outlookAddress || '–'
+              const whatsappReady = c.autoChatConfig ? (c.autoChatConfig.phoneNumberId && c.autoChatConfig.accessToken ? '✓ Aktiv' : '✗ Ausstehend') : '–'
+              const gmailReady = c.mailPilotConfig ? (c.mailPilotConfig.gmailAddress ? `✓ ${c.mailPilotConfig.gmailAddress}` : c.mailPilotConfig.outlookAddress ? `✓ ${c.mailPilotConfig.outlookAddress}` : '✗ Ausstehend') : '–'
               const products = [
                 c.autoChatConfig ? 'AutoChat' : null,
                 c.mailPilotConfig ? 'MailPilot' : null,
@@ -72,8 +74,13 @@ export default async function AdminPage({
                     <span style={{ fontFamily: 'monospace', fontSize: '0.85rem' }}>{businessContact}</span>
                   </td>
                   <td style={td}>
-                    <span style={{ color: whatsappReady.startsWith('✓') ? '#0d9488' : '#d97706', fontWeight: 600, fontSize: '0.82rem' }}>
+                    <span style={{ color: whatsappReady.startsWith('✓') ? '#0d9488' : whatsappReady === '–' ? '#94a3b8' : '#d97706', fontWeight: 600, fontSize: '0.82rem' }}>
                       {whatsappReady}
+                    </span>
+                  </td>
+                  <td style={td}>
+                    <span style={{ color: gmailReady.startsWith('✓') ? '#0d9488' : gmailReady === '–' ? '#94a3b8' : '#d97706', fontWeight: 600, fontSize: '0.82rem' }}>
+                      {gmailReady}
                     </span>
                   </td>
                   <td style={td}>
