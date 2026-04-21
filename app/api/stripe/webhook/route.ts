@@ -109,7 +109,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "joka.chat <onboarding@resend.dev>",
+        from: "joka.chat <noreply@joka.chat>",
         to: email,
         subject: "Willkommen bei AutoChat – jetzt einrichten",
         html: `
@@ -144,7 +144,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "joka.chat <onboarding@resend.dev>",
+      from: "joka.chat <noreply@joka.chat>",
       to: "joka.chat.business@gmail.com",
       subject: `🎉 Neuer Kunde: ${safeName} – ${produktLabel}`,
       html: `

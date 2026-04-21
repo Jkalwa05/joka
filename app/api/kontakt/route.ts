@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'joka.chat Anfragen <onboarding@resend.dev>',
+      from: 'joka.chat Anfragen <noreply@joka.chat>',
       to: 'joka.chat.business@gmail.com',
       reply_to: email,
       subject: `Neue Anfrage von ${safeName}`,

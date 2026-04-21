@@ -38,7 +38,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ url: session.url });
   } catch (err) {
-    console.error("[stripe/checkout] Fehler:", err);
+    const stripeErr = err as { message?: string; type?: string; code?: string };
+    console.error("[stripe/checkout] Fehler:", {
+      message: stripeErr?.message,
+      type: stripeErr?.type,
+      code: stripeErr?.code,
+      raw: err,
+    });
     return NextResponse.json({ error: "Checkout konnte nicht gestartet werden. Bitte später erneut versuchen." }, { status: 500 });
   }
 }
