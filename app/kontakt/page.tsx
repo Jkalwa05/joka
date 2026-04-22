@@ -67,7 +67,8 @@ function KontaktForm() {
             <option value="">Bitte wählen</option>
             <option value="autochat">AutoChat – WhatsApp automatisch beantworten (€39/Monat)</option>
             <option value="mailpilot">MailPilot – E-Mails automatisch sortieren (€29/Monat)</option>
-            <option value="beides">Beides</option>
+            <option value="website">Website – Wir erstellen deine Website</option>
+            <option value="beides">Paket (AutoChat + MailPilot)</option>
           </select>
         </div>
         <div className="grp">
