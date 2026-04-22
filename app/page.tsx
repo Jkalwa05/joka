@@ -74,7 +74,7 @@ export default function Home() {
         <div className="container-wide">
           <div className="center-text fade-up">
             <span className="sub-label">Unsere Tools</span>
-            <h2>Zwei Produkte. Ein Ziel.</h2>
+            <h2>Drei Produkte. Ein Ziel.</h2>
             <p>Weniger Handarbeit, mehr Zeit für das Wesentliche – egal ob Friseur, Restaurant oder Selbstständiger.</p>
           </div>
 
@@ -122,6 +122,27 @@ export default function Home() {
                 <Link href="/bestellen?produkt=mailpilot" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '1rem' }}>Jetzt abonnieren</Link>
               </div>
             </div>
+
+            {/* Website */}
+            <div className="product-card fade-up delay-2">
+              <div className="product-icon"><i className="ph-duotone ph-browser"></i></div>
+              <span className="product-tag">Website</span>
+              <h3 style={{ fontSize: '1.8rem', letterSpacing: '-0.5px' }}>Wir erstellen deine Website</h3>
+              <p style={{ marginTop: '0.75rem' }}>Wir entwickeln deine Website im gleichen Corporate Design wie dein Auftritt. Modern, klar und darauf ausgelegt, dass mehr Kunden auf dich aufmerksam werden.</p>
+              <ul className="product-features">
+                <li><i className="ph-bold ph-check-circle"></i> Mehr Aufmerksamkeit von potenziellen Kunden</li>
+                <li><i className="ph-bold ph-check-circle"></i> Performance- und SEO-optimiert aufgebaut</li>
+                <li><i className="ph-bold ph-check-circle"></i> Individuell auf dein Unternehmen zugeschnitten</li>
+              </ul>
+              <div style={{ marginTop: '1.5rem', background: '#f0fdfa', borderRadius: '10px', padding: '0.85rem 1rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <i className="ph-fill ph-trend-up" style={{ color: 'var(--primary)', fontSize: '1.2rem', flexShrink: 0 }}></i>
+                <span style={{ fontSize: '0.9rem', color: 'var(--primary)', fontWeight: 600 }}>Mehr Sichtbarkeit, schneller und professioneller online</span>
+              </div>
+              <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
+                <div className="product-price product-price--custom">€-- <span>/ einmalig</span></div>
+                <Link href="/kontakt?produkt=website" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '1rem' }}>Anfragen</Link>
+              </div>
+            </div>
           </div>
 
           {/* BUNDLE */}
@@ -165,6 +186,8 @@ export default function Home() {
               { icon: 'ph-duotone ph-funnel', title: 'Nur echte Anfragen erreichen dich', desc: 'Werbung, Newsletter und Spam werden automatisch sortiert. Deine Inbox zeigt nur die Mails, die wirklich deine Aufmerksamkeit brauchen.' },
               { icon: 'ph-duotone ph-smiley', title: 'Kunden sind zufriedener', desc: 'Sofortige Antwort auf jede Frage – auch wenn du gerade arbeitest oder im Urlaub bist. Kein "wir melden uns" – direkt die Info, die der Kunde braucht.' },
               { icon: 'ph-duotone ph-currency-eur', title: 'Rechnet sich ab Tag 1', desc: 'Eine Stunde deiner Arbeitszeit kostet mehr als ein ganzer Monat joka.chat. Ab der ersten eingesparten Stunde zahlt sich der Dienst aus.' },
+              { icon: 'ph-duotone ph-browser', title: 'Professioneller Auftritt online', desc: 'Deine Website zeigt auf den ersten Blick, wer du bist, was du anbietest und warum Kunden bei dir richtig sind. Klar, modern und vertrauenswürdig.' },
+              { icon: 'ph-duotone ph-magnifying-glass', title: 'Besser bei Google gefunden werden', desc: 'Mit einer performance- und SEO-optimierten Website wirst du leichter gefunden und machst aus mehr Besuchern echte Anfragen.' },
             ].map(({ icon, title, desc }) => (
               <div key={title} style={{ background: 'white', borderRadius: '16px', padding: '1.75rem', border: '1px solid rgba(0,0,0,0.05)' }} className="fade-up">
                 <i className={icon} style={{ color: 'var(--primary)', fontSize: '2rem', marginBottom: '1rem', display: 'inline-block' }}></i>
