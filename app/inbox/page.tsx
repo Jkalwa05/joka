@@ -39,7 +39,7 @@ function InboxContent() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
         </div>
       </nav>
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '80px' }}>
@@ -156,7 +156,7 @@ function InboxApp({ token }: { token: string }) {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
           <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>AutoChat Inbox</span>
         </div>
       </nav>

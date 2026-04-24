@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://joka.chat'
+const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://joka.ai'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()

@@ -1,4 +1,4 @@
-const CACHE = 'jokachat-v1'
+const CACHE = 'jokaai-v1'
 const PRECACHE = ['/', '/autochat', '/mailpilot', '/offline.html']
 
 self.addEventListener('install', (e) => {

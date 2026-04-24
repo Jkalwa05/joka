@@ -86,7 +86,7 @@ export default function OnboardingForm({ customerId, product, email, inboxToken,
         <h1 style={{ marginBottom: '0.5rem' }}>Passwort festlegen</h1>
         <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
           Lege dein Passwort fest. Du kannst dich danach unter{' '}
-          <strong>joka.chat/anmelden</strong> mit <strong>{email}</strong> einloggen.
+          <strong>joka.ai/anmelden</strong> mit <strong>{email}</strong> einloggen.
         </p>
         <form onSubmit={handlePasswordSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div>

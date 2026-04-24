@@ -42,9 +42,9 @@ export async function POST(req: NextRequest) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'joka.chat <onboarding@resend.dev>',
+      from: 'joka.ai <onboarding@resend.dev>',
       to: email,
-      subject: 'Dein joka.chat Inbox-Zugang',
+      subject: 'Dein joka.ai Inbox-Zugang',
       html: `
         <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:2rem">
           <h2 style="color:#0f172a">Dein Inbox-Link</h2>

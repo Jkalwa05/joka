@@ -29,11 +29,11 @@ export default function Dashboard() {
 
   useEffect(() => {
     const urlToken = new URLSearchParams(window.location.search).get('token')
-    const stored = localStorage.getItem('jokachat-token')
+    const stored = localStorage.getItem('jokaai-token')
     const t = urlToken || stored
     if (!t) { router.push('/anmelden'); return }
     if (urlToken) {
-      localStorage.setItem('jokachat-token', urlToken)
+      localStorage.setItem('jokaai-token', urlToken)
       window.history.replaceState({}, '', '/dashboard')
     }
     setToken(t)
@@ -47,7 +47,7 @@ export default function Dashboard() {
   }, [token])
 
   function logout() {
-    localStorage.removeItem('jokachat-token')
+    localStorage.removeItem('jokaai-token')
     router.push('/anmelden')
   }
 
@@ -57,7 +57,7 @@ export default function Dashboard() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
           <div className="nav-items">
             <button
               onClick={() => setTab('inbox')}

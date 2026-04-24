@@ -42,7 +42,7 @@ export default function Home() {
       {/* NAV */}
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
@@ -158,7 +158,7 @@ export default function Home() {
         <div className="container-wide">
           <div className="center-text fade-up">
             <span className="sub-label">Was du davon hast</span>
-            <h2>Konkret: Was joka.chat für dich macht.</h2>
+            <h2>Konkret: Was joka.ai für dich macht.</h2>
             <p>Kein Marketing-Gerede. Das sind die Dinge, die du ab Tag 1 spürst.</p>
           </div>
 
@@ -169,7 +169,7 @@ export default function Home() {
               { icon: 'ph-duotone ph-calendar-plus', title: 'Termine direkt im Kalender', desc: 'Ob WhatsApp oder Mail – Terminanfragen landen automatisch in Google Kalender oder Outlook. Keine doppelte Arbeit.' },
               { icon: 'ph-duotone ph-funnel', title: 'Nur echte Anfragen erreichen dich', desc: 'Werbung, Newsletter und Spam werden sortiert. Deine Inbox zeigt nur, was wirklich deine Aufmerksamkeit braucht.' },
               { icon: 'ph-duotone ph-magnifying-glass', title: 'Besser bei Google gefunden werden', desc: 'Mit einer performance- und SEO-optimierten Website wirst du leichter gefunden und machst aus Besuchern echte Anfragen.' },
-              { icon: 'ph-duotone ph-currency-eur', title: 'Rechnet sich ab Tag 1', desc: 'Eine Stunde deiner Arbeitszeit kostet mehr als ein ganzer Monat joka.chat. Ab der ersten eingesparten Stunde lohnt es sich.' },
+              { icon: 'ph-duotone ph-currency-eur', title: 'Rechnet sich ab Tag 1', desc: 'Eine Stunde deiner Arbeitszeit kostet mehr als ein ganzer Monat joka.ai. Ab der ersten eingesparten Stunde lohnt es sich.' },
             ].map(({ icon, title, desc }) => (
               <div key={title} style={{ background: 'white', borderRadius: '16px', padding: '1.75rem', border: '1px solid rgba(0,0,0,0.05)' }} className="fade-up">
                 <i className={icon} style={{ color: 'var(--primary)', fontSize: '2rem', marginBottom: '1rem', display: 'inline-block' }}></i>
@@ -244,7 +244,7 @@ export default function Home() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {[
-              { q: 'Muss ich etwas installieren?', a: 'Nein. joka.chat läuft komplett im Hintergrund – kein Download, keine App, kein Aufwand.' },
+              { q: 'Muss ich etwas installieren?', a: 'Nein. joka.ai läuft komplett im Hintergrund – kein Download, keine App, kein Aufwand.' },
               { q: 'Was passiert wenn die KI eine Frage nicht beantworten kann?', a: 'AutoChat antwortet ehrlich, dass es die Frage nicht beantworten kann, und weist den Kunden darauf hin, sich direkt zu melden. Über deine Inbox kannst du jederzeit selbst übernehmen.' },
               { q: 'Kann ich jederzeit kündigen?', a: 'Ja. Kein Vertrag, monatlich kündbar. Über "Mein Abo" kannst du dein Abo jederzeit selbst verwalten.' },
               { q: 'Sind meine Daten sicher?', a: 'Ja. Alle Daten werden verschlüsselt auf EU-Servern gespeichert. Kein Passwort wird bei uns hinterlegt. Die Verbindung zu WhatsApp und Gmail läuft ausschließlich über offizielle APIs – sicher und jederzeit widerrufbar.' },
@@ -328,7 +328,7 @@ export default function Home() {
       <footer>
         <div className="container-wide footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.chat. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.ai. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
             <a href="https://www.linkedin.com/in/jonas-kalwa-3333612a1/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Ein Projekt von Jonas Kalwa →</a>
           </div>
           <div className="footer-links">

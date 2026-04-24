@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Website – Professioneller Online-Auftritt | joka.chat',
+  title: 'Website – Professioneller Online-Auftritt | joka.ai',
   description:
     'Wir entwickeln deine Website – modern, schnell und SEO-optimiert. Individuell auf dein Unternehmen zugeschnitten, damit mehr Kunden auf dich aufmerksam werden.',
   alternates: { canonical: '/website' },
   openGraph: {
-    title: 'Website – Professioneller Online-Auftritt | joka.chat',
+    title: 'Website – Professioneller Online-Auftritt | joka.ai',
     description:
       'Individuelle Website, performance- und SEO-optimiert. Mehr Sichtbarkeit und mehr Anfragen für dein Unternehmen.',
     url: '/website',
@@ -20,7 +20,7 @@ export default function WebsitePage() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
@@ -119,7 +119,7 @@ export default function WebsitePage() {
       <footer>
         <div className="container-wide footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.chat. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.ai. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
             <a href="https://www.linkedin.com/in/jonas-kalwa-3333612a1/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Ein Projekt von Jonas Kalwa →</a>
           </div>
           <div className="footer-links">
