@@ -126,6 +126,27 @@ export default function Home() {
             </div>
           </div>
 
+          {/* WEBSITE */}
+          <div style={{ marginTop: '2rem', background: '#0f172a', borderRadius: '20px', padding: '2rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+            <div style={{ flex: 1 }}>
+              <span style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.75)', borderRadius: '50px', padding: '3px 14px', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.05em' }}>WEBSITE</span>
+              <h3 style={{ color: 'white', fontSize: '1.6rem', margin: '0.75rem 0 0.4rem 0', letterSpacing: '-0.5px' }}>Dein professioneller Online-Auftritt</h3>
+              <p style={{ color: 'rgba(255,255,255,0.7)', margin: 0, fontSize: '0.95rem' }}>Wir entwickeln deine Website – modern, schnell und SEO-optimiert. Individuell auf dein Unternehmen zugeschnitten, damit mehr Kunden auf dich aufmerksam werden.</p>
+              <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+                {['Performance- & SEO-optimiert', 'Individuell gestaltet', 'Mehr Sichtbarkeit online'].map(f => (
+                  <span key={f} style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <i className="ph-bold ph-check-circle" style={{ color: 'rgba(255,255,255,0.6)' }}></i> {f}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div style={{ textAlign: 'center', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>Preis auf Anfrage</div>
+              <Link href="/website" style={{ display: 'inline-block', background: 'white', color: '#0f172a', fontWeight: 700, padding: '0.75rem 1.75rem', borderRadius: '50px', fontSize: '1rem', textDecoration: 'none' }}>Mehr erfahren</Link>
+              <Link href="/kontakt?produkt=website" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.85rem', textDecoration: 'underline' }}>Direkt anfragen →</Link>
+            </div>
+          </div>
+
           {/* BUNDLE */}
           <div style={{ marginTop: '2rem', background: 'var(--primary)', borderRadius: '20px', padding: '2rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
             <div style={{ flex: 1 }}>
@@ -145,27 +166,6 @@ export default function Home() {
               <div style={{ color: 'white', fontSize: '2.2rem', fontWeight: 800, lineHeight: 1 }}>€49 <span style={{ fontSize: '0.9rem', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}>/ Monat</span></div>
               <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem', marginTop: '0.25rem', marginBottom: '1rem' }}>Du sparst €19 im Monat</div>
               <Link href="/bestellen?produkt=bundle" style={{ display: 'inline-block', background: 'white', color: '#0d3d35', fontWeight: 700, padding: '0.75rem 1.75rem', borderRadius: '50px', fontSize: '1rem', textDecoration: 'none' }}>Jetzt abonnieren</Link>
-            </div>
-          </div>
-
-          {/* WEBSITE */}
-          <div style={{ marginTop: '2rem', background: '#0f172a', borderRadius: '20px', padding: '2rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
-            <div style={{ flex: 1 }}>
-              <span style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.75)', borderRadius: '50px', padding: '3px 14px', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.05em' }}>WEBSITE</span>
-              <h3 style={{ color: 'white', fontSize: '1.6rem', margin: '0.75rem 0 0.4rem 0', letterSpacing: '-0.5px' }}>Dein professioneller Online-Auftritt</h3>
-              <p style={{ color: 'rgba(255,255,255,0.7)', margin: 0, fontSize: '0.95rem' }}>Wir entwickeln deine Website – modern, schnell und SEO-optimiert. Individuell auf dein Unternehmen zugeschnitten, damit mehr Kunden auf dich aufmerksam werden.</p>
-              <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-                {['Performance- & SEO-optimiert', 'Individuell gestaltet', 'Mehr Sichtbarkeit online'].map(f => (
-                  <span key={f} style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <i className="ph-bold ph-check-circle" style={{ color: 'rgba(255,255,255,0.6)' }}></i> {f}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div style={{ textAlign: 'center', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>Preis auf Anfrage</div>
-              <Link href="/website" style={{ display: 'inline-block', background: 'white', color: '#0f172a', fontWeight: 700, padding: '0.75rem 1.75rem', borderRadius: '50px', fontSize: '1rem', textDecoration: 'none' }}>Mehr erfahren</Link>
-              <Link href="/kontakt?produkt=website" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.85rem', textDecoration: 'underline' }}>Direkt anfragen →</Link>
             </div>
           </div>
         </div>
