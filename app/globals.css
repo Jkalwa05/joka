@@ -93,8 +93,12 @@ p { font-size: 1.1rem; color: var(--text-muted); }
 .product-features { list-style: none; margin: 1.25rem 0; display: flex; flex-direction: column; gap: 0.6rem; }
 .product-features li { display: flex; gap: 8px; align-items: flex-start; font-size: 0.9rem; color: var(--text-muted); }
 .product-features i { color: var(--primary); font-size: 1rem; flex-shrink: 0; margin-top: 3px; }
-.product-footer { margin-top: auto; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,0.05); }
+.product-footer { margin-top: auto; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,0.05); position: relative; z-index: 2; }
 .product-footer .btn-primary { width: 100%; text-align: center; display: block; margin-top: 0.85rem; padding: 0.75rem 1.5rem; font-size: 0.95rem; }
+.product-card-link { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+
+/* --- BENEFITS GRID --- */
+.benefits-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
 
 /* --- SKILL CARDS --- */
 .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -138,6 +142,7 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); background: wh
 /* --- MOBILE --- */
 @media (max-width: 1024px) {
     .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .benefits-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .skills-grid { grid-template-columns: 1fr; }
     .cta-banner { flex-direction: column; text-align: center; }
     .footer-inner { flex-direction: column; text-align: center; }
@@ -166,6 +171,7 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); background: wh
     /* 2-column grids → 1 column */
     .two-col { grid-template-columns: 1fr; gap: 2.5rem; }
     .products-grid { grid-template-columns: 1fr; }
+    .benefits-grid { grid-template-columns: 1fr; }
 
     /* Product cards */
     .product-card { padding: 2rem; }

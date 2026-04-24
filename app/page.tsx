@@ -83,7 +83,8 @@ export default function Home() {
 
           <div className="products-grid">
             {/* AutoChat */}
-            <div className="product-card fade-up">
+            <div className="product-card fade-up" style={{ position: 'relative' }}>
+              <Link href="/autochat" aria-label="Mehr zu AutoChat" className="product-card-link"></Link>
               <div className="product-icon"><i className="ph-duotone ph-whatsapp-logo"></i></div>
               <span className="product-tag">AutoChat</span>
               <h3>WhatsApp automatisch beantworten</h3>
@@ -100,7 +101,8 @@ export default function Home() {
             </div>
 
             {/* MailPilot */}
-            <div className="product-card fade-up delay-1">
+            <div className="product-card fade-up delay-1" style={{ position: 'relative' }}>
+              <Link href="/mailpilot" aria-label="Mehr zu MailPilot" className="product-card-link"></Link>
               <div className="product-icon"><i className="ph-duotone ph-envelope-simple"></i></div>
               <span className="product-tag">MailPilot</span>
               <h3>E-Mails sortieren, Termine eintragen</h3>
@@ -117,7 +119,8 @@ export default function Home() {
             </div>
 
             {/* Website */}
-            <div className="product-card fade-up delay-2">
+            <div className="product-card fade-up delay-2" style={{ position: 'relative' }}>
+              <Link href="/website" aria-label="Mehr zu Website" className="product-card-link"></Link>
               <div className="product-icon"><i className="ph-duotone ph-browser"></i></div>
               <span className="product-tag">Website</span>
               <h3>Dein professioneller Online-Auftritt</h3>
@@ -129,7 +132,7 @@ export default function Home() {
               </ul>
               <div className="product-footer">
                 <div className="product-price product-price--custom">Auf Anfrage</div>
-                <Link href="/website" className="btn-primary">Mehr erfahren</Link>
+                <Link href="/kontakt?produkt=website" className="btn-primary">Anfragen</Link>
               </div>
             </div>
           </div>
@@ -138,7 +141,7 @@ export default function Home() {
           <div style={{ marginTop: '1.5rem', background: 'var(--primary)', borderRadius: '20px', padding: '2rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
             <div style={{ flex: 1 }}>
               <span style={{ background: 'rgba(255,255,255,0.18)', color: 'white', borderRadius: '50px', padding: '3px 14px', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.05em' }}>KOMBI-PAKET · SPARE €19</span>
-              <h3 style={{ color: 'white', fontSize: '1.5rem', margin: '0.75rem 0 0.4rem 0', letterSpacing: '-0.5px' }}>AutoChat + MailPilot zusammen</h3>
+              <h3 style={{ color: 'white', fontSize: '1.5rem', margin: '0.75rem 0 0.4rem 0', letterSpacing: '-0.5px' }}>AutoChat + MailPilot</h3>
               <p style={{ color: 'rgba(255,255,255,0.8)', margin: 0, fontSize: '0.95rem' }}>Beide Tools in einem Paket. WhatsApp <em>und</em> E-Mails automatisch – zum günstigeren Preis.</p>
             </div>
             <div style={{ textAlign: 'center', flexShrink: 0 }}>
@@ -159,7 +162,7 @@ export default function Home() {
             <p>Kein Marketing-Gerede. Das sind die Dinge, die du ab Tag 1 spürst.</p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginTop: '2.5rem' }}>
+          <div className="benefits-grid">
             {[
               { icon: 'ph-duotone ph-clock-countdown', title: '30+ Stunden im Monat gespart', desc: 'AutoChat übernimmt 80–90 % der WhatsApp-Routine, MailPilot sortiert deine Inbox. Du hast den Kopf frei für das Wichtige.' },
               { icon: 'ph-duotone ph-phone-outgoing', title: 'Keine Anrufe nachts um 22 Uhr', desc: 'Kunden wollen sofort Antwort – auch abends. AutoChat antwortet in Sekunden, du bleibst ungestört und verlierst keinen Auftrag.' },
