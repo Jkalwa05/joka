@@ -78,7 +78,7 @@ p { font-size: 1.1rem; color: var(--text-muted); }
 .bg-darker { background: #0f172a; }
 
 /* --- PRODUCT CARDS (homepage split) --- */
-.products-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 4rem; }
+.products-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; margin-top: 4rem; }
 .product-card { background: white; border-radius: 24px; padding: 3rem; border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow-card); transition: 0.3s; display: flex; flex-direction: column; }
 .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-float); }
 .product-card.highlight { border: 2px solid var(--primary); }
@@ -135,7 +135,6 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); background: wh
 
 /* --- MOBILE --- */
 @media (max-width: 1024px) {
-    .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .skills-grid { grid-template-columns: 1fr; }
     .cta-banner { flex-direction: column; text-align: center; }
     .footer-inner { flex-direction: column; text-align: center; }

@@ -46,6 +46,7 @@ export default function Home() {
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
+            <Link href="/website">Website</Link>
             <Link href="/anmelden">Anmelden</Link>
             <Link href="/kontakt" className="btn-primary small">Fragen?</Link>
           </div>
@@ -59,11 +60,12 @@ export default function Home() {
             <div className="status-badge fade-in" style={{ margin: '0 auto 2rem auto' }}><span className="status-dot"></span> Jetzt verfügbar</div>
             <h1 className="fade-in" style={{ fontSize: 'clamp(2.4rem, 4.5vw, 4rem)', letterSpacing: '-2px' }}>Dein Joker. Wenn es um Automatisierung geht.</h1>
             <p className="fade-in delay-1" style={{ fontSize: '1.25rem', maxWidth: '600px', margin: '0 auto' }}>
-              WhatsApp automatisch beantworten. E-Mails automatisch sortieren. Einmal einrichten – und du sparst täglich Stunden.
+              WhatsApp automatisch beantworten. E-Mails automatisch sortieren. Professionell online auftreten. Einmal einrichten – und du sparst täglich Stunden.
             </p>
             <div className="hero-btns fade-in delay-2" style={{ justifyContent: 'center' }}>
               <Link href="/autochat" className="btn-primary">AutoChat entdecken</Link>
               <Link href="/mailpilot" className="btn-secondary">MailPilot entdecken</Link>
+              <Link href="/website" className="btn-secondary">Website anfragen</Link>
             </div>
           </div>
         </div>
@@ -73,7 +75,7 @@ export default function Home() {
       <section className="section bg-light">
         <div className="container-wide">
           <div className="center-text fade-up">
-            <span className="sub-label">Unsere Tools</span>
+            <span className="sub-label">Unsere Produkte</span>
             <h2>Drei Produkte. Ein Ziel.</h2>
             <p>Weniger Handarbeit, mehr Zeit für das Wesentliche – egal ob Friseur, Restaurant oder Selbstständiger.</p>
           </div>
@@ -122,27 +124,6 @@ export default function Home() {
                 <Link href="/bestellen?produkt=mailpilot" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '1rem' }}>Jetzt abonnieren</Link>
               </div>
             </div>
-
-            {/* Website */}
-            <div className="product-card fade-up delay-2">
-              <div className="product-icon"><i className="ph-duotone ph-browser"></i></div>
-              <span className="product-tag">Website</span>
-              <h3 style={{ fontSize: '1.8rem', letterSpacing: '-0.5px' }}>Wir erstellen deine Website</h3>
-              <p style={{ marginTop: '0.75rem' }}>Wir entwickeln deine Website im gleichen Corporate Design wie dein Auftritt. Modern, klar und darauf ausgelegt, dass mehr Kunden auf dich aufmerksam werden.</p>
-              <ul className="product-features">
-                <li><i className="ph-bold ph-check-circle"></i> Mehr Aufmerksamkeit von potenziellen Kunden</li>
-                <li><i className="ph-bold ph-check-circle"></i> Performance- und SEO-optimiert aufgebaut</li>
-                <li><i className="ph-bold ph-check-circle"></i> Individuell auf dein Unternehmen zugeschnitten</li>
-              </ul>
-              <div style={{ marginTop: '1.5rem', background: '#f0fdfa', borderRadius: '10px', padding: '0.85rem 1rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                <i className="ph-fill ph-trend-up" style={{ color: 'var(--primary)', fontSize: '1.2rem', flexShrink: 0 }}></i>
-                <span style={{ fontSize: '0.9rem', color: 'var(--primary)', fontWeight: 600 }}>Mehr Sichtbarkeit, schneller und professioneller online</span>
-              </div>
-              <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
-                <div className="product-price product-price--custom">€-- <span>/ einmalig</span></div>
-                <Link href="/kontakt?produkt=website" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '1rem' }}>Anfragen</Link>
-              </div>
-            </div>
           </div>
 
           {/* BUNDLE */}
@@ -164,6 +145,27 @@ export default function Home() {
               <div style={{ color: 'white', fontSize: '2.2rem', fontWeight: 800, lineHeight: 1 }}>€49 <span style={{ fontSize: '0.9rem', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}>/ Monat</span></div>
               <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem', marginTop: '0.25rem', marginBottom: '1rem' }}>Du sparst €19 im Monat</div>
               <Link href="/bestellen?produkt=bundle" style={{ display: 'inline-block', background: 'white', color: '#0d3d35', fontWeight: 700, padding: '0.75rem 1.75rem', borderRadius: '50px', fontSize: '1rem', textDecoration: 'none' }}>Jetzt abonnieren</Link>
+            </div>
+          </div>
+
+          {/* WEBSITE */}
+          <div style={{ marginTop: '2rem', background: '#0f172a', borderRadius: '20px', padding: '2rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+            <div style={{ flex: 1 }}>
+              <span style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.75)', borderRadius: '50px', padding: '3px 14px', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.05em' }}>WEBSITE</span>
+              <h3 style={{ color: 'white', fontSize: '1.6rem', margin: '0.75rem 0 0.4rem 0', letterSpacing: '-0.5px' }}>Dein professioneller Online-Auftritt</h3>
+              <p style={{ color: 'rgba(255,255,255,0.7)', margin: 0, fontSize: '0.95rem' }}>Wir entwickeln deine Website – modern, schnell und SEO-optimiert. Individuell auf dein Unternehmen zugeschnitten, damit mehr Kunden auf dich aufmerksam werden.</p>
+              <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+                {['Performance- & SEO-optimiert', 'Individuell gestaltet', 'Mehr Sichtbarkeit online'].map(f => (
+                  <span key={f} style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <i className="ph-bold ph-check-circle" style={{ color: 'rgba(255,255,255,0.6)' }}></i> {f}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div style={{ textAlign: 'center', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>Preis auf Anfrage</div>
+              <Link href="/website" style={{ display: 'inline-block', background: 'white', color: '#0f172a', fontWeight: 700, padding: '0.75rem 1.75rem', borderRadius: '50px', fontSize: '1rem', textDecoration: 'none' }}>Mehr erfahren</Link>
+              <Link href="/kontakt?produkt=website" style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.85rem', textDecoration: 'underline' }}>Direkt anfragen →</Link>
             </div>
           </div>
         </div>
@@ -300,6 +302,7 @@ export default function Home() {
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <Link href="/bestellen?produkt=autochat" className="btn-primary">AutoChat – €39/Monat</Link>
               <Link href="/bestellen?produkt=mailpilot" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>MailPilot – €29/Monat</Link>
+              <Link href="/website" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>Website anfragen</Link>
             </div>
           </div>
         </div>

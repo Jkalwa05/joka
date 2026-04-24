@@ -24,6 +24,7 @@ export default function MailPilot() {
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot" style={{ color: 'var(--primary)', fontWeight: 700 }}>MailPilot</Link>
+            <Link href="/website">Website</Link>
             <Link href="/anmelden">Anmelden</Link>
             <Link href="/kontakt" className="btn-primary small">Fragen?</Link>
           </div>

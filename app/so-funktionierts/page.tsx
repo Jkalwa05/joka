@@ -15,6 +15,7 @@ export default function SoFunktionierts() {
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
+            <Link href="/website">Website</Link>
             <Link href="/kontakt" className="btn-primary small">Fragen?</Link>
           </div>
         </div>
