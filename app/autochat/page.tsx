@@ -208,28 +208,6 @@ export default function AutoChat() {
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="section">
-        <div className="container-wide">
-          <div className="center-text">
-            <span className="sub-label">Features</span>
-            <h2>Was AutoChat kann.</h2>
-          </div>
-          <div className="skills-grid">
-            {[
-              { icon: 'ph-duotone ph-clock', title: '24/7 verfügbar', desc: 'AutoChat schläft nicht. Auch sonntags um 22 Uhr bekommt dein Kunde sofort eine Antwort.' },
-              { icon: 'ph-duotone ph-brain', title: 'Intelligente Antworten', desc: 'Die KI versteht den Kontext. Kein starres FAQ – echte Konversation auf Basis deiner Infos.' },
-              { icon: 'ph-duotone ph-phone', title: 'Deine Nummer bleibt', desc: 'Kein Nummernwechsel, keine Weiterleitung. Deine Kunden merken keinen Unterschied.' },
-            ].map(({ icon, title, desc }) => (
-              <div key={title} className="skill-card">
-                <div className="card-header"><i className={icon}></i><h3>{title}</h3></div>
-                <p>{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="section bg-light">
         <div className="container-wide">

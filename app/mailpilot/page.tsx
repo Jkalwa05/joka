@@ -133,28 +133,6 @@ export default function MailPilot() {
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="section bg-light">
-        <div className="container-wide">
-          <div className="center-text">
-            <span className="sub-label">Features</span>
-            <h2>Was MailPilot kann.</h2>
-          </div>
-          <div className="skills-grid">
-            {[
-              { icon: 'ph-duotone ph-folders', title: 'Automatisches Sortieren', desc: 'Rechnungen, Anfragen, Newsletter – jede Mail landet im richtigen Ordner. Ohne dass du einen Finger rührst.' },
-              { icon: 'ph-duotone ph-calendar-check', title: 'Termine automatisch eintragen', desc: 'Steckt ein Termin in der Mail? MailPilot erkennt ihn und legt ihn direkt in deinem Google Kalender an.' },
-              { icon: 'ph-duotone ph-shield-check', title: 'Sicher & DSGVO-konform', desc: 'Verbindung über offizielle Google- und Microsoft-APIs. Kein Passwort wird gespeichert. Jederzeit widerrufbar.' },
-            ].map(({ icon, title, desc }) => (
-              <div key={title} className="skill-card">
-                <div className="card-header"><i className={icon}></i><h3>{title}</h3></div>
-                <p>{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="section bg-light">
         <div className="container-wide">

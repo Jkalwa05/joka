@@ -48,33 +48,6 @@ export default function WebsitePage() {
         </div>
       </header>
 
-      {/* FEATURES */}
-      <section className="section bg-light">
-        <div className="container-wide">
-          <div className="center-text">
-            <span className="sub-label">Was du bekommst</span>
-            <h2>Eine Website, die für dich arbeitet.</h2>
-            <p>Kein Baukastensystem. Keine Templates. Eine individuelle Website, die zu deinem Unternehmen passt und Kunden überzeugt.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginTop: '3rem' }}>
-            {[
-              { icon: 'ph-duotone ph-paint-brush', title: 'Individuelles Design', desc: 'Kein Baukastensystem. Deine Website wird von Grund auf gestaltet – passend zu deinem Unternehmen, deiner Branche und deiner Zielgruppe.' },
-              { icon: 'ph-duotone ph-rocket-launch', title: 'Performance-optimiert', desc: 'Schnelle Ladezeiten und technische Sauberkeit. Deine Seite lädt in unter 2 Sekunden – auf Desktop und Mobilgerät.' },
-              { icon: 'ph-duotone ph-magnifying-glass', title: 'SEO-optimiert', desc: 'Aufgebaut nach SEO-Best-Practices, damit du bei Google besser gefunden wirst und mehr potenzielle Kunden erreichst.' },
-              { icon: 'ph-duotone ph-device-mobile', title: 'Mobile-first', desc: 'Über 70 % der Websitebesuche kommen vom Smartphone. Deine Seite sieht auf jedem Gerät perfekt aus.' },
-              { icon: 'ph-duotone ph-users', title: 'Auf deine Zielgruppe ausgerichtet', desc: 'Deine Inhalte kommunizieren klar, was du anbietest und warum Kunden bei dir richtig sind – ohne Marketing-Gerede.' },
-              { icon: 'ph-duotone ph-handshake', title: 'Einmal zahlen, dauerhaft nutzen', desc: 'Einmalige Investition, keine laufenden Abokosten. Du bekommst die fertige Website übergeben und kannst sie selbst pflegen.' },
-            ].map(({ icon, title, desc }) => (
-              <div key={title} style={{ background: 'white', borderRadius: '16px', padding: '1.75rem', border: '1px solid rgba(0,0,0,0.05)' }}>
-                <i className={icon} style={{ color: 'var(--primary)', fontSize: '2rem', marginBottom: '1rem', display: 'inline-block' }}></i>
-                <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{title}</h3>
-                <p style={{ fontSize: '0.92rem', margin: 0, lineHeight: 1.6 }}>{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* PROCESS */}
       <section className="section">
         <div className="container-wide">
