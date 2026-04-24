@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/', priority: 1.0, changeFrequency: 'weekly' },
     { path: '/autochat', priority: 0.9, changeFrequency: 'weekly' },
     { path: '/mailpilot', priority: 0.9, changeFrequency: 'weekly' },
+    { path: '/website', priority: 0.9, changeFrequency: 'weekly' },
     { path: '/so-funktionierts', priority: 0.7, changeFrequency: 'monthly' },
     { path: '/bestellen', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/kontakt', priority: 0.6, changeFrequency: 'monthly' },

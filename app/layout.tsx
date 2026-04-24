@@ -25,6 +25,10 @@ export const metadata: Metadata = {
     'KI für Friseur',
     'Automatisierung Restaurant',
     'Chatbot WhatsApp Business',
+    'Website erstellen lassen',
+    'Webdesign für Kleinunternehmen',
+    'SEO optimierte Website',
+    'individuelle Website entwickeln',
     'joka.chat',
   ],
   authors: [{ name: 'Jonas Kalwa', url: 'https://www.linkedin.com/in/jonas-kalwa-3333612a1/' }],
@@ -95,6 +99,50 @@ const jsonLdSoftware = {
   aggregateRating: { '@type': 'AggregateRating', ratingValue: '5', reviewCount: '12' },
 }
 
+const jsonLdWebsiteService = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Webdesign',
+  name: 'Individuelle Website-Entwicklung',
+  url: `${SITE_URL}/website`,
+  provider: { '@type': 'Organization', name: 'joka.chat', url: SITE_URL },
+  areaServed: 'DE',
+  description:
+    'Individuelle Website-Entwicklung für kleine Unternehmen – modern, performance-optimiert und SEO-ready. Von Konzept bis Launch aus einer Hand.',
+}
+
+const jsonLdFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Muss ich etwas installieren?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Nein. joka.chat läuft komplett im Hintergrund – kein Download, keine App, kein Aufwand.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Was passiert wenn die KI eine Frage nicht beantworten kann?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AutoChat antwortet ehrlich, dass es die Frage nicht beantworten kann, und weist den Kunden darauf hin, sich direkt zu melden. Über deine Inbox kannst du jederzeit selbst übernehmen.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Kann ich jederzeit kündigen?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Ja. Kein Vertrag, monatlich kündbar. Über "Mein Abo" kannst du dein Abo jederzeit selbst verwalten.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Sind meine Daten sicher?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Ja. Alle Daten werden verschlüsselt auf EU-Servern gespeichert. Kein Passwort wird bei uns hinterlegt. Die Verbindung zu WhatsApp und Gmail läuft ausschließlich über offizielle APIs – sicher und jederzeit widerrufbar.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Wie lange dauert die Einrichtung?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AutoChat ist nach einem kurzen Einrichtungs-Call einsatzbereit. MailPilot läuft nach dem Google-Login vollautomatisch an – das dauert unter 5 Minuten.' },
+    },
+  ],
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de">
@@ -115,6 +163,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script id="ld-org" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrg) }} />
         <Script id="ld-website" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }} />
         <Script id="ld-software" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSoftware) }} />
+        <Script id="ld-website-service" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsiteService) }} />
+        <Script id="ld-faq" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }} />
       </head>
       <body>{children}<Analytics /><CookieBanner /><PwaSetup /></body>
     </html>

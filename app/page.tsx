@@ -54,30 +54,31 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <header className="hero-section" style={{ paddingBottom: '8rem' }}>
+      <header className="hero-section" style={{ paddingBottom: '7rem' }}>
         <div className="container-wide">
-          <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-            <div className="status-badge fade-in" style={{ margin: '0 auto 2rem auto' }}><span className="status-dot"></span> Jetzt verfügbar</div>
+          <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
             <h1 className="fade-in" style={{ fontSize: 'clamp(2.4rem, 4.5vw, 4rem)', letterSpacing: '-2px' }}>Dein Joker. Wenn es um Automatisierung geht.</h1>
-            <p className="fade-in delay-1" style={{ fontSize: '1.25rem', maxWidth: '600px', margin: '0 auto' }}>
-              WhatsApp automatisch beantworten. E-Mails automatisch sortieren. Professionell online auftreten. Einmal einrichten – und du sparst täglich Stunden.
+            <p className="fade-in delay-1" style={{ fontSize: '1.2rem', maxWidth: '620px', margin: '0 auto' }}>
+              WhatsApp automatisch beantworten, E-Mails sortieren, professionell online auftreten. Einmal einrichten – und du sparst täglich Stunden.
             </p>
             <div className="hero-btns fade-in delay-2" style={{ justifyContent: 'center' }}>
-              <Link href="/autochat" className="btn-primary">AutoChat entdecken</Link>
-              <Link href="/mailpilot" className="btn-secondary">MailPilot entdecken</Link>
-              <Link href="/website" className="btn-secondary">Website anfragen</Link>
+              <Link href="/bestellen?trial=1" className="btn-primary">1 Monat kostenlos testen</Link>
+              <Link href="#produkte" className="btn-secondary">Produkte ansehen</Link>
             </div>
+            <p className="fade-in delay-2" style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '1.5rem' }}>
+              Kein Vertrag · Monatlich kündbar · Einrichtung in 20 Minuten
+            </p>
           </div>
         </div>
       </header>
 
       {/* PRODUCTS */}
-      <section className="section bg-light">
+      <section id="produkte" className="section bg-light">
         <div className="container-wide">
           <div className="center-text fade-up">
             <span className="sub-label">Unsere Produkte</span>
             <h2>Drei Produkte. Ein Ziel.</h2>
-            <p>Weniger Handarbeit, mehr Zeit für das Wesentliche – egal ob Friseur, Restaurant oder Selbstständiger.</p>
+            <p>Weniger Handarbeit, mehr Sichtbarkeit – einfach umgesetzt.</p>
           </div>
 
           <div className="products-grid">
@@ -85,21 +86,16 @@ export default function Home() {
             <div className="product-card fade-up">
               <div className="product-icon"><i className="ph-duotone ph-whatsapp-logo"></i></div>
               <span className="product-tag">AutoChat</span>
-              <h3 style={{ fontSize: '1.8rem', letterSpacing: '-0.5px' }}>WhatsApp automatisch beantworten</h3>
-              <p style={{ marginTop: '0.75rem' }}>Kunden schreiben dir auf WhatsApp – AutoChat antwortet sofort, rund um die Uhr. Öffnungszeiten, Preise, Terminanfragen – alles automatisch.</p>
+              <h3>WhatsApp automatisch beantworten</h3>
+              <p>Kunden bekommen sofort Antwort – du behältst deine Ruhe.</p>
               <ul className="product-features">
-                <li><i className="ph-bold ph-check-circle"></i> Antwortet 24/7 auf WhatsApp-Nachrichten</li>
-                <li><i className="ph-bold ph-check-circle"></i> Kennt deine Öffnungszeiten, Preise & Infos</li>
-                <li><i className="ph-bold ph-check-circle"></i> Deine Nummer bleibt deine Nummer</li>
-                <li><i className="ph-bold ph-check-circle"></i> Einrichtung in einem 15-Minuten-Call</li>
+                <li><i className="ph-bold ph-check-circle"></i> Antworten 24/7, auch wenn du schläfst</li>
+                <li><i className="ph-bold ph-check-circle"></i> Kennt deine Preise & Öffnungszeiten</li>
+                <li><i className="ph-bold ph-check-circle"></i> Spart bis zu 30 Stunden im Monat</li>
               </ul>
-              <div style={{ marginTop: '1.5rem', background: '#f0fdfa', borderRadius: '10px', padding: '0.85rem 1rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                <i className="ph-fill ph-clock" style={{ color: 'var(--primary)', fontSize: '1.2rem', flexShrink: 0 }}></i>
-                <span style={{ fontSize: '0.9rem', color: 'var(--primary)', fontWeight: 600 }}>Spart dir bis zu 30 Stunden im Monat</span>
-              </div>
-              <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
+              <div className="product-footer">
                 <div className="product-price">€39 <span>/ Monat</span></div>
-                <Link href="/bestellen?produkt=autochat" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '1rem' }}>Jetzt abonnieren</Link>
+                <Link href="/bestellen?produkt=autochat" className="btn-primary">Jetzt abonnieren</Link>
               </div>
             </div>
 
@@ -107,65 +103,48 @@ export default function Home() {
             <div className="product-card fade-up delay-1">
               <div className="product-icon"><i className="ph-duotone ph-envelope-simple"></i></div>
               <span className="product-tag">MailPilot</span>
-              <h3 style={{ fontSize: '1.8rem', letterSpacing: '-0.5px' }}>E-Mails automatisch sortieren & Termine eintragen</h3>
-              <p style={{ marginTop: '0.75rem' }}>MailPilot liest dein Postfach, sortiert E-Mails in die richtigen Ordner und trägt Termine automatisch in deinen Google Kalender ein.</p>
+              <h3>E-Mails sortieren, Termine eintragen</h3>
+              <p>Nur die Mails, die wirklich deine Aufmerksamkeit brauchen.</p>
               <ul className="product-features">
-                <li><i className="ph-bold ph-check-circle"></i> E-Mails automatisch in Ordner sortieren</li>
-                <li><i className="ph-bold ph-check-circle"></i> Termine direkt in Google Kalender eintragen</li>
                 <li><i className="ph-bold ph-check-circle"></i> Funktioniert mit Gmail & Outlook</li>
-                <li><i className="ph-bold ph-check-circle"></i> Kein Download, läuft im Hintergrund</li>
+                <li><i className="ph-bold ph-check-circle"></i> Termine direkt im Kalender</li>
+                <li><i className="ph-bold ph-check-circle"></i> Spart bis zu 20 Stunden im Monat</li>
               </ul>
-              <div style={{ marginTop: '1.5rem', background: '#f0fdfa', borderRadius: '10px', padding: '0.85rem 1rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                <i className="ph-fill ph-clock" style={{ color: 'var(--primary)', fontSize: '1.2rem', flexShrink: 0 }}></i>
-                <span style={{ fontSize: '0.9rem', color: 'var(--primary)', fontWeight: 600 }}>Spart dir bis zu 20 Stunden im Monat</span>
-              </div>
-              <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
+              <div className="product-footer">
                 <div className="product-price">€29 <span>/ Monat</span></div>
-                <Link href="/bestellen?produkt=mailpilot" className="btn-primary" style={{ width: '100%', textAlign: 'center', display: 'block', marginTop: '1rem' }}>Jetzt abonnieren</Link>
+                <Link href="/bestellen?produkt=mailpilot" className="btn-primary">Jetzt abonnieren</Link>
               </div>
             </div>
-          </div>
 
-          {/* WEBSITE */}
-          <div style={{ marginTop: '2rem', background: 'white', borderRadius: '20px', padding: '2rem 2.5rem', border: '1px solid rgba(0,0,0,0.06)', boxShadow: 'var(--shadow-card)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
-            <div style={{ flex: 1 }}>
+            {/* Website */}
+            <div className="product-card fade-up delay-2">
+              <div className="product-icon"><i className="ph-duotone ph-browser"></i></div>
               <span className="product-tag">Website</span>
-              <h3 style={{ fontSize: '1.6rem', margin: '0.75rem 0 0.4rem 0', letterSpacing: '-0.5px' }}>Dein professioneller Online-Auftritt</h3>
-              <p style={{ margin: 0, fontSize: '0.95rem' }}>Wir entwickeln deine Website – modern, schnell und SEO-optimiert. Individuell auf dein Unternehmen zugeschnitten, damit mehr Kunden auf dich aufmerksam werden.</p>
-              <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-                {['Performance- & SEO-optimiert', 'Individuell gestaltet', 'Mehr Sichtbarkeit online'].map(f => (
-                  <span key={f} style={{ color: 'var(--text-muted)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <i className="ph-bold ph-check-circle" style={{ color: 'var(--primary)' }}></i> {f}
-                  </span>
-                ))}
+              <h3>Dein professioneller Online-Auftritt</h3>
+              <p>Modern, schnell und gut sichtbar bei Google – individuell für dich.</p>
+              <ul className="product-features">
+                <li><i className="ph-bold ph-check-circle"></i> SEO- & Performance-optimiert</li>
+                <li><i className="ph-bold ph-check-circle"></i> Individuelles Design</li>
+                <li><i className="ph-bold ph-check-circle"></i> Mehr Sichtbarkeit, mehr Anfragen</li>
+              </ul>
+              <div className="product-footer">
+                <div className="product-price product-price--custom">Auf Anfrage</div>
+                <Link href="/website" className="btn-primary">Mehr erfahren</Link>
               </div>
-            </div>
-            <div style={{ textAlign: 'center', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Preis auf Anfrage</div>
-              <Link href="/website" className="btn-primary">Mehr erfahren</Link>
-              <Link href="/kontakt?produkt=website" style={{ color: 'var(--primary)', fontSize: '0.85rem', textDecoration: 'underline' }}>Direkt anfragen →</Link>
             </div>
           </div>
 
           {/* BUNDLE */}
-          <div style={{ marginTop: '2rem', background: 'var(--primary)', borderRadius: '20px', padding: '2rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+          <div style={{ marginTop: '1.5rem', background: 'var(--primary)', borderRadius: '20px', padding: '2rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
             <div style={{ flex: 1 }}>
-              <span style={{ background: 'rgba(255,255,255,0.18)', color: 'white', borderRadius: '50px', padding: '3px 14px', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.05em' }}>KOMBI-PAKET</span>
-              <h3 style={{ color: 'white', fontSize: '1.6rem', margin: '0.75rem 0 0.4rem 0', letterSpacing: '-0.5px' }}>AutoChat + MailPilot</h3>
-              <p style={{ color: 'rgba(255,255,255,0.75)', margin: 0, fontSize: '0.95rem' }}>Beide Tools zusammen – WhatsApp automatisch beantworten <em>und</em> E-Mails sortieren. Einmal einrichten, dauerhaft sparen.</p>
-              <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-                {['WhatsApp 24/7 automatisch', 'E-Mails sortieren & Kalender', 'Kein Vertrag, monatlich kündbar'].map(f => (
-                  <span key={f} style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <i className="ph-bold ph-check-circle" style={{ color: 'white' }}></i> {f}
-                  </span>
-                ))}
-              </div>
+              <span style={{ background: 'rgba(255,255,255,0.18)', color: 'white', borderRadius: '50px', padding: '3px 14px', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.05em' }}>KOMBI-PAKET · SPARE €19</span>
+              <h3 style={{ color: 'white', fontSize: '1.5rem', margin: '0.75rem 0 0.4rem 0', letterSpacing: '-0.5px' }}>AutoChat + MailPilot zusammen</h3>
+              <p style={{ color: 'rgba(255,255,255,0.8)', margin: 0, fontSize: '0.95rem' }}>Beide Tools in einem Paket. WhatsApp <em>und</em> E-Mails automatisch – zum günstigeren Preis.</p>
             </div>
             <div style={{ textAlign: 'center', flexShrink: 0 }}>
               <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', textDecoration: 'line-through' }}>€68 / Monat</div>
               <div style={{ color: 'white', fontSize: '2.2rem', fontWeight: 800, lineHeight: 1 }}>€49 <span style={{ fontSize: '0.9rem', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}>/ Monat</span></div>
-              <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem', marginTop: '0.25rem', marginBottom: '1rem' }}>Du sparst €19 im Monat</div>
-              <Link href="/bestellen?produkt=bundle" style={{ display: 'inline-block', background: 'white', color: '#0d3d35', fontWeight: 700, padding: '0.75rem 1.75rem', borderRadius: '50px', fontSize: '1rem', textDecoration: 'none' }}>Jetzt abonnieren</Link>
+              <Link href="/bestellen?produkt=bundle" style={{ display: 'inline-block', background: 'white', color: '#0d3d35', fontWeight: 700, padding: '0.75rem 1.75rem', borderRadius: '50px', fontSize: '1rem', textDecoration: 'none', marginTop: '1rem' }}>Jetzt abonnieren</Link>
             </div>
           </div>
         </div>
@@ -182,14 +161,12 @@ export default function Home() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginTop: '2.5rem' }}>
             {[
-              { icon: 'ph-duotone ph-clock-countdown', title: '30+ Stunden im Monat gespart', desc: 'Du antwortest nicht mehr manuell auf jede WhatsApp-Nachricht. AutoChat erledigt 80–90% der Routine-Fragen. Der Rest landet strukturiert in deiner Inbox.' },
-              { icon: 'ph-duotone ph-phone-outgoing', title: 'Keine Anrufe nachts um 22 Uhr', desc: 'Kunden wollen sofort Antwort – auch abends. AutoChat antwortet sekundenschnell, du bleibst ungestört und verlierst keinen Auftrag.' },
-              { icon: 'ph-duotone ph-calendar-plus', title: 'Termine direkt im Kalender', desc: 'Wenn ein Kunde per WhatsApp oder Mail einen Termin anfragt, landet er automatisch in deinem Google Kalender oder Outlook. Keine doppelte Arbeit mehr.' },
-              { icon: 'ph-duotone ph-funnel', title: 'Nur echte Anfragen erreichen dich', desc: 'Werbung, Newsletter und Spam werden automatisch sortiert. Deine Inbox zeigt nur die Mails, die wirklich deine Aufmerksamkeit brauchen.' },
-              { icon: 'ph-duotone ph-smiley', title: 'Kunden sind zufriedener', desc: 'Sofortige Antwort auf jede Frage – auch wenn du gerade arbeitest oder im Urlaub bist. Kein "wir melden uns" – direkt die Info, die der Kunde braucht.' },
-              { icon: 'ph-duotone ph-currency-eur', title: 'Rechnet sich ab Tag 1', desc: 'Eine Stunde deiner Arbeitszeit kostet mehr als ein ganzer Monat joka.chat. Ab der ersten eingesparten Stunde zahlt sich der Dienst aus.' },
-              { icon: 'ph-duotone ph-browser', title: 'Professioneller Auftritt online', desc: 'Deine Website zeigt auf den ersten Blick, wer du bist, was du anbietest und warum Kunden bei dir richtig sind. Klar, modern und vertrauenswürdig.' },
-              { icon: 'ph-duotone ph-magnifying-glass', title: 'Besser bei Google gefunden werden', desc: 'Mit einer performance- und SEO-optimierten Website wirst du leichter gefunden und machst aus mehr Besuchern echte Anfragen.' },
+              { icon: 'ph-duotone ph-clock-countdown', title: '30+ Stunden im Monat gespart', desc: 'AutoChat übernimmt 80–90 % der WhatsApp-Routine, MailPilot sortiert deine Inbox. Du hast den Kopf frei für das Wichtige.' },
+              { icon: 'ph-duotone ph-phone-outgoing', title: 'Keine Anrufe nachts um 22 Uhr', desc: 'Kunden wollen sofort Antwort – auch abends. AutoChat antwortet in Sekunden, du bleibst ungestört und verlierst keinen Auftrag.' },
+              { icon: 'ph-duotone ph-calendar-plus', title: 'Termine direkt im Kalender', desc: 'Ob WhatsApp oder Mail – Terminanfragen landen automatisch in Google Kalender oder Outlook. Keine doppelte Arbeit.' },
+              { icon: 'ph-duotone ph-funnel', title: 'Nur echte Anfragen erreichen dich', desc: 'Werbung, Newsletter und Spam werden sortiert. Deine Inbox zeigt nur, was wirklich deine Aufmerksamkeit braucht.' },
+              { icon: 'ph-duotone ph-magnifying-glass', title: 'Besser bei Google gefunden werden', desc: 'Mit einer performance- und SEO-optimierten Website wirst du leichter gefunden und machst aus Besuchern echte Anfragen.' },
+              { icon: 'ph-duotone ph-currency-eur', title: 'Rechnet sich ab Tag 1', desc: 'Eine Stunde deiner Arbeitszeit kostet mehr als ein ganzer Monat joka.chat. Ab der ersten eingesparten Stunde lohnt es sich.' },
             ].map(({ icon, title, desc }) => (
               <div key={title} style={{ background: 'white', borderRadius: '16px', padding: '1.75rem', border: '1px solid rgba(0,0,0,0.05)' }} className="fade-up">
                 <i className={icon} style={{ color: 'var(--primary)', fontSize: '2rem', marginBottom: '1rem', display: 'inline-block' }}></i>
@@ -300,9 +277,8 @@ export default function Home() {
               <p>Einmal einrichten, dauerhaft Zeit sparen. Kein Vertrag, monatlich kündbar.</p>
             </div>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <Link href="/bestellen?produkt=autochat" className="btn-primary">AutoChat – €39/Monat</Link>
-              <Link href="/bestellen?produkt=mailpilot" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>MailPilot – €29/Monat</Link>
-              <Link href="/website" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>Website anfragen</Link>
+              <Link href="/bestellen?trial=1" className="btn-primary">1 Monat kostenlos testen</Link>
+              <Link href="/kontakt" className="btn-secondary" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>Fragen stellen</Link>
             </div>
           </div>
         </div>
