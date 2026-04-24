@@ -88,7 +88,7 @@ export default function WebsitePage() {
               {[
                 { n: '01', title: 'Briefing-Call', desc: 'Wir besprechen dein Unternehmen, deine Ziele und deine Wünsche. Ein kurzes Gespräch reicht – du musst kein Webseiten-Experte sein.' },
                 { n: '02', title: 'Design & Entwicklung', desc: 'Wir entwickeln deine Website – individuell, schnell und sauber umgesetzt. Du erhältst regelmäßige Updates und kannst Feedback geben.' },
-                { n: '03', title: 'Launch & Übergabe', desc: 'Deine Website geht live. Du bekommst alle Zugänge und eine kurze Einführung, damit du selbst Inhalte anpassen kannst.' },
+                { n: '03', title: 'Launch & Übergabe', desc: 'Deine Website geht live. Du bekommst alle Zugänge und die volle Kontrolle über deinen neuen Online-Auftritt.' },
               ].map(({ n, title, desc }) => (
                 <div key={n} className="step">
                   <span className="step-num">{n}</span>
