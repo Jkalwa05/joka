@@ -78,21 +78,23 @@ p { font-size: 1.1rem; color: var(--text-muted); }
 .bg-darker { background: #0f172a; }
 
 /* --- PRODUCT CARDS (homepage split) --- */
-.products-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; margin-top: 4rem; }
-.product-card { background: white; border-radius: 24px; padding: 3rem; border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow-card); transition: 0.3s; display: flex; flex-direction: column; }
-.product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-float); }
+.products-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+.product-card { background: white; border-radius: 20px; padding: 2.25rem; border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow-card); transition: 0.3s; display: flex; flex-direction: column; }
+.product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-float); }
 .product-card.highlight { border: 2px solid var(--primary); }
-.product-card > p { min-height: 170px; }
-.product-icon { width: 64px; height: 64px; background: var(--primary-glow); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
-.product-icon i { font-size: 2rem; color: var(--primary); }
-.product-tag { display: inline-block; background: #f0fdfa; color: var(--primary); font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; margin-bottom: 1rem; }
-.product-price { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin: 1.5rem 0 0.3rem 0; letter-spacing: -1px; }
-.product-price span { font-size: 1rem; font-weight: 500; color: var(--text-muted); }
-.product-price--custom { font-size: 2rem; margin-top: 0.25rem; }
-.product-features { list-style: none; margin: 1.5rem 0 2rem 0; display: flex; flex-direction: column; gap: 0.75rem; }
-.product-features li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.95rem; color: var(--text-muted); }
-.product-features i { color: var(--primary); font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
-.product-cta { margin-top: auto; }
+.product-icon { width: 52px; height: 52px; background: var(--primary-glow); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+.product-icon i { font-size: 1.6rem; color: var(--primary); }
+.product-tag { display: inline-block; background: #f0fdfa; color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 50px; margin-bottom: 0.75rem; letter-spacing: 0.03em; }
+.product-card h3 { font-size: 1.35rem; letter-spacing: -0.3px; line-height: 1.25; margin-bottom: 0.5rem; }
+.product-card > p { font-size: 0.95rem; color: var(--text-muted); margin: 0; line-height: 1.55; }
+.product-price { font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: var(--text-main); margin: 0 0 0.25rem 0; letter-spacing: -0.5px; }
+.product-price span { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); }
+.product-price--custom { font-size: 1.4rem; }
+.product-features { list-style: none; margin: 1.25rem 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.product-features li { display: flex; gap: 8px; align-items: flex-start; font-size: 0.9rem; color: var(--text-muted); }
+.product-features i { color: var(--primary); font-size: 1rem; flex-shrink: 0; margin-top: 3px; }
+.product-footer { margin-top: auto; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,0.05); }
+.product-footer .btn-primary { width: 100%; text-align: center; display: block; margin-top: 0.85rem; padding: 0.75rem 1.5rem; font-size: 0.95rem; }
 
 /* --- SKILL CARDS --- */
 .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -135,6 +137,7 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); background: wh
 
 /* --- MOBILE --- */
 @media (max-width: 1024px) {
+    .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .skills-grid { grid-template-columns: 1fr; }
     .cta-banner { flex-direction: column; text-align: center; }
     .footer-inner { flex-direction: column; text-align: center; }
@@ -166,8 +169,7 @@ footer { padding: 3rem 0; border-top: 1px solid rgba(0,0,0,0.05); background: wh
 
     /* Product cards */
     .product-card { padding: 2rem; }
-    .product-card > p { min-height: 0; }
-    .product-price { font-size: 2rem; }
+    .product-price { font-size: 1.8rem; }
 
     /* Steps */
     .steps { gap: 1.5rem; }
