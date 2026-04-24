@@ -56,7 +56,7 @@ export default function WebsitePage() {
             <h2>Eine Website, die für dich arbeitet.</h2>
             <p>Kein Baukastensystem. Keine Templates. Eine individuelle Website, die zu deinem Unternehmen passt und Kunden überzeugt.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginTop: '3rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginTop: '3rem' }}>
             {[
               { icon: 'ph-duotone ph-paint-brush', title: 'Individuelles Design', desc: 'Kein Baukastensystem. Deine Website wird von Grund auf gestaltet – passend zu deinem Unternehmen, deiner Branche und deiner Zielgruppe.' },
               { icon: 'ph-duotone ph-rocket-launch', title: 'Performance-optimiert', desc: 'Schnelle Ladezeiten und technische Sauberkeit. Deine Seite lädt in unter 2 Sekunden – auf Desktop und Mobilgerät.' },
@@ -111,7 +111,7 @@ export default function WebsitePage() {
             <h2>Kunden googeln. Bist du da?</h2>
             <p>Wer online nicht professionell auftritt, verliert täglich potenzielle Kunden – an Konkurrenten, die einfach besser zu finden sind.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem', marginTop: '2.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginTop: '2.5rem' }}>
             {[
               { icon: 'ph-duotone ph-trend-up', title: 'Mehr Anfragen', desc: 'Eine professionelle, gut gefundene Website bringt dir regelmäßig neue Kundenanfragen – automatisch, ohne aktives Akquirieren.' },
               { icon: 'ph-duotone ph-star', title: 'Erster Eindruck zählt', desc: 'Kunden entscheiden in Sekunden. Eine klare, moderne Website schafft Vertrauen – bevor du ein Wort gesagt hast.' },

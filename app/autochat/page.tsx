@@ -173,7 +173,7 @@ export default function AutoChat() {
             <p>Nicht Features. Ergebnisse.</p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginTop: '2.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginTop: '2.5rem' }}>
             {[
               { title: 'Du verlierst keine Anfrage mehr', desc: 'Jede WhatsApp-Nachricht wird beantwortet – auch nachts, im Urlaub oder wenn du gerade Kunden bedienst. Niemand bekommt ein "wir melden uns später".' },
               { title: '30 Stunden pro Monat weniger Handarbeit', desc: 'Öffnungszeiten, Preise, Adresse, häufige Fragen – das beantwortet AutoChat vollautomatisch. Du musst nicht mehr denselben Satz 40× am Tag schreiben.' },

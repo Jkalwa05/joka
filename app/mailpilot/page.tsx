@@ -112,7 +112,7 @@ export default function MailPilot() {
             <p>Weniger Klicks. Weniger Stress. Mehr Fokus.</p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginTop: '2.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginTop: '2.5rem' }}>
             {[
               { title: 'Dein Posteingang ist aufgeräumt', desc: 'Jede eingehende Mail landet im richtigen Ordner. Keine Rechnungen mehr, die in der Werbung untergehen. Keine Newsletter, die zwischen echten Anfragen stören.' },
               { title: 'Keine Termine mehr übersehen', desc: 'Steht ein Termin in einer Mail, wird er automatisch in deinen Kalender eingetragen. Egal ob Google Kalender oder Outlook Kalender – läuft im Hintergrund.' },
