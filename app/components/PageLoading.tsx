@@ -21,7 +21,7 @@ export default function PageLoading() {
             color: 'var(--text-main, #0f172a)',
           }}
         >
-          joka<span style={{ color: 'var(--primary, #006266)' }}>.chat</span>
+          joka<span style={{ color: 'var(--primary, #006266)' }}>.ai</span>
         </div>
         <div
           aria-label="Lädt"
@@ -31,10 +31,10 @@ export default function PageLoading() {
             border: '3px solid rgba(0, 98, 102, 0.15)',
             borderTopColor: 'var(--primary, #006266)',
             borderRadius: '50%',
-            animation: 'jokachat-spin 0.9s linear infinite',
+            animation: 'jokaai-spin 0.9s linear infinite',
           }}
         />
-        <style>{`@keyframes jokachat-spin { to { transform: rotate(360deg); } }`}</style>
+        <style>{`@keyframes jokaai-spin { to { transform: rotate(360deg); } }`}</style>
       </div>
     </>
   )

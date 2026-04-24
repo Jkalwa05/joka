@@ -30,7 +30,7 @@ export default function Anmelden() {
       return
     }
 
-    localStorage.setItem('jokachat-token', data.token)
+    localStorage.setItem('jokaai-token', data.token)
     router.push('/dashboard')
   }
 
@@ -38,7 +38,7 @@ export default function Anmelden() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
         </div>
       </nav>
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '80px' }}>

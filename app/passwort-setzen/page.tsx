@@ -48,7 +48,7 @@ function PasswortSetzenForm() {
     <div className="form-card" style={{ maxWidth: '440px' }}>
       <span className="sub-label">Einmalige Einrichtung</span>
       <h2 style={{ marginBottom: '0.5rem' }}>Passwort setzen</h2>
-      <p style={{ marginBottom: '2rem', color: 'var(--text-muted)' }}>Wähle ein Passwort für deinen joka.chat-Account.</p>
+      <p style={{ marginBottom: '2rem', color: 'var(--text-muted)' }}>Wähle ein Passwort für deinen joka.ai-Account.</p>
       {done ? (
         <div style={{ background: '#f0fdfa', border: '1.5px solid #99f6e4', borderRadius: '12px', padding: '1.25rem', color: '#0d9488', fontWeight: 600, textAlign: 'center' }}>
           ✓ Passwort gesetzt! Du wirst weitergeleitet…
@@ -78,7 +78,7 @@ export default function PasswortSetzen() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
         </div>
       </nav>
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '80px' }}>

@@ -28,9 +28,9 @@ export default function DemoSetup({ token }: { token: string }) {
       <div style={{ maxWidth: '720px', margin: '0 auto', padding: '3rem 1.5rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <div style={{ fontSize: '0.8rem', color: '#006266', fontWeight: 700, letterSpacing: '1px', marginBottom: '0.5rem' }}>DEMO-ZUGANG AKTIVIERT</div>
-          <h1 style={{ fontSize: '2rem', margin: '0 0 0.75rem', color: '#0f172a' }}>joka.chat Demo</h1>
+          <h1 style={{ fontSize: '2rem', margin: '0 0 0.75rem', color: '#0f172a' }}>joka.ai Demo</h1>
           <p style={{ color: '#64748b', margin: 0 }}>
-            {ready ? 'Du bist eingeloggt als demo@joka.chat. Klick dich durch.' : 'Wird eingerichtet…'}
+            {ready ? 'Du bist eingeloggt als demo@joka.ai. Klick dich durch.' : 'Wird eingerichtet…'}
           </p>
         </div>
 

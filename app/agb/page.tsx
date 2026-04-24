@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Allgemeine Geschäftsbedingungen | joka.chat',
+  title: 'Allgemeine Geschäftsbedingungen | joka.ai',
 }
 
 export default function AGB() {
@@ -9,7 +9,7 @@ export default function AGB() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
@@ -31,12 +31,12 @@ export default function AGB() {
               <h3 style={{ marginBottom: '0.5rem' }}>§ 1 Geltungsbereich, Anbieter</h3>
               <p>(1) Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Verträge, die zwischen</p>
               <p style={{ marginTop: '0.5rem' }}>
-                Jonas Kalwa – joka.chat<br />
+                Jonas Kalwa – joka.ai<br />
                 Dinkelkamp 30, 49377 Vechta<br />
                 E-Mail: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a><br />
                 (nachfolgend „Anbieter" oder „wir")
               </p>
-              <p style={{ marginTop: '1rem' }}>und dem Kunden über die Nutzung der Dienste <strong>AutoChat</strong> und/oder <strong>MailPilot</strong> über die Website <a href="https://joka.chat" style={{ color: 'var(--primary)' }}>joka.chat</a> abgeschlossen werden.</p>
+              <p style={{ marginTop: '1rem' }}>und dem Kunden über die Nutzung der Dienste <strong>AutoChat</strong> und/oder <strong>MailPilot</strong> über die Website <a href="https://joka.ai" style={{ color: 'var(--primary)' }}>joka.ai</a> abgeschlossen werden.</p>
               <p style={{ marginTop: '1rem' }}>(2) Abweichende Bedingungen des Kunden werden nicht anerkannt, es sei denn, wir stimmen ihrer Geltung ausdrücklich schriftlich zu.</p>
               <p style={{ marginTop: '0.5rem' }}>(3) Verbraucher im Sinne dieser AGB ist jede natürliche Person, die ein Rechtsgeschäft zu Zwecken abschließt, die überwiegend weder ihrer gewerblichen noch ihrer selbstständigen beruflichen Tätigkeit zugerechnet werden können (§ 13 BGB).</p>
             </div>
@@ -139,7 +139,7 @@ export default function AGB() {
 
       <footer style={{ marginTop: '4rem' }}>
         <div className="container-wide footer-inner">
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.chat.</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.ai.</p>
           <div className="footer-links">
             <Link href="/mein-abo">Mein Abo</Link>
             <span className="separator">|</span>

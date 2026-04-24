@@ -18,7 +18,7 @@ export default async function DemoPage({ searchParams }: { searchParams: { key?:
   }
 
   try {
-    const email = 'demo@joka.chat'
+    const email = 'demo@joka.ai'
     const token = crypto.randomBytes(32).toString('hex')
     const expiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
 

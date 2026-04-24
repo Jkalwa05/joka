@@ -108,7 +108,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "joka.chat <noreply@joka.chat>",
+        from: "joka.ai <noreply@joka.ai>",
         to: email,
         subject: "Willkommen bei MailPilot – jetzt einrichten",
         html: `
@@ -138,7 +138,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "joka.chat <noreply@joka.chat>",
+        from: "joka.ai <noreply@joka.ai>",
         to: email,
         subject: "Willkommen bei AutoChat – jetzt einrichten",
         html: `
@@ -154,7 +154,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
 
             <div style="background:#f8f9fa;border:1px solid rgba(0,0,0,0.06);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem">
               <p style="color:#0f172a;font-weight:700;margin:0 0 0.5rem 0;font-size:0.95rem">Schritt 2 – Passwort setzen</p>
-              <p style="color:#64748b;font-size:0.85rem;margin:0 0 0.75rem 0">Richte einmalig dein Passwort ein – danach kannst du dich jederzeit unter joka.chat/anmelden einloggen.</p>
+              <p style="color:#64748b;font-size:0.85rem;margin:0 0 0.75rem 0">Richte einmalig dein Passwort ein – danach kannst du dich jederzeit unter joka.ai/anmelden einloggen.</p>
               <a href="${passwordLink}" style="display:inline-block;background:#f1f5f9;color:#0f172a;padding:0.6rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:0.85rem">Passwort setzen →</a>
             </div>
 
@@ -173,7 +173,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "joka.chat <noreply@joka.chat>",
+      from: "joka.ai <noreply@joka.ai>",
       to: "joka.chat.business@gmail.com",
       subject: `🎉 Neuer Kunde: ${safeName} – ${produktLabel}`,
       html: `
@@ -204,7 +204,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
             <h3 style="color:#92400e;margin:0 0 1rem 0">⚠️ AutoChat manuell einrichten – Anleitung</h3>
             <p style="color:#78350f;margin:0 0 0.75rem 0;font-size:14px">Der Kunde hat seine WhatsApp-Nummer <strong>${safeBusinessContact}</strong> angegeben. Gehe jetzt so vor:</p>
             <ol style="color:#78350f;font-size:14px;margin:0;padding-left:1.25rem;line-height:2">
-              <li>Öffne das Terminal im joka.chat-Projektordner und führe aus:<br><code style="background:#fef3c7;padding:2px 6px;border-radius:4px">npx prisma studio</code></li>
+              <li>Öffne das Terminal im joka.ai-Projektordner und führe aus:<br><code style="background:#fef3c7;padding:2px 6px;border-radius:4px">npx prisma studio</code></li>
               <li>Browser öffnet sich auf <strong>localhost:5555</strong></li>
               <li>Klicke auf <strong>AutoChatConfig</strong></li>
               <li>Finde den Eintrag mit der Kundennummer <strong>${safeBusinessContact}</strong></li>

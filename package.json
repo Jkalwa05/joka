@@ -1,7 +1,7 @@
 {
-  "name": "jokachat",
+  "name": "jokaai",
   "version": "1.0.0",
-  "description": "joka.chat – Automatisierung für lokale Businesses",
+  "description": "joka.ai – Automatisierung für lokale Businesses",
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",

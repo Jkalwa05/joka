@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Widerrufsbelehrung | joka.chat',
+  title: 'Widerrufsbelehrung | joka.ai',
 }
 
 export default function Widerruf() {
@@ -9,7 +9,7 @@ export default function Widerruf() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.chat</span></Link>
+          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
@@ -32,7 +32,7 @@ export default function Widerruf() {
               <p>Du hast das Recht, binnen <strong>vierzehn Tagen</strong> ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag des Vertragsabschlusses.</p>
               <p style={{ marginTop: '1rem' }}>Um dein Widerrufsrecht auszuüben, musst du uns</p>
               <p style={{ marginTop: '0.5rem' }}>
-                Jonas Kalwa – joka.chat<br />
+                Jonas Kalwa – joka.ai<br />
                 Dinkelkamp 30, 49377 Vechta<br />
                 E-Mail: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a>
               </p>
@@ -66,7 +66,7 @@ export default function Widerruf() {
               <p style={{ marginBottom: '1rem', fontSize: '0.88rem' }}>(Wenn du den Vertrag widerrufen willst, dann fülle dieses Formular aus und sende es zurück.)</p>
               <div style={{ fontSize: '0.9rem', fontFamily: 'monospace', whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', wordBreak: 'break-all', background: 'white', padding: '1rem 1.25rem', borderRadius: '8px', border: '1px solid #e2e8f0', lineHeight: 1.8, overflowX: 'auto', maxWidth: '100%' }}>
 {`An:
-Jonas Kalwa – joka.chat
+Jonas Kalwa – joka.ai
 Dinkelkamp 30
 49377 Vechta
 E-Mail: joka.chat.business@gmail.com
@@ -100,7 +100,7 @@ Unterschrift des/der Verbraucher(s)
 
       <footer style={{ marginTop: '4rem' }}>
         <div className="container-wide footer-inner">
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.chat.</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.ai.</p>
           <div className="footer-links">
             <Link href="/mein-abo">Mein Abo</Link>
             <span className="separator">|</span>
