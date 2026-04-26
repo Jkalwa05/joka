@@ -49,10 +49,10 @@ export default function PwaInstallPrompt() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
           <span style={{ fontSize: '1.8rem' }}>📲</span>
-          <strong style={{ color: 'var(--text-main)', fontSize: '1rem' }}>joka.ai als App installieren</strong>
+          <strong style={{ color: 'var(--text-main)', fontSize: '1rem' }}>Joka Chat als App installieren</strong>
         </div>
         <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', margin: '0 0 1rem 0', lineHeight: 1.5 }}>
-          Füge joka.ai zu deinem Homescreen hinzu – so hast du die Inbox immer direkt zur Hand.
+          Füge Joka Chat zu deinem Homescreen hinzu – so hast du die Inbox immer direkt zur Hand.
         </p>
         <ol style={{ margin: 0, paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {[
@@ -98,10 +98,10 @@ export default function PwaInstallPrompt() {
       <div style={{ fontSize: '2.5rem', lineHeight: 1, flexShrink: 0 }}>📲</div>
       <div style={{ flex: 1 }}>
         <strong style={{ display: 'block', marginBottom: '0.3rem', color: 'var(--text-main)' }}>
-          joka.ai als App installieren
+          Joka Chat als App installieren
         </strong>
         <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', margin: '0 0 1rem 0', lineHeight: 1.5 }}>
-          Füge joka.ai zu deinem Homescreen hinzu – Inbox immer direkt zur Hand, ohne Browser.
+          Füge Joka Chat zu deinem Homescreen hinzu – Inbox immer direkt zur Hand, ohne Browser.
         </p>
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
           <button onClick={install} className="btn-primary" style={{ fontSize: '0.9rem', padding: '0.6rem 1.5rem' }}>

@@ -21,7 +21,7 @@ export default function PageLoading() {
             color: 'var(--text-main, #0f172a)',
           }}
         >
-          joka<span style={{ color: 'var(--primary, #006266)' }}>.ai</span>
+          Joka <span style={{ color: 'var(--primary, #006266)' }}>Chat</span>
         </div>
         <div
           aria-label="Lädt"

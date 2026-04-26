@@ -108,7 +108,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "joka.ai <noreply@joka.ai>",
+        from: "Joka Chat <noreply@joka.ai>",
         to: email,
         subject: "Willkommen bei MailPilot – jetzt einrichten",
         html: `
@@ -138,7 +138,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "joka.ai <noreply@joka.ai>",
+        from: "Joka Chat <noreply@joka.ai>",
         to: email,
         subject: "Willkommen bei AutoChat – jetzt einrichten",
         html: `
@@ -173,7 +173,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "joka.ai <noreply@joka.ai>",
+      from: "Joka Chat <noreply@joka.ai>",
       to: "joka.chat.business@gmail.com",
       subject: `🎉 Neuer Kunde: ${safeName} – ${produktLabel}`,
       html: `
@@ -204,7 +204,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
             <h3 style="color:#92400e;margin:0 0 1rem 0">⚠️ AutoChat manuell einrichten – Anleitung</h3>
             <p style="color:#78350f;margin:0 0 0.75rem 0;font-size:14px">Der Kunde hat seine WhatsApp-Nummer <strong>${safeBusinessContact}</strong> angegeben. Gehe jetzt so vor:</p>
             <ol style="color:#78350f;font-size:14px;margin:0;padding-left:1.25rem;line-height:2">
-              <li>Öffne das Terminal im joka.ai-Projektordner und führe aus:<br><code style="background:#fef3c7;padding:2px 6px;border-radius:4px">npx prisma studio</code></li>
+              <li>Öffne das Terminal im Joka Chat-Projektordner und führe aus:<br><code style="background:#fef3c7;padding:2px 6px;border-radius:4px">npx prisma studio</code></li>
               <li>Browser öffnet sich auf <strong>localhost:5555</strong></li>
               <li>Klicke auf <strong>AutoChatConfig</strong></li>
               <li>Finde den Eintrag mit der Kundennummer <strong>${safeBusinessContact}</strong></li>

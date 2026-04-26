@@ -10,11 +10,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://joka.ai'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'joka.ai – WhatsApp & E-Mail automatisch beantworten',
-    template: '%s | joka.ai',
+    default: 'Joka Chat – WhatsApp & E-Mail automatisch beantworten',
+    template: '%s | Joka Chat',
   },
   description:
-    'joka.ai automatisiert deinen WhatsApp und deine E-Mails. WhatsApp automatisch beantworten, E-Mails sortieren, Termine in Google Kalender eintragen – einmal einrichten, dauerhaft Zeit sparen.',
+    'Joka Chat automatisiert deinen WhatsApp und deine E-Mails. WhatsApp automatisch beantworten, E-Mails sortieren, Termine in Google Kalender eintragen – einmal einrichten, dauerhaft Zeit sparen.',
   keywords: [
     'WhatsApp automatisch beantworten',
     'WhatsApp Bot Deutsch',
@@ -29,11 +29,11 @@ export const metadata: Metadata = {
     'Webdesign für Kleinunternehmen',
     'SEO optimierte Website',
     'individuelle Website entwickeln',
-    'joka.ai',
+    'Joka Chat',
   ],
   authors: [{ name: 'Jonas Kalwa', url: 'https://www.linkedin.com/in/jonas-kalwa-3333612a1/' }],
   creator: 'Jonas Kalwa',
-  publisher: 'joka.ai',
+  publisher: 'Joka Chat',
   alternates: { canonical: '/' },
   robots: {
     index: true,
@@ -44,15 +44,15 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'de_DE',
     url: SITE_URL,
-    siteName: 'joka.ai',
-    title: 'joka.ai – WhatsApp & E-Mail automatisch beantworten',
+    siteName: 'Joka Chat',
+    title: 'Joka Chat – WhatsApp & E-Mail automatisch beantworten',
     description:
       'WhatsApp automatisch beantworten, E-Mails sortieren, Termine in Google Kalender oder Outlook eintragen. Einmal einrichten, täglich Stunden sparen.',
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'joka.ai – Automatisierung für lokale Businesses' }],
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Joka Chat – Automatisierung für lokale Businesses' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'joka.ai – WhatsApp & E-Mail automatisch beantworten',
+    title: 'Joka Chat – WhatsApp & E-Mail automatisch beantworten',
     description:
       'WhatsApp automatisch beantworten, E-Mails sortieren, Termine eintragen. Einmal einrichten, dauerhaft sparen.',
     images: ['/og.png'],
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
 const jsonLdOrg = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'joka.ai',
+  name: 'Joka Chat',
   url: SITE_URL,
   logo: `${SITE_URL}/og.png`,
   email: 'joka.chat.business@gmail.com',
@@ -77,20 +77,20 @@ const jsonLdOrg = {
 const jsonLdWebsite = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'joka.ai',
+  name: 'Joka Chat',
   url: SITE_URL,
   inLanguage: 'de-DE',
-  publisher: { '@type': 'Organization', name: 'joka.ai' },
+  publisher: { '@type': 'Organization', name: 'Joka Chat' },
 }
 
 const jsonLdSoftware = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'joka.ai',
+  name: 'Joka Chat',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
   description:
-    'joka.ai automatisiert WhatsApp-Antworten und sortiert E-Mails in Gmail oder Outlook. Termine werden automatisch in Google Kalender oder Outlook Kalender eingetragen.',
+    'Joka Chat automatisiert WhatsApp-Antworten und sortiert E-Mails in Gmail oder Outlook. Termine werden automatisch in Google Kalender oder Outlook Kalender eingetragen.',
   offers: [
     { '@type': 'Offer', name: 'AutoChat', price: '39', priceCurrency: 'EUR', url: `${SITE_URL}/bestellen?produkt=autochat` },
     { '@type': 'Offer', name: 'MailPilot', price: '29', priceCurrency: 'EUR', url: `${SITE_URL}/bestellen?produkt=mailpilot` },
@@ -105,7 +105,7 @@ const jsonLdWebsiteService = {
   serviceType: 'Webdesign',
   name: 'Individuelle Website-Entwicklung',
   url: `${SITE_URL}/website`,
-  provider: { '@type': 'Organization', name: 'joka.ai', url: SITE_URL },
+  provider: { '@type': 'Organization', name: 'Joka Chat', url: SITE_URL },
   areaServed: 'DE',
   description:
     'Individuelle Website-Entwicklung für kleine Unternehmen – modern, performance-optimiert und SEO-ready. Von Konzept bis Launch aus einer Hand.',
@@ -118,7 +118,7 @@ const jsonLdFaq = {
     {
       '@type': 'Question',
       name: 'Muss ich etwas installieren?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Nein. joka.ai läuft komplett im Hintergrund – kein Download, keine App, kein Aufwand.' },
+      acceptedAnswer: { '@type': 'Answer', text: 'Nein. Joka Chat läuft komplett im Hintergrund – kein Download, keine App, kein Aufwand.' },
     },
     {
       '@type': 'Question',
@@ -152,7 +152,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" href="/icon-512.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="joka.ai" />
+        <meta name="apple-mobile-web-app-title" content="Joka Chat" />
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Datenschutzerklärung | joka.ai',
+  title: 'Datenschutzerklärung | Joka Chat',
 }
 
 export default function Datenschutz() {
@@ -9,7 +9,7 @@ export default function Datenschutz() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
+          <Link href="/" className="brand">Joka <span className="dot">Chat</span></Link>
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
@@ -30,14 +30,14 @@ export default function Datenschutz() {
             <div>
               <h3 style={{ marginBottom: '0.5rem' }}>1. Verantwortlicher</h3>
               <p>Verantwortlich im Sinne der DSGVO ist:<br />
-              Jonas Kalwa – joka.ai<br />
+              Jonas Kalwa – Joka Chat<br />
               Dinkelkamp 30, 49377 Vechta, Deutschland<br />
               E-Mail: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></p>
             </div>
 
             <div>
-              <h3 style={{ marginBottom: '0.5rem' }}>2. Überblick: Was macht joka.ai?</h3>
-              <p>joka.ai betreibt zwei Dienste: <strong>AutoChat</strong> beantwortet WhatsApp-Nachrichten deiner Endkunden automatisch per KI. <strong>MailPilot</strong> sortiert deine Gmail- oder Outlook-E-Mails automatisch und trägt Termine in deinen Kalender ein. In beiden Fällen verarbeiten wir personenbezogene Daten – deine eigenen (als joka.ai-Kunde) und Daten deiner Endkunden (Dritter, die mit dir kommunizieren).</p>
+              <h3 style={{ marginBottom: '0.5rem' }}>2. Überblick: Was macht Joka Chat?</h3>
+              <p>Joka Chat betreibt zwei Dienste: <strong>AutoChat</strong> beantwortet WhatsApp-Nachrichten deiner Endkunden automatisch per KI. <strong>MailPilot</strong> sortiert deine Gmail- oder Outlook-E-Mails automatisch und trägt Termine in deinen Kalender ein. In beiden Fällen verarbeiten wir personenbezogene Daten – deine eigenen (als Joka Chat-Kunde) und Daten deiner Endkunden (Dritter, die mit dir kommunizieren).</p>
             </div>
 
             <div>
@@ -121,12 +121,12 @@ export default function Datenschutz() {
 
             <div>
               <h3 style={{ marginBottom: '0.5rem' }}>8. Verarbeitung von Endkunden-Daten (Dritte)</h3>
-              <p>Wenn du AutoChat oder MailPilot nutzt, verarbeitet joka.ai auch Daten von Personen, die <em>dir</em> schreiben (deine Endkunden). Gegenüber diesen Personen bist <strong>du</strong> der Verantwortliche im Sinne der DSGVO; joka.ai handelt insoweit als dein <strong>Auftragsverarbeiter</strong> gemäß Art. 28 DSGVO. Durch den Abschluss des Abonnements schließt du mit uns einen Auftragsverarbeitungsvertrag ab, dessen Inhalt in unseren <Link href="/agb" style={{ color: 'var(--primary)' }}>AGB</Link> geregelt ist. Du bist verpflichtet, deine Endkunden in geeigneter Form über den Einsatz einer KI-gestützten Antwort- bzw. Sortierlösung zu informieren.</p>
+              <p>Wenn du AutoChat oder MailPilot nutzt, verarbeitet Joka Chat auch Daten von Personen, die <em>dir</em> schreiben (deine Endkunden). Gegenüber diesen Personen bist <strong>du</strong> der Verantwortliche im Sinne der DSGVO; Joka Chat handelt insoweit als dein <strong>Auftragsverarbeiter</strong> gemäß Art. 28 DSGVO. Durch den Abschluss des Abonnements schließt du mit uns einen Auftragsverarbeitungsvertrag ab, dessen Inhalt in unseren <Link href="/agb" style={{ color: 'var(--primary)' }}>AGB</Link> geregelt ist. Du bist verpflichtet, deine Endkunden in geeigneter Form über den Einsatz einer KI-gestützten Antwort- bzw. Sortierlösung zu informieren.</p>
             </div>
 
             <div>
               <h3 style={{ marginBottom: '0.5rem' }}>9. Cookies, Tracking & Analyse</h3>
-              <p>joka.ai setzt <strong>keine</strong> Tracking-Cookies, kein Google Analytics, keine Werbe-Pixel. Es wird lediglich ein technisch notwendiges Authentifizierungs-Token im Local Storage deines Browsers abgelegt, damit du eingeloggt bleibst. Dieses Token enthält keine personenbezogenen Daten.</p>
+              <p>Joka Chat setzt <strong>keine</strong> Tracking-Cookies, kein Google Analytics, keine Werbe-Pixel. Es wird lediglich ein technisch notwendiges Authentifizierungs-Token im Local Storage deines Browsers abgelegt, damit du eingeloggt bleibst. Dieses Token enthält keine personenbezogenen Daten.</p>
             </div>
 
             <div>
@@ -151,7 +151,7 @@ export default function Datenschutz() {
 
             <div>
               <h3 style={{ marginBottom: '0.5rem' }}>12. Automatisierte Entscheidungen</h3>
-              <p>Die KI-gestützten Antworten und Sortierungen von joka.ai stellen <strong>keine automatisierte Entscheidung im Einzelfall mit rechtlicher Wirkung</strong> im Sinne von Art. 22 DSGVO dar. Du kannst jederzeit selbst antworten und die KI für einzelne Konversationen pausieren.</p>
+              <p>Die KI-gestützten Antworten und Sortierungen von Joka Chat stellen <strong>keine automatisierte Entscheidung im Einzelfall mit rechtlicher Wirkung</strong> im Sinne von Art. 22 DSGVO dar. Du kannst jederzeit selbst antworten und die KI für einzelne Konversationen pausieren.</p>
             </div>
 
             <div>
@@ -165,7 +165,7 @@ export default function Datenschutz() {
 
       <footer style={{ marginTop: '4rem' }}>
         <div className="container-wide footer-inner">
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.ai.</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Joka Chat.</p>
           <div className="footer-links">
             <Link href="/mein-abo">Mein Abo</Link>
             <span className="separator">|</span>
