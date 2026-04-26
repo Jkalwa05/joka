@@ -57,7 +57,7 @@ export default function Dashboard() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
+          <Link href="/" className="brand">Joka <span className="dot">Chat</span></Link>
           <div className="nav-items">
             <button
               onClick={() => setTab('inbox')}

@@ -166,7 +166,7 @@ function AutoChatOnboardingForm() {
         <p style={{ fontWeight: 600, color: 'var(--text-main)', margin: '0 0 0.4rem 0', fontSize: '0.95rem' }}>Hilfe benötigt?</p>
         <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: '0 0 1rem 0' }}>Nicht sicher was du eintragen sollst? Wir helfen dir kostenlos weiter.</p>
         <a href="mailto:joka.chat.business@gmail.com?subject=Hilfe beim AutoChat Onboarding" className="btn-secondary" style={{ fontSize: '0.9rem' }}>
-          joka.ai kontaktieren
+          Joka Chat kontaktieren
         </a>
       </div>
     </div>
@@ -178,7 +178,7 @@ export default function AutoChatOnboarding() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
+          <Link href="/" className="brand">Joka <span className="dot">Chat</span></Link>
         </div>
       </nav>
 

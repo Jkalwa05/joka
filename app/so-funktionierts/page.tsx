@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'So funktioniert\'s – AutoChat & MailPilot | joka.ai',
+  title: 'So funktioniert\'s – AutoChat & MailPilot | Joka Chat',
   description: 'Einfach erklärt: Wie AutoChat deine WhatsApp-Nachrichten automatisch beantwortet und wie MailPilot deine E-Mails sortiert.',
 }
 
@@ -11,7 +11,7 @@ export default function SoFunktionierts() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
+          <Link href="/" className="brand">Joka <span className="dot">Chat</span></Link>
           <div className="nav-items">
             <Link href="/autochat">AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
@@ -64,7 +64,7 @@ export default function SoFunktionierts() {
                 {
                   n: '05',
                   title: 'Du kannst jederzeit selbst übernehmen',
-                  text: 'Über deine persönliche joka.ai-Inbox kannst du alle Gespräche einsehen und bei Bedarf selbst antworten. Du kannst die KI für einzelne Gespräche pausieren – zum Beispiel wenn ein Kunde ein komplexes Anliegen hat.',
+                  text: 'Über deine persönliche Joka Chat-Inbox kannst du alle Gespräche einsehen und bei Bedarf selbst antworten. Du kannst die KI für einzelne Gespräche pausieren – zum Beispiel wenn ein Kunde ein komplexes Anliegen hat.',
                 },
               ].map(({ n, title, text }) => (
                 <div key={n} className="step">
@@ -155,7 +155,7 @@ export default function SoFunktionierts() {
       <footer>
         <div className="container-wide footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.ai. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Joka Chat. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
             <a href="https://www.linkedin.com/in/jonas-kalwa-3333612a1/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Ein Projekt von Jonas Kalwa →</a>
           </div>
           <div className="footer-links">

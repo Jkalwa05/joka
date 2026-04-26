@@ -20,7 +20,7 @@ export default function AutoChat() {
     <>
       <nav className="navbar">
         <div className="nav-wrapper">
-          <Link href="/" className="brand">joka<span className="dot">.ai</span></Link>
+          <Link href="/" className="brand">Joka <span className="dot">Chat</span></Link>
           <div className="nav-items">
             <Link href="/autochat" style={{ color: 'var(--primary)', fontWeight: 700 }}>AutoChat</Link>
             <Link href="/mailpilot">MailPilot</Link>
@@ -112,7 +112,7 @@ export default function AutoChat() {
             <div>
               <span className="sub-label">Dein Posteingang</span>
               <h2>Du behältst die Kontrolle.</h2>
-              <p style={{ marginBottom: '1.5rem' }}>AutoChat antwortet automatisch – aber du siehst jedes Gespräch. In deinem eigenen joka.ai-Posteingang kannst du Unterhaltungen lesen, selbst eingreifen oder die KI für einzelne Kunden pausieren.</p>
+              <p style={{ marginBottom: '1.5rem' }}>AutoChat antwortet automatisch – aber du siehst jedes Gespräch. In deinem eigenen Joka Chat-Posteingang kannst du Unterhaltungen lesen, selbst eingreifen oder die KI für einzelne Kunden pausieren.</p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                 {[
                   { icon: 'ph-duotone ph-chat-dots', text: 'Alle Kundengespräche auf einen Blick' },
@@ -134,7 +134,7 @@ export default function AutoChat() {
                 {/* Header */}
                 <div style={{ background: 'var(--primary)', padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <i className="ph-fill ph-chat-dots" style={{ color: 'white', fontSize: '1.3rem' }}></i>
-                  <strong style={{ color: 'white', fontSize: '0.95rem' }}>joka.ai Posteingang</strong>
+                  <strong style={{ color: 'white', fontSize: '0.95rem' }}>Joka Chat Posteingang</strong>
                   <span style={{ marginLeft: 'auto', background: 'rgba(255,255,255,0.2)', color: 'white', borderRadius: '50px', padding: '2px 10px', fontSize: '0.72rem', fontWeight: 700 }}>3 neu</span>
                 </div>
                 {/* Conversation list */}
@@ -224,7 +224,7 @@ export default function AutoChat() {
       <footer>
         <div className="container-wide footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 joka.ai. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>© 2026 Joka Chat. <span style={{ fontSize: '0.8rem' }}>Support: <a href="mailto:joka.chat.business@gmail.com" style={{ color: 'var(--primary)' }}>joka.chat.business@gmail.com</a></span></p>
             <a href="https://www.linkedin.com/in/jonas-kalwa-3333612a1/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>Ein Projekt von Jonas Kalwa →</a>
           </div>
           <div className="footer-links">
