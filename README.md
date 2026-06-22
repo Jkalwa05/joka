@@ -4,7 +4,7 @@ AI automation for German-speaking local businesses — WhatsApp auto-replies, em
 
 ![Next.js](https://img.shields.io/badge/Next.js_14-black?logo=next.js) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white) ![Prisma](https://img.shields.io/badge/Prisma-2D3748?logo=prisma) ![Anthropic](https://img.shields.io/badge/Claude_Haiku-191919?logo=anthropic) ![Stripe](https://img.shields.io/badge/Stripe-008CDD?logo=stripe&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-000?logo=vercel)
 
-> GitHub repo: `joka` · package name: `jokaai`
+> GitHub repo: `Jkalwa05/ai-chatbot` · package name: `jokaai`
 
 ## What it is
 
@@ -27,8 +27,8 @@ Small businesses lose customers because they can't respond fast enough to WhatsA
 
 **Backend**
 - Next.js API routes (20+ endpoints)
-- Prisma 5 + PostgreSQL (Supabase) — 8 models: `Customer`, `AutoChatConfig`, `Conversation`, `Message`, `MailPilotConfig`, `GoogleToken`, `MicrosoftToken`, plus enums
-- NextAuth v4 with Prisma adapter; bcrypt password hashing for the inbox token flow
+- Prisma 5 + PostgreSQL (Supabase) — 7 models: `Customer`, `AutoChatConfig`, `Conversation`, `Message`, `MailPilotConfig`, `GoogleToken`, `MicrosoftToken`, plus enums
+- Custom token auth (random 32-byte hex, 1-year expiry stored in DB); PBKDF2/SHA-512 password hashing via Node `crypto`
 
 **AI**
 - Anthropic Claude Haiku (`@anthropic-ai/sdk`) for WhatsApp reply generation and email classification
@@ -59,11 +59,15 @@ Deployed and live at **[joka.chat](https://joka.chat)** — MVP with paying cust
 npm install
 
 # 2. Configure environment
-cp .env.example .env.local
-# Fill in DATABASE_URL, DIRECT_URL, NEXTAUTH_SECRET,
-# ANTHROPIC_API_KEY, STRIPE_SECRET_KEY + WEBHOOK_SECRET,
-# Google OAuth credentials, Microsoft OAuth credentials,
-# RESEND_API_KEY, and META_APP_SECRET.
+# Create .env.local and fill in:
+# DATABASE_URL, DIRECT_URL, NEXTAUTH_SECRET,
+# ANTHROPIC_API_KEY, STRIPE_SECRET_KEY + STRIPE_WEBHOOK_SECRET,
+# STRIPE_AUTOCHAT_PRICE_ID, STRIPE_MAILPILOT_PRICE_ID, STRIPE_BUNDLE_PRICE_ID,
+# GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_PUBSUB_TOPIC,
+# MICROSOFT_CLIENT_ID, MICROSOFT_CLIENT_SECRET,
+# RESEND_API_KEY, META_APP_SECRET, WHATSAPP_VERIFY_TOKEN,
+# GMAIL_WEBHOOK_SECRET, OUTLOOK_WEBHOOK_SECRET, CRON_SECRET,
+# ADMIN_KEY, NEXTAUTH_URL, NEXT_PUBLIC_BASE_URL.
 
 # 3. Set up the database
 npx prisma generate
