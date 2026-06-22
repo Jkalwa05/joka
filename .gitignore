@@ -16,3 +16,4 @@ out/
 npm-debug.log*
 
 /app/generated/prisma
+tsconfig.tsbuildinfo
